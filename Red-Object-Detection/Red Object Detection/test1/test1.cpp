@@ -7,6 +7,57 @@
 using namespace cv;
 using namespace std;
 
+Mat filterUsingHSV(Mat frame,int iLowH, int iHighH, int iLowS, int iHighS, int iLowV, int iHighV){
+	Mat imgHSV;
+
+	cvtColor(frame, imgHSV, COLOR_BGR2HSV); //Convert the captured frame from BGR to HSV
+
+	Mat imgThresholded;
+
+	inRange(imgHSV, Scalar(iLowH, iLowS, iLowV), Scalar(iHighH, iHighS, iHighV), imgThresholded); //Threshold the image
+
+	//morphological opening (removes small objects from the foreground)
+	erode(imgThresholded, imgThresholded, getStructuringElement(MORPH_ELLIPSE, Size(5, 5)));
+	dilate(imgThresholded, imgThresholded, getStructuringElement(MORPH_ELLIPSE, Size(5, 5)));
+
+	//morphological closing (removes small holes from the foreground)
+	dilate(imgThresholded, imgThresholded, getStructuringElement(MORPH_ELLIPSE, Size(5, 5)));
+	erode(imgThresholded, imgThresholded, getStructuringElement(MORPH_ELLIPSE, Size(5, 5)));
+
+	
+	return imgThresholded;
+}
+
+Mat drawRedFollowLine(Mat frame) {
+	int iLastX = -1;
+	int iLastY = -1;
+	//Calculate the moments of the thresholded image
+	Moments oMoments = moments(frame);
+	Mat imgLines = Mat::zeros(frame.size(), CV_8UC3);;
+
+	double dM01 = oMoments.m01;
+	double dM10 = oMoments.m10;
+	double dArea = oMoments.m00;
+
+	// if the area <= 10000, I consider that the there are no object in the image and it's because of the noise, the area is not zero 
+	if (dArea > 10000)
+	{
+		//calculate the position of the ball
+		int posX = dM10 / dArea;
+		int posY = dM01 / dArea;
+
+		if (iLastX >= 0 && iLastY >= 0 && posX >= 0 && posY >= 0)
+		{
+			//Draw a red line from the previous point to the current point
+			line(imgLines, Point(posX, posY), Point(iLastX, iLastY), Scalar(0, 0, 255), 2);
+		}
+
+		iLastX = posX;
+		iLastY = posY;
+	}
+	return imgLines;
+}
+
 int main(int argc, char** argv)
 {
 	VideoCapture cap(1); //capture the video from webcam
@@ -49,8 +100,7 @@ int main(int argc, char** argv)
 	createTrackbar("LowV", "Control", &iLowV, 255);//Value (0 - 255)
 	createTrackbar("HighV", "Control", &iHighV, 255);*/
 
-	int iLastX = -1;
-	int iLastY = -1;
+
 
 	int iLastX_red = -1;
 	int iLastY_red = -1;
@@ -60,7 +110,7 @@ int main(int argc, char** argv)
 	cap.read(imgTmp);
 
 	//Create a black image with the size as the camera output
-	Mat imgLines = Mat::zeros(imgTmp.size(), CV_8UC3);;
+	
 
 
 	while (true)
@@ -77,75 +127,14 @@ int main(int argc, char** argv)
 			break;
 		}
 
-		Mat imgHSV;
+		Mat imgThresholded = filterUsingHSV(imgOriginal, iLowH, iHighH, iLowS, iHighS, iLowV, iHighV);
+		Mat imgThresholded2 = filterUsingHSV(imgOriginal, iLowH_red, iHighH_red, iLowS_red, iHighS_red, iLowV_red, iHighV_red);
+		
+		Mat imgResult = imgThresholded + imgThresholded2;
 
-		cvtColor(imgOriginal, imgHSV, COLOR_BGR2HSV); //Convert the captured frame from BGR to HSV
+		imshow("Thresholded Image", imgResult); //show the thresholded image
 
-		Mat imgThresholded;
-		Mat imgThresholded_red;
-
-		inRange(imgHSV, Scalar(iLowH, iLowS, iLowV), Scalar(iHighH, iHighS, iHighV), imgThresholded); //Threshold the image
-		inRange(imgHSV, Scalar(iLowH_red, iLowS_red, iLowV_red), Scalar(iHighH_red, iHighS_red, iHighV_red), imgThresholded_red); //Threshold the image RED
-
-		//morphological opening (removes small objects from the foreground)
-		erode(imgThresholded, imgThresholded, getStructuringElement(MORPH_ELLIPSE, Size(5, 5)));
-		dilate(imgThresholded, imgThresholded, getStructuringElement(MORPH_ELLIPSE, Size(5, 5)));
-
-		//morphological opening (removes small objects from the foreground) RED
-		erode(imgThresholded_red, imgThresholded_red, getStructuringElement(MORPH_ELLIPSE, Size(5, 5)));
-		dilate(imgThresholded_red, imgThresholded_red, getStructuringElement(MORPH_ELLIPSE, Size(5, 5)));
-
-		//morphological closing (removes small holes from the foreground)
-		dilate(imgThresholded, imgThresholded, getStructuringElement(MORPH_ELLIPSE, Size(5, 5)));
-		erode(imgThresholded, imgThresholded, getStructuringElement(MORPH_ELLIPSE, Size(5, 5)));
-
-		//morphological closing (removes small holes from the foreground) RED
-		dilate(imgThresholded_red, imgThresholded_red, getStructuringElement(MORPH_ELLIPSE, Size(5, 5)));
-		erode(imgThresholded_red, imgThresholded_red, getStructuringElement(MORPH_ELLIPSE, Size(5, 5)));
-
-		//Calculate the moments of the thresholded image
-		Moments oMoments = moments(imgThresholded);
-
-		//Calculate the moments of the thresholded image RED
-		Moments oMoments_red = moments(imgThresholded_red);
-
-		double dM01 = oMoments.m01;
-		double dM10 = oMoments.m10;
-		double dArea = oMoments.m00;
-
-		//RED
-		double dM01_red = oMoments_red.m01;
-		double dM10_red = oMoments_red.m10;
-		double dArea_red = oMoments_red.m00;
-
-		// if the area <= 10000, I consider that the there are no object in the image and it's because of the noise, the area is not zero 
-		if (dArea > 10000)
-		{
-			//calculate the position of the ball
-			int posX = dM10 / dArea;
-			int posY = dM01 / dArea;
-
-			int posX_red = dM10_red / dArea_red;
-			int posY_red = dM01_red / dArea_red;
-
-			if ((iLastX >= 0 && iLastY >= 0 && posX >= 0 && posY >= 0) && (iLastX_red >= 0 && iLastY_red >= 0 && posX_red >= 0 && posY_red >= 0))
-			{
-				//Draw a red line from the previous point to the current point
-				line(imgLines, Point(posX, posY), Point(iLastX, iLastY), Scalar(0, 0, 255), 2);
-				//RED
-				line(imgLines, Point(posX_red, posY_red), Point(iLastX_red, iLastY_red), Scalar(255, 0, 255), 2);
-			}
-
-			iLastX = posX;
-			iLastY = posY;
-
-			iLastX_red = posX_red;
-			iLastY_red = posY_red;
-		}
-		Mat result = imgThresholded + imgThresholded_red;
-		imshow("Thresholded Image", result); //show the thresholded image
-
-		imgOriginal = imgOriginal + imgLines;
+		imgOriginal += drawRedFollowLine(imgResult);
 		imshow("Original", imgOriginal); //show the original image
 
 		if (waitKey(30) == 27) //wait for 'esc' key press for 30ms. If 'esc' key is pressed, break loop
