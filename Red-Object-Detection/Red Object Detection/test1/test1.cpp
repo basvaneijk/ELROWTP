@@ -90,36 +90,15 @@ int main(int argc, char** argv)
 	int iLowV = 103;
 	int iHighV = 255;
 
-	//Create trackbars in "Control" window
-	/*createTrackbar("LowH", "Control", &iLowH, 179); //Hue (0 - 179)
-	createTrackbar("HighH", "Control", &iHighH, 179);
-
-	createTrackbar("LowS", "Control", &iLowS, 255); //Saturation (0 - 255)
-	createTrackbar("HighS", "Control", &iHighS, 255);
-
-	createTrackbar("LowV", "Control", &iLowV, 255);//Value (0 - 255)
-	createTrackbar("HighV", "Control", &iHighV, 255);*/
-
-
-
-	int iLastX_red = -1;
-	int iLastY_red = -1;
-
 	//Capture a temporary image from the camera
 	Mat imgTmp;
 	cap.read(imgTmp);
-
-	//Create a black image with the size as the camera output
-	
-
 
 	while (true)
 	{
 		Mat imgOriginal;
 
 		bool bSuccess = cap.read(imgOriginal); // read a new frame from video
-
-
 
 		if (!bSuccess) //if not success, break loop
 		{
