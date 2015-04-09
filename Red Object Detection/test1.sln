@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test1", "test1\test1.vcxproj", "{7D209720-FD0F-4AFB-A4E3-F407B476FB60}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Background filtering", "Background filtering\Background filtering.vcxproj", "{139BB2F2-D0ED-41B6-B5BF-4CFB156CA1BB}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Blobtracking", "Blobtracking\Blobtracking.vcxproj", "{9D1B76E5-347E-4DD2-B975-57C913B42658}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7D209720-FD0F-4AFB-A4E3-F407B476FB60}.Debug|Win32.ActiveCfg = Debug|Win32
+		{7D209720-FD0F-4AFB-A4E3-F407B476FB60}.Debug|Win32.Build.0 = Debug|Win32
+		{7D209720-FD0F-4AFB-A4E3-F407B476FB60}.Release|Win32.ActiveCfg = Release|Win32
+		{7D209720-FD0F-4AFB-A4E3-F407B476FB60}.Release|Win32.Build.0 = Release|Win32
+		{139BB2F2-D0ED-41B6-B5BF-4CFB156CA1BB}.Debug|Win32.ActiveCfg = Debug|Win32
+		{139BB2F2-D0ED-41B6-B5BF-4CFB156CA1BB}.Debug|Win32.Build.0 = Debug|Win32
+		{139BB2F2-D0ED-41B6-B5BF-4CFB156CA1BB}.Release|Win32.ActiveCfg = Release|Win32
+		{139BB2F2-D0ED-41B6-B5BF-4CFB156CA1BB}.Release|Win32.Build.0 = Release|Win32
+		{9D1B76E5-347E-4DD2-B975-57C913B42658}.Debug|Win32.ActiveCfg = Debug|Win32
+		{9D1B76E5-347E-4DD2-B975-57C913B42658}.Debug|Win32.Build.0 = Debug|Win32
+		{9D1B76E5-347E-4DD2-B975-57C913B42658}.Release|Win32.ActiveCfg = Release|Win32
+		{9D1B76E5-347E-4DD2-B975-57C913B42658}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
