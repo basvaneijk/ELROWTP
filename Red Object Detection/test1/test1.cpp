@@ -8,7 +8,8 @@
 using namespace cv;
 using namespace std;
 
-Mat filterUsingHSV(Mat frame,int iLowH, int iHighH, int iLowS, int iHighS, int iLowV, int iHighV){
+
+Mat filterUsingHSV(Mat frame, int iLowH, int iHighH, int iLowS, int iHighS, int iLowV, int iHighV){
 	Mat imgHSV;
 
 	cvtColor(frame, imgHSV, COLOR_BGR2HSV); //Convert the captured frame from BGR to HSV
@@ -25,7 +26,7 @@ Mat filterUsingHSV(Mat frame,int iLowH, int iHighH, int iLowS, int iHighS, int i
 	dilate(imgThresholded, imgThresholded, getStructuringElement(MORPH_ELLIPSE, Size(5, 5)));
 	erode(imgThresholded, imgThresholded, getStructuringElement(MORPH_ELLIPSE, Size(5, 5)));
 
-	
+
 	return imgThresholded;
 }
 
@@ -66,14 +67,14 @@ Mat blobTrack(Mat im){
 	params.minThreshold = 10;
 	params.maxThreshold = 200;
 	// Filter by Area.
-	params.filterByArea = false;
-	params.minArea = 15;
+	params.filterByArea = true;
+	params.minArea = 35;
 	// Filter by Circularity
 	params.filterByCircularity = true;
-	params.minCircularity = 0.01;
+	params.minCircularity = 0.3;
 	// Filter by Convexity
 	params.filterByConvexity = true;
-	params.minConvexity = 0.03;
+	params.minConvexity = 0.27;
 	// Filter by Inertia
 	params.filterByInertia = false;
 	params.minInertiaRatio = 0.01;
@@ -93,13 +94,29 @@ Mat blobTrack(Mat im){
 	// Draw detected blobs as red circles.
 	// DrawMatchesFlags::DRAW_RICH_KEYPOINTS flag ensures
 	// the size of the circle corresponds to the size of blob
+
+	//
 	Mat im_with_keypoints;
+
 	drawKeypoints(im, keypoints, im_with_keypoints, Scalar(0, 0, 255), DrawMatchesFlags::DRAW_RICH_KEYPOINTS);
+
+	if (!keypoints.empty()){
+		for each(KeyPoint kp in keypoints){
+			int x = kp.pt.x;
+			int y = kp.pt.y;
+
+			char str[200];
+			std::cout << "X:" << x << " Y:" << y << endl;
+			sprintf(str, "X: %d, Y: %d", x, y);
+
+			putText(im_with_keypoints,str, Point(x+20,y), FONT_HERSHEY_SIMPLEX, 0.7, Scalar(0, 0, 0),2 );
+		}
+	}
 	return im_with_keypoints;
 }
 int main(int argc, char** argv)
 {
-	VideoCapture cap(1); //capture the video from webcam
+	VideoCapture cap(0); //capture the video from webcam
 	cap.set(CV_CAP_PROP_SETTINGS, 1);
 	if (!cap.isOpened())  // if not success, exit program
 	{
@@ -119,16 +136,25 @@ int main(int argc, char** argv)
 	int iLowV_red = 60;
 	int iHighV_red = 255;
 
-	//BLUE
-	int iLowH = 102;
-	int iHighH = 120;
+	//ALL LIGHTS WITH HIGH SATURATION
+	int iLowH = 0;
+	int iHighH = 179;
 
-	int iLowS = 168;
+	int iLowS = 150;
 	int iHighS = 255;
 
-	int iLowV = 103;
+	int iLowV = 250;
 	int iHighV = 255;
 
+	//Create trackbars in "Control" window
+	createTrackbar("LowH", "Control", &iLowH, 179); //Hue (0 - 179)
+	createTrackbar("HighH", "Control", &iHighH, 179);
+
+	createTrackbar("LowS", "Control", &iLowS, 255); //Saturation (0 - 255)
+	createTrackbar("HighS", "Control", &iHighS, 255);
+
+	createTrackbar("LowV", "Control", &iLowV, 255);//Value (0 - 255)
+	createTrackbar("HighV", "Control", &iHighV, 255);
 	//Capture a temporary image from the camera
 	Mat imgTmp;
 	cap.read(imgTmp);
@@ -146,10 +172,12 @@ int main(int argc, char** argv)
 		}
 
 		Mat imgThresholded = filterUsingHSV(imgOriginal, iLowH, iHighH, iLowS, iHighS, iLowV, iHighV);
-		Mat imgThresholded2 = filterUsingHSV(imgOriginal, iLowH_red, iHighH_red, iLowS_red, iHighS_red, iLowV_red, iHighV_red);
-		
-		Mat imgResult = imgThresholded + imgThresholded2;
-		Mat result = blobTrack(imgResult);
+		//Mat imgThresholded2 = filterUsingHSV(imgOriginal, iLowH_red, iHighH_red, iLowS_red, iHighS_red, iLowV_red, iHighV_red);
+
+		//	Mat imgResult = imgThresholded + imgThresholded2;
+		Mat blobtrackable;
+		bitwise_not(imgThresholded, blobtrackable);
+		Mat result = blobTrack(blobtrackable);
 
 		imshow("Thresholded Image", result); //show the thresholded image
 		//

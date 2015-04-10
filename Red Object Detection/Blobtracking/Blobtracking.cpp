@@ -21,7 +21,11 @@ int _tmain(int argc, _TCHAR* argv[]){
 
 	namedWindow("keypoints");
 	// Read image
-	Mat im = imread("blob.jpg", IMREAD_GRAYSCALE);
+	Mat in = imread("blob.jpg", IMREAD_GRAYSCALE);
+	
+	//invert(, output);
+	Mat im;
+	bitwise_not(in, im);
 	// Setup SimpleBlobDetector parameters.
 	SimpleBlobDetector::Params params;
 	// Change thresholds
