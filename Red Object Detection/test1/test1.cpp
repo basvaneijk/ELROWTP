@@ -9,7 +9,7 @@ using namespace cv;
 using namespace std;
 
 
-Mat filterUsingHSV(Mat frame, int iLowH, int iHighH, int iLowS, int iHighS, int iLowV, int iHighV){
+Mat filterUsingHSV(Mat &frame, int iLowH, int iHighH, int iLowS, int iHighS, int iLowV, int iHighV){
 	Mat imgHSV;
 
 	cvtColor(frame, imgHSV, COLOR_BGR2HSV); //Convert the captured frame from BGR to HSV
@@ -30,7 +30,7 @@ Mat filterUsingHSV(Mat frame, int iLowH, int iHighH, int iLowS, int iHighS, int 
 	return imgThresholded;
 }
 
-Mat drawRedFollowLine(Mat frame) {
+Mat drawRedFollowLine(Mat &frame) {
 	int iLastX = -1;
 	int iLastY = -1;
 	//Calculate the moments of the thresholded image
@@ -59,22 +59,25 @@ Mat drawRedFollowLine(Mat frame) {
 	}
 	return imgLines;
 }
-Mat blobTrack(Mat im){
+Mat blobTrack(Mat &im){
 
 	// Setup SimpleBlobDetector parameters.
 	SimpleBlobDetector::Params params;
 	// Change thresholds
-	params.minThreshold = 10;
-	params.maxThreshold = 200;
+	//params.minThreshold = 254;
+	//params.maxThreshold = 255;
+	//filter by color
+	params.filterByColor = true;
+	params.blobColor = 255;
 	// Filter by Area.
 	params.filterByArea = true;
 	params.minArea = 35;
 	// Filter by Circularity
 	params.filterByCircularity = true;
-	params.minCircularity = 0.3;
+	params.minCircularity = 0.5;
 	// Filter by Convexity
 	params.filterByConvexity = true;
-	params.minConvexity = 0.27;
+	params.minConvexity = 0.80;
 	// Filter by Inertia
 	params.filterByInertia = false;
 	params.minInertiaRatio = 0.01;
@@ -109,7 +112,7 @@ Mat blobTrack(Mat im){
 			std::cout << "X:" << x << " Y:" << y << endl;
 			sprintf(str, "X: %d, Y: %d", x, y);
 
-			putText(im_with_keypoints,str, Point(x+20,y), FONT_HERSHEY_SIMPLEX, 0.7, Scalar(0, 0, 0),2 );
+			putText(im_with_keypoints,str, Point(x+30,y), FONT_HERSHEY_SIMPLEX, 0.7, Scalar(255, 255, 255),2 );
 		}
 	}
 	return im_with_keypoints;
@@ -175,10 +178,10 @@ int main(int argc, char** argv)
 		//Mat imgThresholded2 = filterUsingHSV(imgOriginal, iLowH_red, iHighH_red, iLowS_red, iHighS_red, iLowV_red, iHighV_red);
 
 		//	Mat imgResult = imgThresholded + imgThresholded2;
-		Mat blobtrackable;
-		bitwise_not(imgThresholded, blobtrackable);
-		Mat result = blobTrack(blobtrackable);
-
+		//Mat blobtrackable = imgThresholded;
+		//bitwise_not(imgThresholded, blobtrackable);
+		Mat result = blobTrack(imgThresholded);
+		result = imgOriginal + result;
 		imshow("Thresholded Image", result); //show the thresholded image
 		//
 		//imgOriginal += drawRedFollowLine(imgResult);
