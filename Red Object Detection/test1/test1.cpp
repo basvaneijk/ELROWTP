@@ -71,7 +71,7 @@ Mat blobTrack(Mat &im){
 	params.blobColor = 255;
 	// Filter by Area.
 	params.filterByArea = true;
-	params.minArea = 35;
+	params.minArea = 5;
 	// Filter by Circularity
 	params.filterByCircularity = true;
 	params.minCircularity = 0.5;
@@ -143,10 +143,10 @@ int main(int argc, char** argv)
 	int iLowH = 0;
 	int iHighH = 179;
 
-	int iLowS = 150;
+	int iLowS = 85;
 	int iHighS = 255;
 
-	int iLowV = 250;
+	int iLowV = 108;
 	int iHighV = 255;
 
 	//Create trackbars in "Control" window
@@ -185,7 +185,7 @@ int main(int argc, char** argv)
 		imshow("Thresholded Image", result); //show the thresholded image
 		//
 		//imgOriginal += drawRedFollowLine(imgResult);
-		imshow("Original", imgOriginal); //show the original image
+		//imshow("Original", imgOriginal); //show the original image
 
 		if (waitKey(30) == 27) //wait for 'esc' key press for 30ms. If 'esc' key is pressed, break loop
 		{
