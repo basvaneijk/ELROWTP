@@ -115,7 +115,7 @@ Mat drawPoints(Mat img, vector<KeyPointColor> keypointcolors){
 			int y = kpc.keypoint.pt.y;
 
 			char str[200];
-			std::cout << "X:" << x << " Y:" << y << endl;
+			//std::cout << "X:" << x << " Y:" << y << endl;
 			sprintf(str, "X: %d, Y: %d", x, y);
 			Scalar color = kpc.color;
 			putText(img, str, Point(x + 30, y), FONT_HERSHEY_SIMPLEX, 0.7, color, 2);
@@ -138,7 +138,14 @@ vector<KeyPointColor> getKeypointColors(Mat & img, vector<KeyPoint> & keypoints)
 int main(int argc, char** argv)
 {
 	VideoCapture cap(0); //capture the video from webcam
-	cap.set(CV_CAP_PROP_SETTINGS, 1);
+	//cap.set(CV_CAP_PROP_SETTINGS, 1);
+	cap.set(CV_CAP_PROP_EXPOSURE, -11);
+	cap.set(CV_CAP_PROP_CONTRAST, 10);
+	cap.set(CV_CAP_PROP_FOCUS, 0);
+	//cap.set(CV_CAP_PROP_FRAME_HEIGHT, 720); //Does not seem to work yet..?
+	//cap.set(CV_CAP_PROP_FRAME_WIDTH, 1280);
+	
+
 	if (!cap.isOpened())  // if not success, exit program
 	{
 		cout << "Cannot open the web cam" << endl;
