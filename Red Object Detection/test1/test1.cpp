@@ -8,6 +8,10 @@
 using namespace cv;
 using namespace std;
 
+struct KeyPointColor{
+	KeyPoint keypoint;
+	Vec3b color;
+};
 
 Mat filterUsingHSV(Mat &frame, int iLowH, int iHighH, int iLowS, int iHighS, int iLowV, int iHighV){
 	Mat imgHSV;
@@ -59,8 +63,7 @@ Mat drawRedFollowLine(Mat &frame) {
 	}
 	return imgLines;
 }
-Mat blobTrack(Mat &im){
-
+vector<KeyPoint> blobTrack(Mat &im){
 	// Setup SimpleBlobDetector parameters.
 	SimpleBlobDetector::Params params;
 	// Change thresholds
@@ -99,23 +102,38 @@ Mat blobTrack(Mat &im){
 	// the size of the circle corresponds to the size of blob
 
 	//
-	Mat im_with_keypoints;
+	return keypoints;
+}
+Mat drawPoints(Mat img, vector<KeyPointColor> keypointcolors){
+	
+	//for each()
+		//drawKeypoints(img, keypoints, img, Scalar(0, 0, 255), DrawMatchesFlags::DRAW_RICH_KEYPOINTS);
 
-	drawKeypoints(im, keypoints, im_with_keypoints, Scalar(0, 0, 255), DrawMatchesFlags::DRAW_RICH_KEYPOINTS);
-
-	if (!keypoints.empty()){
-		for each(KeyPoint kp in keypoints){
-			int x = kp.pt.x;
-			int y = kp.pt.y;
+	if (!keypointcolors.empty()){
+		for each(KeyPointColor kpc in keypointcolors){
+			int x = kpc.keypoint.pt.x;
+			int y = kpc.keypoint.pt.y;
 
 			char str[200];
 			std::cout << "X:" << x << " Y:" << y << endl;
 			sprintf(str, "X: %d, Y: %d", x, y);
-
-			putText(im_with_keypoints,str, Point(x+30,y), FONT_HERSHEY_SIMPLEX, 0.7, Scalar(255, 255, 255),2 );
+			Scalar color = kpc.color;
+			putText(img, str, Point(x + 30, y), FONT_HERSHEY_SIMPLEX, 0.7, color, 2);
 		}
 	}
-	return im_with_keypoints;
+	return img;
+}
+vector<KeyPointColor> getKeypointColors(Mat & img, vector<KeyPoint> & keypoints){
+	vector<KeyPointColor> keypointcolors;
+	if (!keypoints.empty()){
+		for each(KeyPoint kp in keypoints){
+			KeyPointColor k;
+			k.color = img.at<Vec3b>(kp.pt);
+			k.keypoint = kp;
+			keypointcolors.push_back(k);
+		}
+	}
+	return keypointcolors;
 }
 int main(int argc, char** argv)
 {
@@ -175,17 +193,12 @@ int main(int argc, char** argv)
 		}
 
 		Mat imgThresholded = filterUsingHSV(imgOriginal, iLowH, iHighH, iLowS, iHighS, iLowV, iHighV);
-		//Mat imgThresholded2 = filterUsingHSV(imgOriginal, iLowH_red, iHighH_red, iLowS_red, iHighS_red, iLowV_red, iHighV_red);
-
-		//	Mat imgResult = imgThresholded + imgThresholded2;
-		//Mat blobtrackable = imgThresholded;
-		//bitwise_not(imgThresholded, blobtrackable);
-		Mat result = blobTrack(imgThresholded);
-		result = imgOriginal + result;
+		vector<KeyPoint> points = blobTrack(imgThresholded);
+		vector<KeyPointColor> pointsWithColor = getKeypointColors(imgOriginal, points);
+		Mat result = drawPoints(imgOriginal, pointsWithColor);
 		imshow("Thresholded Image", result); //show the thresholded image
-		//
-		//imgOriginal += drawRedFollowLine(imgResult);
-		//imshow("Original", imgOriginal); //show the original image
+
+
 
 		if (waitKey(30) == 27) //wait for 'esc' key press for 30ms. If 'esc' key is pressed, break loop
 		{
