@@ -17,7 +17,7 @@ public class CompassOrientation : MonoBehaviour
 		Quaternion compRot = Quaternion.Euler (0, Input.compass.trueHeading, 0);
 		angleDiff = Mathf.Abs (Quaternion.Angle (Quaternion.Euler (0, transform.rotation.eulerAngles.y, 0), compRot));
 
-		transform.rotation = Quaternion.RotateTowards (transform.rotation, compRot, angleDiff / 30);
+		transform.rotation = Quaternion.RotateTowards (transform.rotation, compRot, angleDiff / 25);
 
 	}
 
