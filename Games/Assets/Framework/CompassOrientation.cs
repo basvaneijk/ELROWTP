@@ -3,8 +3,10 @@ using System.Collections;
 
 public class CompassOrientation : MonoBehaviour
 {
-	float angleDiff;
+	public bool printDebug = false;
 
+	float angleDiff;
+	
 	void Start ()
 	{
 		Input.compass.enabled = true;
@@ -23,7 +25,9 @@ public class CompassOrientation : MonoBehaviour
 
 	void OnGUI ()
 	{
-		GUI.Label (new Rect (10, 10, 100, 100), "Compas: " + Input.compass.trueHeading);
-		GUI.Label (new Rect (10, 150, 100, 100), "angleDiff: " + angleDiff);
+		if (printDebug) {
+			GUI.Label (new Rect (10, 10, 100, 100), "Compas: " + Input.compass.trueHeading);
+			GUI.Label (new Rect (10, 150, 100, 100), "angleDiff: " + angleDiff);
+		}
 	}
 }
