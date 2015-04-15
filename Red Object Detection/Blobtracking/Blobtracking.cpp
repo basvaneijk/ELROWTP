@@ -20,50 +20,63 @@ using namespace std;
 int _tmain(int argc, _TCHAR* argv[]){
 
 	namedWindow("keypoints");
+	namedWindow("Control", CV_WINDOW_AUTOSIZE);
 	// Read image
 	Mat in = imread("blob.jpg", IMREAD_GRAYSCALE);
-	
+
 	//invert(, output);
 	Mat im;
 	bitwise_not(in, im);
 	// Setup SimpleBlobDetector parameters.
-	SimpleBlobDetector::Params params;
-	// Change thresholds
-	params.minThreshold = 10;
-	params.maxThreshold = 200;
-	// Filter by Area.
-	params.filterByArea = true;
-	params.minArea = 1500;
-	// Filter by Circularity
-	params.filterByCircularity = true;
-	params.minCircularity = 0.1;
-	// Filter by Convexity
-	params.filterByConvexity = true;
-	params.minConvexity = 0.87;
-	// Filter by Inertia
-	params.filterByInertia = true;
-	params.minInertiaRatio = 0.01;
-	// Storage for blobs
-	vector<KeyPoint> keypoints;
-#if CV_MAJOR_VERSION < 3 // If you are using OpenCV 2
-	// Set up detector with params
-	SimpleBlobDetector detector(params);
-	// Detect blobs
-	detector.detect(im, keypoints);
-#else
-	// Set up detector with params
-	Ptr<SimpleBlobDetector> detector = SimpleBlobDetector::create(params);
-	// Detect blobs
-	detector->detect(im, keypoints);
-#endif
-	// Draw detected blobs as red circles.
-	// DrawMatchesFlags::DRAW_RICH_KEYPOINTS flag ensures
-	// the size of the circle corresponds to the size of blob
-	Mat im_with_keypoints;
-	drawKeypoints(im, keypoints, im_with_keypoints, Scalar(0, 0, 255), DrawMatchesFlags::DRAW_RICH_KEYPOINTS);
-	// Show blobs
-	imshow("keypoints", im_with_keypoints);
-	waitKey(0);
+	int minArea = 30, minCircularity = 30, minConvexity = 30, minInertiaRatio = 30;
+
+	createTrackbar("minArea", "Control", &minArea, 1400);
+	createTrackbar("minCircularity", "Control", &minCircularity, 100);
+	createTrackbar("minConvexity", "Control", &minConvexity, 100);
+	createTrackbar("minInertiaRatio", "Control", &minInertiaRatio, 100);
+
+	while (true)
+	{
+
+		SimpleBlobDetector::Params params;
+		// Change thresholds
+		//params.minThreshold = 10;
+		//params.maxThreshold = 200;
+		params.filterByColor = true;
+		params.blobColor = 255;
+		// Filter by Area.
+		params.filterByArea = true;
+		params.minArea = minArea;
+		// Filter by Circularity
+		params.filterByCircularity = true;
+		params.minCircularity = (float)minCircularity / 100;
+		// Filter by Convexity
+		params.filterByConvexity = true;
+		params.minConvexity = (float)minConvexity / 100;
+		// Filter by Inertia
+		params.filterByInertia = false;
+		//params.minInertiaRatio = 0.01;
+		// Storage for blobs
+		vector<KeyPoint> keypoints;
+		// Set up detector with params
+		SimpleBlobDetector detector(params);
+		// Detect blobs
+		detector.detect(im, keypoints);
+
+		// Draw detected blobs as red circles.
+		// DrawMatchesFlags::DRAW_RICH_KEYPOINTS flag ensures
+		// the size of the circle corresponds to the size of blob
+		Mat im_with_keypoints;
+		drawKeypoints(im, keypoints, im_with_keypoints, Scalar(0, 0, 255), DrawMatchesFlags::DRAW_RICH_KEYPOINTS);
+		// Show blobs
+		imshow("keypoints", im_with_keypoints);
+
+		if (waitKey(30) == 27) //wait for 'esc' key press for 30ms. If 'esc' key is pressed, break loop
+		{
+			cout << "esc key is pressed by user" << endl;
+			break;
+		}
+	}
 	//create GUI windows
 	//destroy GUI windows
 	destroyAllWindows();
