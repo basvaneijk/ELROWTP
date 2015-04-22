@@ -6,7 +6,7 @@ using System.Collections;
 public class CoinTrigger : MonoBehaviour
 {
 
-	int score;
+	public int score;
 	Text scoreDisplay;
 
 	void Awake ()
