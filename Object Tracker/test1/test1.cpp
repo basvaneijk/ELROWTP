@@ -63,6 +63,7 @@ Mat drawRedFollowLine(Mat &frame) {
 	}
 	return imgLines;
 }
+
 vector<KeyPoint> blobTrack(Mat &im){
 	// Setup SimpleBlobDetector parameters.
 	SimpleBlobDetector::Params params;
@@ -101,6 +102,7 @@ vector<KeyPoint> blobTrack(Mat &im){
 	//
 	return keypoints;
 }
+
 Mat drawPoints(Mat img, vector<KeyPointColor> keypointcolors){
 	// Draw detected blobs as red circles.
 	// DrawMatchesFlags::DRAW_RICH_KEYPOINTS flag ensures
@@ -120,6 +122,7 @@ Mat drawPoints(Mat img, vector<KeyPointColor> keypointcolors){
 	}
 	return img;
 }
+
 vector<KeyPointColor> getKeypointColors(Mat & img, vector<KeyPoint> & keypoints){
 	vector<KeyPointColor> keypointcolors;
 	if (!keypoints.empty()){
@@ -132,6 +135,7 @@ vector<KeyPointColor> getKeypointColors(Mat & img, vector<KeyPoint> & keypoints)
 	}
 	return keypointcolors;
 }
+
 int main(int argc, char** argv)
 {
 	VideoCapture cap(0); //capture the video from webcam
