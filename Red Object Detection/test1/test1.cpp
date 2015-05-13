@@ -97,17 +97,14 @@ vector<KeyPoint> blobTrack(Mat &im){
 	// Detect blobs
 	detector->detect(im, keypoints);
 #endif
-	// Draw detected blobs as red circles.
-	// DrawMatchesFlags::DRAW_RICH_KEYPOINTS flag ensures
-	// the size of the circle corresponds to the size of blob
 
 	//
 	return keypoints;
 }
 Mat drawPoints(Mat img, vector<KeyPointColor> keypointcolors){
-	
-	//for each()
-		//drawKeypoints(img, keypoints, img, Scalar(0, 0, 255), DrawMatchesFlags::DRAW_RICH_KEYPOINTS);
+	// Draw detected blobs as red circles.
+	// DrawMatchesFlags::DRAW_RICH_KEYPOINTS flag ensures
+	// the size of the circle corresponds to the size of blob
 
 	if (!keypointcolors.empty()){
 		for each(KeyPointColor kpc in keypointcolors){
@@ -138,7 +135,7 @@ vector<KeyPointColor> getKeypointColors(Mat & img, vector<KeyPoint> & keypoints)
 int main(int argc, char** argv)
 {
 	VideoCapture cap(0); //capture the video from webcam
-	//cap.set(CV_CAP_PROP_SETTINGS, 1);
+	cap.set(CV_CAP_PROP_SETTINGS, 1);
 	cap.set(CV_CAP_PROP_EXPOSURE, -11);
 	cap.set(CV_CAP_PROP_CONTRAST, 10);
 	cap.set(CV_CAP_PROP_FOCUS, 0);

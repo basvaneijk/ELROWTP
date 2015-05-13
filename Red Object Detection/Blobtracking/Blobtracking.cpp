@@ -22,31 +22,36 @@ int _tmain(int argc, _TCHAR* argv[]){
 	namedWindow("keypoints");
 	namedWindow("Control", CV_WINDOW_AUTOSIZE);
 	// Read image
-	Mat in = imread("blob.jpg", IMREAD_GRAYSCALE);
+	//Mat in = imread("blob.jpg", IMREAD_GRAYSCALE);
+	Mat im = imread("orgafbeelding.jpg", IMREAD_GRAYSCALE);
 
 	//invert(, output);
-	Mat im;
-	bitwise_not(in, im);
+	//Mat im;
+	//bitwise_not(in, im);
 	// Setup SimpleBlobDetector parameters.
-	int minArea = 30, minCircularity = 30, minConvexity = 30, minInertiaRatio = 30;
+	int minArea = 30, minCircularity = 30, minConvexity = 30, minInertiaRatio = 30, blobColor = 30, minThreshold = 0, maxThreshold = 255;
 
 	createTrackbar("minArea", "Control", &minArea, 1400);
 	createTrackbar("minCircularity", "Control", &minCircularity, 100);
 	createTrackbar("minConvexity", "Control", &minConvexity, 100);
 	createTrackbar("minInertiaRatio", "Control", &minInertiaRatio, 100);
+	createTrackbar("blobColor", "Control", &blobColor, 255);
+	createTrackbar("minThreshold", "Control", &minThreshold, 255);
+	createTrackbar("maxThreshold", "Control", &maxThreshold, 255);
 
 	while (true)
 	{
 
 		SimpleBlobDetector::Params params;
 		// Change thresholds
-		//params.minThreshold = 10;
-		//params.maxThreshold = 200;
+		//params.minThreshold = minThreshold;
+		//params.maxThreshold = maxThreshold;
+
 		params.filterByColor = true;
-		params.blobColor = 255;
+		params.blobColor = blobColor;
 		// Filter by Area.
 		params.filterByArea = true;
-		params.minArea = minArea;
+		params.minArea = minArea > 0 ? minArea : 1;
 		// Filter by Circularity
 		params.filterByCircularity = true;
 		params.minCircularity = (float)minCircularity / 100;
@@ -54,8 +59,8 @@ int _tmain(int argc, _TCHAR* argv[]){
 		params.filterByConvexity = true;
 		params.minConvexity = (float)minConvexity / 100;
 		// Filter by Inertia
-		params.filterByInertia = false;
-		//params.minInertiaRatio = 0.01;
+		params.filterByInertia = true;
+		params.minInertiaRatio = (float)minInertiaRatio / 100;
 		// Storage for blobs
 		vector<KeyPoint> keypoints;
 		// Set up detector with params
