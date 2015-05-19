@@ -116,10 +116,17 @@ void tracker::trackObjects(){
 				cout << "Cannot read a frame from video stream" << endl;
 				break;
 			}
+			imshow("Ruk", imgOriginal);
 
 			Mat imgThresholded = filterUsingHSV(imgOriginal, iLowH, iHighH, iLowS, iHighS, iLowV, iHighV);
 			vector<KeyPoint> points = trackBlob(imgThresholded);
 			trackingResult = getKeypointColors(imgOriginal, points);
+			
+			if (waitKey(30) == 27) //wait for 'esc' key press for 30ms. If 'esc' key is pressed, break loop
+			{
+				cout << "esc key is pressed by user" << endl;
+				break;
+			}
 	}
 }
 

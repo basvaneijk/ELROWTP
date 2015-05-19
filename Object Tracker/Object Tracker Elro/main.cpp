@@ -1,6 +1,7 @@
 #include "tracker.h"
 
 int main() {
-	tracker t(0);
+	tracker t(1);
 	t.trackObjects();
+	
 }
