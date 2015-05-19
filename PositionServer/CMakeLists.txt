@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.2)
 project (position-server)
 
 find_package(OpenCV REQUIRED)
-find_package(Boost REQUIRED COMPONENTS iostreams)
+find_package(Boost REQUIRED COMPONENTS system)
 
 file(GLOB SOURCES src/*.cpp src/*.c)
 
