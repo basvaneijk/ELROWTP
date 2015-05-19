@@ -81,7 +81,7 @@ Mat tracker::drawPoints(Mat img, vector<KeyPointColor> keypointcolors){
 			char str[200];
 			//std::cout << "X:" << x << " Y:" << y << endl;
 			sprintf(str, "X: %d, Y: %d", x, y);
-			Scalar color = kpc.color;
+			Scalar color (kpc.color[0], kpc.color[1], kpc.color[2], 1.0);
 			putText(img, str, Point(x + 30, y), FONT_HERSHEY_SIMPLEX, 0.7, color, 2);
 		}
 	}
@@ -91,7 +91,7 @@ Mat tracker::drawPoints(Mat img, vector<KeyPointColor> keypointcolors){
 vector<KeyPointColor> tracker::getKeypointColors(Mat & img, vector<KeyPoint> & keypoints){
 	vector<KeyPointColor> keypointcolors;
 	if (!keypoints.empty()){
-		for KeyPoint kp : keypoints){
+		for (KeyPoint kp : keypoints){
 			KeyPointColor k;
 			k.color = img.at<Vec3b>(kp.pt);
 			k.keypoint = kp;
@@ -116,11 +116,12 @@ void tracker::trackObjects(){
 				cout << "Cannot read a frame from video stream" << endl;
 				break;
 			}
-			imshow("Ruk", imgOriginal);
 
 			Mat imgThresholded = filterUsingHSV(imgOriginal, iLowH, iHighH, iLowS, iHighS, iLowV, iHighV);
 			vector<KeyPoint> points = trackBlob(imgThresholded);
 			trackingResult = getKeypointColors(imgOriginal, points);
+			imshow("Ruk", imgThresholded);
+                        drawPoints(imgOriginal, trackingResult);
 			
 			if (waitKey(30) == 27) //wait for 'esc' key press for 30ms. If 'esc' key is pressed, break loop
 			{

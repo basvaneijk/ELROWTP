@@ -9,26 +9,26 @@ using namespace cv;
 using namespace std;
 
 struct KeyPointColor{
-	KeyPoint keypoint;
-	Vec3b color;
+    KeyPoint keypoint;
+    Vec3b color;
 };
 
 
 class tracker
 {
-public:
-	tracker(VideoCapture cap);
-	~tracker();
-	void trackObjects();
-private:
-	VideoCapture cap;
-	int iLowH = 0, iHighH = 179, iLowS = 85, iHighS = 255, iLowV = 108, iHighV = 255;
-	vector<KeyPointColor> trackingResult;
+    public:
+        tracker(VideoCapture cap);
+        ~tracker();
+        void trackObjects();
+    private:
+        VideoCapture cap;
+        int iLowH = 0, iHighH = 179, iLowS = 85, iHighS = 255, iLowV = 108, iHighV = 255;
+        vector<KeyPointColor> trackingResult;
 
-	Mat filterUsingHSV(Mat&, int iLowH, int iHighH, int iLowS, int iHighS, int iLowV, int iHighV);
-	vector<KeyPoint> trackBlob(Mat &);
-	vector<KeyPointColor> getKeypointColors(Mat&, vector<KeyPoint>&);
-	Mat drawPoints(Mat img, vector<KeyPointColor> keypointcolors);
+        Mat filterUsingHSV(Mat&, int iLowH, int iHighH, int iLowS, int iHighS, int iLowV, int iHighV);
+        vector<KeyPoint> trackBlob(Mat &);
+        vector<KeyPointColor> getKeypointColors(Mat&, vector<KeyPoint>&);
+        Mat drawPoints(Mat img, vector<KeyPointColor> keypointcolors);
 
-	
+
 };
