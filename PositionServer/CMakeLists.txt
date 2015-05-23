@@ -4,8 +4,6 @@ project (position-server)
 find_package(OpenCV REQUIRED)
 find_package(Boost REQUIRED COMPONENTS system)
 
-file(GLOB SOURCES src/*.cpp src/*.c)
-
 add_executable(position-server src/main.cpp src/tracker.cpp)
 set_property(TARGET position-server PROPERTY CXX_STANDARD 11)
 set_property(TARGET position-server PROPERTY CXX_STANDARD_REQUIRED 11)
