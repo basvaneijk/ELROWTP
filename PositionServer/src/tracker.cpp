@@ -1,3 +1,4 @@
+#include <exception>
 #include "tracker.hpp"
 
 tracker::tracker(VideoCapture cap)
@@ -88,7 +89,7 @@ Mat tracker::drawPoints(Mat img, vector<KeyPointColor> keypointcolors){
     return img;
 }
 
-vector<KeyPointColor> tracker::getKeypointColors(Mat & img, vector<KeyPoint> & keypoints){
+vector<KeyPointColor> tracker::getKeypointColors(Mat & img, const vector<KeyPoint> & keypoints){
     vector<KeyPointColor> keypointcolors;
     if (!keypoints.empty()){
         for (KeyPoint kp : keypoints){
@@ -101,34 +102,23 @@ vector<KeyPointColor> tracker::getKeypointColors(Mat & img, vector<KeyPoint> & k
     return keypointcolors;
 }
 
-void tracker::trackObjects(){
-    Mat imgTmp;
-    cap.read(imgTmp);
+vector<KeyPointColor> tracker::trackObjects(){
+    Mat imgOriginal;
 
-    while (true)
+    if (!cap.read(imgOriginal)) //if not success, break loop
     {
-        Mat imgOriginal;
-
-        bool bSuccess = cap.read(imgOriginal); // read a new frame from video
-
-        if (!bSuccess) //if not success, break loop
-        {
-            cout << "Cannot read a frame from video stream" << endl;
-            break;
-        }
-
-        Mat imgThresholded = filterUsingHSV(imgOriginal, iLowH, iHighH, iLowS, iHighS, iLowV, iHighV);
-        vector<KeyPoint> points = trackBlob(imgThresholded);
-        trackingResult = getKeypointColors(imgOriginal, points);
-        imshow("Ruk", imgThresholded);
-        drawPoints(imgOriginal, trackingResult);
-
-        if (waitKey(30) == 27) //wait for 'esc' key press for 30ms. If 'esc' key is pressed, break loop
-        {
-            cout << "esc key is pressed by user" << endl;
-            break;
-        }
+        throw std::runtime_error("Cannot read a frame from video stream");
     }
+
+    Mat imgThresholded = filterUsingHSV(imgOriginal, iLowH, iHighH, iLowS, iHighS, iLowV, iHighV);
+    auto points = trackBlob(imgThresholded);
+    auto pointcolors = getKeypointColors(imgThresholded, points);
+    
+    if (debug) {
+        imshow("Tracker", drawPoints(imgOriginal, pointcolors));
+    }
+
+    return pointcolors;
 }
 
 tracker::~tracker()

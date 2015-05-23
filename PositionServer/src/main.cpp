@@ -2,81 +2,67 @@
 #include "boost/bind.hpp"
 #include "boost/date_time/posix_time/posix_time_types.hpp"
 #include <array>
+#include <functional>
+#include <string>
 
 #include "tracker.hpp"
 
-using namespace boost::asio;
+namespace asio = boost::asio;
 
 const short multicast_port = 2000;
-const int max_message_count = 10;
-
-struct PositionUpdate {
-    float position[3];
-    float color[3];
-};
 
 class sender
 {
 public:
-    sender(boost::asio::io_service& io_service,
-            const boost::asio::ip::address& multicast_address)
-        : endpoint_(multicast_address, multicast_port),
-        socket_(io_service, endpoint_.protocol()),
-        timer_(io_service),
-        message_count_(0)
+    sender(asio::io_service& io_service,
+            const asio::ip::address& multicast_address)
+        : endpoint(multicast_address, multicast_port),
+        socket(io_service, endpoint.protocol())
     {
-        std::cout << "sending to ip: " << multicast_address << std::endl;
-        message_ = 
-        {{ (float)message_count_++, 50.0f, 51.0f,
-           99.0f, 98.0f, 97.0f
-        }};
-    
-        socket_.async_send_to(
-                boost::asio::buffer(message_, sizeof(message_)), endpoint_,
-                boost::bind(&sender::handle_send_to, this,
-                    boost::asio::placeholders::error));
     }
 
-    void handle_send_to(const boost::system::error_code& error)
+    void send_position(std::array<float, 6> position) 
     {
-        if (!error && message_count_ < max_message_count)
-        {
-            std::cout << "Send message" << std::endl;
-            timer_.expires_from_now(boost::posix_time::seconds(5));
-            timer_.async_wait(
-                    boost::bind(&sender::handle_timeout, this,
-                        boost::asio::placeholders::error));
-        }
-    }
-
-    void handle_timeout(const boost::system::error_code& error)
-    {
-        if (!error)
-        {
-            message_ = {{(float)message_count_++, 50.0f, 51.0f,
-                         99.0f, 98.0f, 97.0f }};
-
-            socket_.async_send_to(
-                    boost::asio::buffer(message_, sizeof(message_)), endpoint_,
-                    boost::bind(&sender::handle_send_to, this,
-                        boost::asio::placeholders::error));
-        }
+        socket.async_send_to(asio::buffer(position), endpoint,
+                [this](boost::system::error_code ec, std::size_t){
+                    std::cout << "send message" << std::endl;
+                });
     }
 
 private:
-    boost::asio::ip::udp::endpoint endpoint_;
-    boost::asio::ip::udp::socket socket_;
-    boost::asio::deadline_timer timer_;
-    int message_count_;
-    std::array<float, 6> message_;
+    asio::ip::udp::endpoint endpoint;
+    asio::ip::udp::socket socket;
 };
+
+std::array<float, 6> keypointcolor_to_array(const KeyPointColor& kc)
+{
+    return {{
+        kc.keypoint.pt.x, kc.keypoint.pt.y, 0.0f,
+        (float)kc.color[0], (float)kc.color[1], (float)kc.color[2]
+    }};
+}
 
 int main(int argc, char* argv[])
 {
+    int cam = std::stoi(argv[1]);
+    tracker tracker(cam);
     try {
-        io_service io_service;
-        sender s(io_service, ip::address::from_string(argv[1]));
+        asio::io_service io_service;
+        std::string ip_str(argv[2]);
+        sender s(io_service, asio::ip::address::from_string(argv[2]));
         io_service.run();
+
+        if (argc >= 4 && std::string(argv[3]) == "debug") {
+            tracker.show_debug_window(true);
+        }
+
+        std::cout << "start sending" << std::endl;
+        while(true){
+            auto locs = tracker.trackObjects();
+            for (auto & loc : locs) {
+                s.send_position(keypointcolor_to_array(loc));
+            }
+        }
     } catch (std::exception& e) {
         std::cerr << "Exception: " << e.what() << "\n";
     }
