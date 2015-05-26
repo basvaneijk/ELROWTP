@@ -11,13 +11,13 @@ namespace Framework
 	{
 		public event LocationUpdateHandler OnLocationUpdate;
 		private UdpClient client = new UdpClient();
+		IPEndPoint localEp = new IPEndPoint(IPAddress.Any, 2000);
 		
 		void Start ()
 		{
 			StartCoroutine (SendLocation ());
 			
 			client.ExclusiveAddressUse = false;
-			IPEndPoint localEp = new IPEndPoint(IPAddress.Any, 2000);
 			
 			client.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
 			client.ExclusiveAddressUse = false;
