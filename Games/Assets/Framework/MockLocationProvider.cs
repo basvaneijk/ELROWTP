@@ -3,16 +3,16 @@ using System.Collections;
 
 namespace Framework
 {
-
+	
 	public class MockLocationProvider : MonoBehaviour, LocationProvider
 	{
 		public event LocationUpdateHandler OnLocationUpdate;
-
+		
 		void Start ()
 		{
 			StartCoroutine (SendFakeLocation ());
 		}
-
+		
 		IEnumerator SendFakeLocation ()
 		{
 			while (true) {
