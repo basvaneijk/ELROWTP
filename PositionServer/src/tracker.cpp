@@ -2,8 +2,12 @@
 #include "tracker.hpp"
 
 tracker::tracker(VideoCapture cap)
+    : cap(cap)
 {
-    this->cap = cap;
+    cap.set(CV_CAP_PROP_SETTINGS, 1);
+    cap.set(CV_CAP_PROP_EXPOSURE, -11);
+    cap.set(CV_CAP_PROP_CONTRAST, 10);
+    cap.set(CV_CAP_PROP_FOCUS, 0);
 }
 
 using namespace cv;
