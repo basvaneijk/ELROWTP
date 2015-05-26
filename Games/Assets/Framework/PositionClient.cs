@@ -32,13 +32,15 @@ namespace Framework
 		{
 			while (true)
 			{
-				float[] position = new float[3];
-				float[] color = new float[3];
 				Byte[] data = client.Receive(ref localEp);
 				
 				Vector3 location = new Vector3(BitConverter.ToSingle(data, 0),BitConverter.ToSingle(data, 8),BitConverter.ToSingle(data, 8));
 				
 				var loc = new LocationUpdateArgs (1, location, 1);
+				
+				if (OnLocationUpdate != null) {
+					OnLocationUpdate (this, loc);
+				}
 			}
 		}
 	}
