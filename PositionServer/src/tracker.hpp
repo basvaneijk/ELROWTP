@@ -25,12 +25,14 @@ class tracker
         bool debug;
         VideoCapture cap;
         int iLowH = 0, iHighH = 179, iLowS = 85, iHighS = 255, iLowV = 108, iHighV = 255;
+		int minArea = 30, minCircularity = 30, minConvexity = 30, minInertiaRatio = 30, blobColor = 30, minThreshold = 0, maxThreshold = 255;
         vector<KeyPointColor> trackingResult;
 
         Mat filterUsingHSV(Mat&, int iLowH, int iHighH, int iLowS, int iHighS, int iLowV, int iHighV);
         vector<KeyPoint> trackBlob(Mat &);
         vector<KeyPointColor> getKeypointColors(Mat&, const vector<KeyPoint>&);
         Mat drawPoints(Mat img, vector<KeyPointColor> keypointcolors);
-
+		
+		SimpleBlobDetector::Params params;
 
 };
