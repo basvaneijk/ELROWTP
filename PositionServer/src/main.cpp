@@ -45,16 +45,13 @@ std::array<float, 6> keypointcolor_to_array(const KeyPointColor& kc)
 int main(int argc, char* argv[])
 {
     int cam = std::stoi(argv[1]);
-    tracker tracker(cam);
+    bool debug = argc >= 4 && std::string(argv[3]) == "debug";
+    tracker tracker(cam, debug);
     try {
         asio::io_service io_service;
         std::string ip_str(argv[2]);
         sender s(io_service, asio::ip::address::from_string(argv[2]));
         io_service.run();
-
-        if (argc >= 4 && std::string(argv[3]) == "debug") {
-            tracker.show_debug_window(true);
-        }
 
         std::cout << "start sending" << std::endl;
         while(true){

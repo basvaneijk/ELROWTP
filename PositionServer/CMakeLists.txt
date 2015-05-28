@@ -1,8 +1,12 @@
 cmake_minimum_required(VERSION 3.2)
 project (position-server)
 
+set(OpenCV_STATIC_ON)
+set(Boost_USE_STATIC_LIBS ON)
+
 find_package(OpenCV REQUIRED)
 find_package(Boost REQUIRED COMPONENTS system)
+
 
 add_executable(position-server src/main.cpp src/tracker.cpp)
 set_property(TARGET position-server PROPERTY CXX_STANDARD 11)

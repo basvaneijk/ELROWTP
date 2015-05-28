@@ -13,26 +13,33 @@ struct KeyPointColor{
     Vec3b color;
 };
 
+struct Bound {
+    int lower;
+    int upper;
+};
 
 class tracker
 {
-    public:
-        tracker(VideoCapture cap);
-        ~tracker();
-        vector<KeyPointColor> trackObjects();
-        void show_debug_window(bool b) { debug = b; }
-    private:
-        bool debug;
-        VideoCapture cap;
-        int iLowH = 0, iHighH = 179, iLowS = 85, iHighS = 255, iLowV = 108, iHighV = 255;
-		int minArea = 30, minCircularity = 30, minConvexity = 30, minInertiaRatio = 30, blobColor = 30, minThreshold = 0, maxThreshold = 255;
-        vector<KeyPointColor> trackingResult;
+public:
+    tracker(VideoCapture cap, bool debug);
+    ~tracker();
+    vector<KeyPointColor> trackObjects();
+    void show_debug_window(bool b) { debug = b; }
+private:
+    VideoCapture cap;
+    bool debug;
+    Bound hue, saturation, value;
+    Bound area, threshold;
+    int minCircularity, minConvexity, 
+        minInertiaRatio, blobColor; 
 
-        Mat filterUsingHSV(Mat&, int iLowH, int iHighH, int iLowS, int iHighS, int iLowV, int iHighV);
-        vector<KeyPoint> trackBlob(Mat &);
-        vector<KeyPointColor> getKeypointColors(Mat&, const vector<KeyPoint>&);
-        Mat drawPoints(Mat img, vector<KeyPointColor> keypointcolors);
-		
-		SimpleBlobDetector::Params params;
+    vector<KeyPointColor> trackingResult;
+
+    Mat filterUsingHSV(const Mat&);
+    vector<KeyPoint> trackBlob(const Mat&);
+    vector<KeyPointColor> getKeypointColors(const Mat&, const vector<KeyPoint>&);
+    void drawPoints(Mat& img, vector<KeyPointColor> keypointcolors);
+
+    SimpleBlobDetector::Params params;
 
 };
