@@ -1,4 +1,6 @@
 #include <exception>
+#include <cstdio>
+#include <vector>
 #include "tracker.hpp"
 
 tracker::tracker(VideoCapture cap, bool debug)
@@ -133,7 +135,7 @@ void tracker::drawPoints(Mat& img, vector<KeyPointColor> keypointcolors)
 
         char str[200];
         //std::cout << "X:" << x << " Y:" << y << endl;
-        snprintf(str, sizeof(str), "X: %d, Y: %d", x, y);
+        std::sprintf(str, "X: %d, Y: %d", x, y);
         Scalar color(kpc.color[0], kpc.color[1], kpc.color[2], 1.0);
         putText(img, str, Point(x + 30, y), FONT_HERSHEY_SIMPLEX, 0.7, color, 2);
     }
@@ -179,7 +181,7 @@ vector<KeyPointColor> tracker::trackObjects(const Mat& imgOriginal)
     Mat imgThresholded = filterUsingHSV(imgOriginal);
 
     auto points = trackBlob(imgThresholded);
-    auto pointcolors = getKeypointColors(imgThresholded, points);
+	auto pointcolors = getKeypointColors(imgOriginal , points);
 
     if (debug) {
         //drawPoints(imgOriginal, pointcolors); 
@@ -188,9 +190,6 @@ vector<KeyPointColor> tracker::trackObjects(const Mat& imgOriginal)
                       Scalar(0, 0, 255), DrawMatchesFlags::DRAW_RICH_KEYPOINTS);
         imshow("Result", imgDebug);
         imshow("HSV", imgThresholded);
-        std::ostringstream keypoints_txt;
-        keypoints_txt << "Num keypoints: " << points.size();
-        displayStatusBar("Controls", keypoints_txt.str());
     }
 
     return pointcolors;
