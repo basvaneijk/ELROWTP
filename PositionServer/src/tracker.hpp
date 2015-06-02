@@ -24,6 +24,7 @@ public:
     tracker(VideoCapture cap, bool debug);
     ~tracker();
     vector<KeyPointColor> trackObjects();
+    vector<KeyPointColor> trackObjects(const std::string& img_filename); 
     void show_debug_window(bool b) { debug = b; }
 private:
     VideoCapture cap;
@@ -39,6 +40,7 @@ private:
     vector<KeyPoint> trackBlob(const Mat&);
     vector<KeyPointColor> getKeypointColors(const Mat&, const vector<KeyPoint>&);
     void drawPoints(Mat& img, vector<KeyPointColor> keypointcolors);
+    vector<KeyPointColor> trackObjects(const Mat& img);
 
     SimpleBlobDetector::Params params;
 

@@ -46,6 +46,12 @@ int main(int argc, char* argv[])
 {
     int cam = std::stoi(argv[1]);
     bool debug = argc >= 4 && std::string(argv[3]) == "debug";
+
+    std::string img_filename;
+    if (argc >= 5 && debug) {
+        img_filename = std::string(argv[4]);
+    }
+
     tracker tracker(cam, debug);
     try {
         asio::io_service io_service;
@@ -55,7 +61,12 @@ int main(int argc, char* argv[])
 
         std::cout << "start sending" << std::endl;
         while(true){
-            auto locs = tracker.trackObjects();
+            vector<KeyPointColor> locs;
+            if (img_filename.length() > 0) {
+                locs = tracker.trackObjects(img_filename);
+            } else {
+                locs = tracker.trackObjects();
+            }
             for (auto & loc : locs) {
                 s.send_position(keypointcolor_to_array(loc));
             }

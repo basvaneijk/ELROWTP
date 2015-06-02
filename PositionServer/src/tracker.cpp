@@ -155,16 +155,27 @@ vector<KeyPointColor> tracker::getKeypointColors(const Mat& img,
 }
 
 vector<KeyPointColor> tracker::trackObjects()
-{
-    //Mat imgOriginal;
+{    
+    Mat imgCam;
 
-    //if (!cap.read(imgOriginal)) //if not success, break loop
-    //{
-    //    throw std::runtime_error("Cannot read a frame from video stream");
-    //}
-    Mat imgOriginal = imread("Capture.JPG");
+    if (!cap.read(imgCam)) //if not success, break loop
+    {
+        throw std::runtime_error("Cannot read a frame from video stream");
+    }
     waitKey(100);
 
+    return trackObjects(imgCam);
+}
+
+vector<KeyPointColor> tracker::trackObjects(const std::string& img_filename)
+{
+    Mat img = imread(img_filename.c_str());
+    waitKey(100);
+    return trackObjects(img);
+}
+
+vector<KeyPointColor> tracker::trackObjects(const Mat& imgOriginal)
+{
     Mat imgThresholded = filterUsingHSV(imgOriginal);
 
     auto points = trackBlob(imgThresholded);
