@@ -13,7 +13,7 @@ namespace Framework
 
 		public int ObjectId {
 			get {
-				return ObjectId;
+				return objectId;
 			}
 		}
 

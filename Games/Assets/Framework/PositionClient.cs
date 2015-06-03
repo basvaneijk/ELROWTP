@@ -67,10 +67,11 @@ namespace Framework
 				                       1.0f);
 				float h, s, v;
 				EditorGUIUtility.RGBToHSV (rgb, out h, out s, out v);
-				PlayerColor objid = HueObject (h);
+				PlayerColor objid = HueObject (h * 360.0f);
 
 				var loc = new LocationUpdateArgs ((int)objid, location, 1);
 
+				//Debug.Log (loc + " h:" + (h * 360.0f));
 				lock (locqueue) {
 					locqueue.Add (loc);
 				}
@@ -79,7 +80,7 @@ namespace Framework
 
 		PlayerColor HueObject (float hue)
 		{
-			if (hue >= 330 && hue <= 60) {
+			if (hue >= 330 || hue <= 60) {
 				return PlayerColor.Red;
 			} else if (hue >= 90 && hue < 180) {
 				return PlayerColor.Green;
