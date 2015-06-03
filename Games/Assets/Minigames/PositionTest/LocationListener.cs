@@ -5,6 +5,7 @@ namespace Framework
 {
 	public class LocationListener : MonoBehaviour
 	{
+		public PlayerColor color;
 		LocationProvider locationProvider;
 
 		// Use this for initialization
@@ -13,8 +14,9 @@ namespace Framework
 			locationProvider = GetComponent<LocationProvider> ();
 
 			locationProvider.OnLocationUpdate += (object source, LocationUpdateArgs e) => {
-				Debug.Log (e);
-				transform.position = e.Location;
+				if ((PlayerColor)e.ObjectId == color) {
+					transform.position = e.Location;
+				}
 			};
 		}
 	}
