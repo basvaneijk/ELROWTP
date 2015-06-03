@@ -3,6 +3,8 @@
 #include <vector>
 #include "tracker.hpp"
 
+using namespace cv;
+
 tracker::tracker(VideoCapture cap, bool debug)
     : cap(cap)
     , debug(debug)
@@ -24,9 +26,9 @@ tracker::tracker(VideoCapture cap, bool debug)
     params.minThreshold = threshold.lower;
     params.maxThreshold = threshold.upper;
     // Filter by Area.
-    params.filterByArea = false;
+    params.filterByArea = true;
     params.minArea = area.lower = 5;
-    params.maxArea = area.upper = 20;
+    params.maxArea = area.upper = 8000;
     // Filter by Circularity
     params.filterByCircularity = true;
     params.minCircularity = 0.5;
@@ -34,7 +36,7 @@ tracker::tracker(VideoCapture cap, bool debug)
     params.filterByConvexity = false;
     params.minConvexity = 0.80;
     // Filter by Inertia
-    params.filterByInertia = true;
+    params.filterByInertia = false;
     params.minInertiaRatio = 0.01;
 
     if (debug) {
@@ -52,8 +54,8 @@ tracker::tracker(VideoCapture cap, bool debug)
         createTrackbar("HighValue", "Control", &value.upper, 255);
 
         //Trackbars for blobs
-        createTrackbar("minArea", "Control", &area.lower, 1400);
-        createTrackbar("maxArea", "Control", &area.upper, 1400);
+        createTrackbar("minArea", "Control", &area.lower, 10000);
+        createTrackbar("maxArea", "Control", &area.upper, 10000);
         createTrackbar("minCircularity", "Control", &minCircularity, 100);
         createTrackbar("minConvexity", "Control", &minConvexity, 100);
         createTrackbar("minInertiaRatio", "Control", &minInertiaRatio, 100);
@@ -63,8 +65,6 @@ tracker::tracker(VideoCapture cap, bool debug)
     }
 }
 
-using namespace cv;
-using namespace std;
 
 Mat tracker::filterUsingHSV(const Mat& frame)
 {
@@ -89,7 +89,7 @@ Mat tracker::filterUsingHSV(const Mat& frame)
     return imgThresholded;
 }
 
-vector<KeyPoint> tracker::trackBlob(const Mat& im)
+std::vector<KeyPoint> tracker::trackBlob(const Mat& im)
 {
     // Setup SimpleBlobDetector parameters.
 
@@ -108,7 +108,7 @@ vector<KeyPoint> tracker::trackBlob(const Mat& im)
     params.maxThreshold = (float)threshold.upper;
 
     // Storage for blobs
-    vector<KeyPoint> keypoints;
+    std::vector<KeyPoint> keypoints;
 #if CV_MAJOR_VERSION < 3 // If you are using OpenCV 2
     // Set up detector with params
     SimpleBlobDetector detector(params);
@@ -123,7 +123,7 @@ vector<KeyPoint> tracker::trackBlob(const Mat& im)
     return keypoints;
 }
 
-void tracker::drawPoints(Mat& img, vector<KeyPointColor> keypointcolors)
+void tracker::drawPoints(Mat& img, std::vector<KeyPointColor> keypointcolors)
 {
     // Draw detected blobs as red circles.
     // DrawMatchesFlags::DRAW_RICH_KEYPOINTS flag ensures
@@ -141,26 +141,21 @@ void tracker::drawPoints(Mat& img, vector<KeyPointColor> keypointcolors)
     }
 }
 
-vector<KeyPointColor> tracker::getKeypointColors(const Mat& img,
-    const vector<KeyPoint>& keypoints)
+std::vector<KeyPointColor> tracker::getKeypointColors(const Mat& img,
+    const std::vector<KeyPoint>& keypoints)
 {
-    vector<KeyPointColor> keypointcolors;
-    if (!keypoints.empty()) {
-        for (KeyPoint kp : keypoints) {
-            KeyPointColor k;
-            k.color = img.at<Vec3b>(kp.pt);
-            k.keypoint = kp;
-            keypointcolors.push_back(k);
-        }
+    std::vector<KeyPointColor> keypointcolors;
+    for (KeyPoint kp : keypoints) {
+        keypointcolors.emplace_back(kp, img.at<Vec3b>(kp.pt));
     }
     return keypointcolors;
 }
 
-vector<KeyPointColor> tracker::trackObjects()
+std::vector<KeyPointColor> tracker::trackObjects()
 {    
     Mat imgCam;
 
-    if (!cap.read(imgCam)) //if not success, break loop
+    if (!cap.read(imgCam))
     {
         throw std::runtime_error("Cannot read a frame from video stream");
     }
@@ -169,25 +164,25 @@ vector<KeyPointColor> tracker::trackObjects()
     return trackObjects(imgCam);
 }
 
-vector<KeyPointColor> tracker::trackObjects(const std::string& img_filename)
+std::vector<KeyPointColor> tracker::trackObjects(const std::string& img_filename)
 {
     Mat img = imread(img_filename.c_str());
     waitKey(100);
     return trackObjects(img);
 }
 
-vector<KeyPointColor> tracker::trackObjects(const Mat& imgOriginal)
+std::vector<KeyPointColor> tracker::trackObjects(const Mat& imgOriginal)
 {
     Mat imgThresholded = filterUsingHSV(imgOriginal);
 
-    auto points = trackBlob(imgThresholded);
-	auto pointcolors = getKeypointColors(imgOriginal , points);
+    std::vector<KeyPoint> points = trackBlob(imgThresholded);
+    std::vector<KeyPointColor> pointcolors = getKeypointColors(imgOriginal , points);
 
     if (debug) {
-        //drawPoints(imgOriginal, pointcolors); 
         Mat imgDebug;
         drawKeypoints(imgOriginal, points, imgDebug, 
                       Scalar(0, 0, 255), DrawMatchesFlags::DRAW_RICH_KEYPOINTS);
+        drawPoints(imgDebug, pointcolors); 
         imshow("Result", imgDebug);
         imshow("HSV", imgThresholded);
     }

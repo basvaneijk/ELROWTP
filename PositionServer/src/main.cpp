@@ -2,6 +2,7 @@
 #include "boost/bind.hpp"
 #include "boost/date_time/posix_time/posix_time_types.hpp"
 #include <array>
+#include <vector>
 #include <functional>
 #include <string>
 
@@ -61,7 +62,7 @@ int main(int argc, char* argv[])
 
         std::cout << "start sending" << std::endl;
         while(true){
-            vector<KeyPointColor> locs;
+            std::vector<KeyPointColor> locs;
             if (img_filename.length() > 0) {
                 locs = tracker.trackObjects(img_filename);
             } else {
