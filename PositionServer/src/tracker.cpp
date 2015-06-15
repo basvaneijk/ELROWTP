@@ -9,10 +9,10 @@ tracker::tracker(VideoCapture cap, bool debug)
     : cap(cap)
     , debug(debug)
 {
-    cap.set(CV_CAP_PROP_SETTINGS, 1);
-    cap.set(CV_CAP_PROP_EXPOSURE, -11);
-    cap.set(CV_CAP_PROP_CONTRAST, 10);
-    cap.set(CV_CAP_PROP_FOCUS, 0);
+    cap.set(CV_CAP_PROP_SETTINGS, 1);			//Opens the context window associated with the capture device
+    cap.set(CV_CAP_PROP_EXPOSURE, -11);			//Sets the exposure
+    cap.set(CV_CAP_PROP_CONTRAST, 10);			//Sets the contrast
+    cap.set(CV_CAP_PROP_FOCUS, 0);				//Disables autofocus
 
     hue = { 0, 179 };
     saturation = { 85, 255 };
@@ -39,11 +39,12 @@ tracker::tracker(VideoCapture cap, bool debug)
     params.filterByInertia = false;
     params.minInertiaRatio = 0.01;
 
+	//If debug mode is enabled a bunch of trackbars will be created
     if (debug) {
-        //Create trackbars in "Control" window
+       
         namedWindow("Control", CV_WINDOW_AUTOSIZE);
 
-        //TRackbars for HSV
+        //Trackbars for HSV
         createTrackbar("LowHue", "Control", &hue.lower, 179); //Hue (0 - 179)
         createTrackbar("HighHue", "Control", &hue.upper, 179);
 
