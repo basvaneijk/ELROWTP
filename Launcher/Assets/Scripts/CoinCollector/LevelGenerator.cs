@@ -9,11 +9,10 @@ public class LevelGenerator : MonoBehaviour {
     private Level CurrentLevel;
     private Vector3 offset;
     public bool canStart;
-    public bool isStarted;
 
 	// Use this for initialization
 	void Start () {
-        isStarted = false;
+        GameObject.FindGameObjectWithTag("StartGameButton").GetComponent<RectTransform>().anchoredPosition = new Vector3(0, 1000, 0);
         canStart = false;
         offset = new Vector3(0, 0.25f, 0);
         levels = new ArrayList();
@@ -35,13 +34,14 @@ public class LevelGenerator : MonoBehaviour {
 	void Update () {
         if (canStart)
         {
-            if (!isStarted)
+            GameObject.FindGameObjectWithTag("StartGameButton").GetComponent<RectTransform>().anchoredPosition = new Vector3(0, 0, 0);
+            foreach (Vector3 v in CurrentLevel.coinPositions)
             {
-                Debug.Log("je kan de game starten");
-                startGame();
-                isStarted = true;
+                (Instantiate(coin, new Vector3(v.x * PlayerPrefs.GetFloat("width"), v.y + 0.10f, v.z * PlayerPrefs.GetFloat("length")), coin.transform.rotation) as GameObject).transform.parent = GameObject.FindGameObjectWithTag("LevelPlane").transform;
             }
+            canStart = false;
         }
+        
 	}
 
     float getScale(float data)
@@ -49,12 +49,12 @@ public class LevelGenerator : MonoBehaviour {
         return data / 10;
     }
 
-    private void startGame()
+    public void startGame()
     {
-
-        foreach(Vector3 v in CurrentLevel.coinPositions) {
-            (Instantiate(coin, new Vector3(v.x * PlayerPrefs.GetFloat("width"), v.y + 0.10f, v.z * PlayerPrefs.GetFloat("length")), coin.transform.rotation) as GameObject).transform.parent = GameObject.FindGameObjectWithTag("LevelPlane").transform;
-        }
+        GameObject.FindGameObjectWithTag("StartGameButton").GetComponent<RectTransform>().anchoredPosition = new Vector3(0, 1000, 0);
+        GameObject.FindGameObjectWithTag("Player").GetComponent<CoinCollection>().isStarted = true;
+        
+        // timer start
       
     }
     private void level1()
