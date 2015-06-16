@@ -11,9 +11,10 @@ public class createLevel : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-		if (PlayerPrefs.GetFloat("width") > 0 && PlayerPrefs.GetFloat("length") > 0) {
-			transform.localScale = new Vector3(getScale(PlayerPrefs.GetFloat("width")), 0.1F, getScale(PlayerPrefs.GetFloat("length")));
-		}
+        if (PlayerPrefs.GetFloat("width") > 0 && PlayerPrefs.GetFloat("length") > 0)
+        {
+            GameObject.FindGameObjectWithTag("LevelPlane").gameObject.transform.localScale = new Vector3(getScale(PlayerPrefs.GetFloat("width")), 0.1F, getScale(PlayerPrefs.GetFloat("length")));
+        }
 	
 	}
 	
@@ -28,7 +29,7 @@ public class createLevel : MonoBehaviour {
 			PlayerPrefs.SetFloat("width", width);
 			PlayerPrefs.SetFloat("length", length);
 
-			transform.localScale = new Vector3(getScale(width), 0.1F, getScale(length));
+            GameObject.FindGameObjectWithTag("LevelPlane").gameObject.transform.localScale = new Vector3(getScale(width), 0.1F, getScale(length));
 		}
 
 		if (Input.GetKeyDown("2")) {
@@ -39,7 +40,7 @@ public class createLevel : MonoBehaviour {
 			PlayerPrefs.SetFloat("width", width);
 			PlayerPrefs.SetFloat("length", length);
 
-			transform.localScale = new Vector3(getScale(width), 0.1F, getScale(length));
+            GameObject.FindGameObjectWithTag("LevelPlane").gameObject.transform.localScale = new Vector3(getScale(width), 0.1F, getScale(length));
 		}
 	
 	}

@@ -40,16 +40,12 @@ public class miniGame1Menu : MonoBehaviour {
 		}
 	}
 
-	public void startCoinsLevel1() {
+	public void startCoinsLevel(int level) {
 		PlayerPrefs.SetString("menu", "miniGame1Menu");
+        PlayerPrefs.SetInt("CurrentLevel",level);
 		Application.LoadLevel("miniGame1");
 	}
-	public void startCoinsLevel2() {
-		Application.LoadLevel("miniGame1");
-	}
-	public void startCoinsLevel3() {
-		Application.LoadLevel("miniGame1");
-	}
+	
 
 	public void returnToMain() {
 		Application.LoadLevel("main");
