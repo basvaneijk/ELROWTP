@@ -8,18 +8,35 @@ public class CoinCollection : MonoBehaviour {
     private int Coins;
     public AudioClip collectSound;
     public bool isStarted;
-
+    public float speed = 4f;
+    public float rotate = 50f;
 	void Start () {
         isStarted = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+        if (Input.GetKey(KeyCode.W))
+        {
+            this.transform.Translate(Vector3.forward * Time.deltaTime * speed);
+        }
+        if (Input.GetKey(KeyCode.A))
+        {
+            this.transform.Rotate(Vector3.up * Time.deltaTime * -rotate);
+        }
+        if (Input.GetKey(KeyCode.S))
+        {
+            this.transform.Translate(-Vector3.forward * Time.deltaTime * speed);
+        }
+        if (Input.GetKey(KeyCode.D))
+        {
+            this.transform.Rotate(Vector3.up * Time.deltaTime * rotate);
+        }
 	}
 
     void OnTriggerEnter(Collider other)
     {
+        Debug.Log("collides with: " + other.name);
         
         if (other.gameObject.tag == "arrow")
         {
