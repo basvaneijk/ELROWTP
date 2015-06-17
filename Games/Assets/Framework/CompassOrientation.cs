@@ -4,30 +4,51 @@ using System.Collections;
 public class CompassOrientation : MonoBehaviour
 {
 	public bool printDebug = false;
+	float speed;
+	Quaternion targetRotation;
+	GUIStyle debugTextStyle;
+	float direction;
 
-	float angleDiff;
-	
 	void Start ()
 	{
 		Input.compass.enabled = true;
 		Input.location.Start ();
+		Input.gyro.enabled = true;
+
+		debugTextStyle = new GUIStyle ();
+		debugTextStyle.fontSize = 32;
 	}
 	
 	// Update is called once per frame
 	void Update ()
 	{
-		Quaternion compRot = Quaternion.Euler (0, Input.compass.trueHeading, 0);
-		angleDiff = Mathf.Abs (Quaternion.Angle (Quaternion.Euler (0, transform.rotation.eulerAngles.y, 0), compRot));
 
-		transform.rotation = Quaternion.RotateTowards (transform.rotation, compRot, angleDiff / 25);
+		targetRotation = Quaternion.Euler (new Vector3 (0.0f, Input.compass.trueHeading, 0.0f));
 
+		speed = Mathf.Abs (Input.gyro.rotationRate.y) * 5.0f;
+
+		direction = Quaternion.Dot (targetRotation, transform.localRotation);
+		if (Mathf.Abs (direction) < 0.99f) {
+			transform.localRotation = targetRotation;
+		} else if (speed > 0.1f) {
+			//transform.localRotation = Quaternion.RotateTowards (transform.rotation, targetRotation, speed);
+			transform.localRotation = transform.localRotation * Quaternion.AngleAxis (Input.gyro.rotationRate.y, Vector3.up);
+		}
+	}
+
+	private static Quaternion ConvertRotation (Quaternion q)
+	{
+		return Quaternion.Euler (-270, 0, 0) * new Quaternion (q.x, q.y, -q.z, -q.w);
 	}
 
 	void OnGUI ()
 	{
 		if (printDebug) {
-			GUI.Label (new Rect (10, 10, 100, 100), "Compas: " + Input.compass.trueHeading);
-			GUI.Label (new Rect (10, 150, 100, 100), "angleDiff: " + angleDiff);
+			GUI.Label (new Rect (10, 10, 200, 100), "Orientation: " + transform.localRotation.eulerAngles, debugTextStyle);
+			GUI.Label (new Rect (10, 50, 200, 100), "TargetOrientation: " + targetRotation.eulerAngles, debugTextStyle);
+			GUI.Label (new Rect (10, 100, 200, 100), "Compas: " + Input.compass.trueHeading, debugTextStyle);
+			GUI.Label (new Rect (10, 150, 200, 100), "Gyro accel: " + Input.gyro.rotationRate, debugTextStyle);
+			GUI.Label (new Rect (10, 200, 200, 100), "direction: " + direction, debugTextStyle);
 		}
 	}
 }

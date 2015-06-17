@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEditor;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -66,7 +65,7 @@ namespace Framework
 				                       BitConverter.ToSingle (data, 12) / 255.0f,
 				                       1.0f);
 				float h, s, v;
-				EditorGUIUtility.RGBToHSV (rgb, out h, out s, out v);
+				RGBToHSV (rgb, out h, out s, out v);
 				PlayerColor objid = HueObject (h * 360.0f);
 
 				var loc = new LocationUpdateArgs ((int)objid, location, 1);
@@ -88,6 +87,47 @@ namespace Framework
 				return PlayerColor.Blue;
 			} else {
 				return PlayerColor.Unknown;
+			}
+		}
+
+		public static void RGBToHSV (Color rgbColor, out float H, out float S, out float V)
+		{
+			if (rgbColor.b > rgbColor.g && rgbColor.b > rgbColor.r) {
+				RGBToHSVHelper (4f, rgbColor.b, rgbColor.r, rgbColor.g, out H, out S, out V);
+			} else {
+				if (rgbColor.g > rgbColor.r) {
+					RGBToHSVHelper (2f, rgbColor.g, rgbColor.b, rgbColor.r, out H, out S, out V);
+				} else {
+					RGBToHSVHelper (0f, rgbColor.r, rgbColor.g, rgbColor.b, out H, out S, out V);
+				}
+			}
+		}
+		
+		private static void RGBToHSVHelper (float offset, float dominantcolor, float colorone, float colortwo, out float H, out float S, out float V)
+		{
+			V = dominantcolor;
+			if (V != 0f) {
+				float num = 0f;
+				if (colorone > colortwo) {
+					num = colortwo;
+				} else {
+					num = colorone;
+				}
+				float num2 = V - num;
+				if (num2 != 0f) {
+					S = num2 / V;
+					H = offset + (colorone - colortwo) / num2;
+				} else {
+					S = 0f;
+					H = offset + (colorone - colortwo);
+				}
+				H /= 6f;
+				if (H < 0f) {
+					H += 1f;
+				}
+			} else {
+				S = 0f;
+				H = 0f;
 			}
 		}
 	}

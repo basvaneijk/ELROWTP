@@ -52,7 +52,7 @@ namespace Vuforia.EditorClasses
 #if UNITY_5_0
                     BuildTargetGroup buildTarget = BuildTargetGroup.iOS;
 #else
-                    BuildTargetGroup buildTarget = BuildTargetGroup.iPhone;
+                    BuildTargetGroup buildTarget = BuildTargetGroup.iOS;
 #endif
                     int scriptingBackend = PlayerSettings.GetPropertyInt("ScriptingBackend", buildTarget);
                     if (scriptingBackend != (int) ScriptingImplementation.IL2CPP)

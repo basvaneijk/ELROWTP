@@ -6,7 +6,7 @@ using System.Collections;
 public class CoinTrigger : MonoBehaviour
 {
 
-	public int score;
+	int score;
 	Text scoreDisplay;
 
 	void Awake ()
@@ -18,6 +18,11 @@ public class CoinTrigger : MonoBehaviour
 	void Start ()
 	{
 		ShowScore ();
+	}
+
+	public int Score ()
+	{
+		return score;
 	}
 
 	void OnTriggerEnter (Collider other)

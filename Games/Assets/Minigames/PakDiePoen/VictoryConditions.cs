@@ -2,7 +2,8 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class VictoryConditions : MonoBehaviour {
+public class VictoryConditions : MonoBehaviour
+{
 	public GameObject otherGameObject;
 
 	public int AmountOfCoinsToWin;
@@ -12,16 +13,18 @@ public class VictoryConditions : MonoBehaviour {
 
 	void Awake ()
 	{
-		cointrigger = GetComponent<CoinTrigger>();
+		cointrigger = GetComponent<CoinTrigger> ();
 		VictoryLabel = GameObject.Find ("VictoryLabel").GetComponent<Text> ();
 	}
-	void Start () {
+	void Start ()
+	{
 
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		if (cointrigger.score >= AmountOfCoinsToWin) {
+	void Update ()
+	{
+		if (cointrigger.Score () >= AmountOfCoinsToWin) {
 			VictoryLabel.text = "You have won the game!";
 		}
 	}
