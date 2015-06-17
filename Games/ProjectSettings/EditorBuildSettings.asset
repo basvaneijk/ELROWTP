@@ -11,9 +11,9 @@ EditorBuildSettings:
     path: Assets/Minigames/PakDiePoen/Menu/MainMenu.unity
   - enabled: 0
     path: Assets/Minigames/PakDiePoen/Level1.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/MainScene/main.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/Minigames/CoinCollector/miniGame1Menu.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/Minigames/CoinCollector/miniGame1.unity

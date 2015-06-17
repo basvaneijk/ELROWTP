@@ -25,14 +25,14 @@ public class CompassOrientation : MonoBehaviour
 
 		targetRotation = Quaternion.Euler (new Vector3 (0.0f, Input.compass.trueHeading, 0.0f));
 
-		speed = Mathf.Abs (Input.gyro.rotationRate.y) * 5.0f;
+		speed = Mathf.Abs (Input.gyro.rotationRate.y) * 100.0f;
 
 		direction = Quaternion.Dot (targetRotation, transform.localRotation);
 		if (Mathf.Abs (direction) < 0.99f) {
 			transform.localRotation = targetRotation;
 		} else if (speed > 0.1f) {
 			//transform.localRotation = Quaternion.RotateTowards (transform.rotation, targetRotation, speed);
-			transform.localRotation = transform.localRotation * Quaternion.AngleAxis (Input.gyro.rotationRate.y, Vector3.up);
+			transform.localRotation = transform.localRotation * Quaternion.AngleAxis (-Input.gyro.rotationRate.y, Vector3.up);
 		}
 	}
 
