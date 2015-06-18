@@ -96,6 +96,11 @@ namespace Framework
 			}
 		}
 
+        /**
+         * 
+         * \param hue
+         * 
+         */
 		PlayerColor HueObject (float hue)
 		{
 			if (hue >= 330 || hue <= 60) {
@@ -109,6 +114,14 @@ namespace Framework
 			}
 		}
 
+        /**
+         * 
+         * \param rgbColor
+         * \param H
+         * \param S
+         * \param V
+         * 
+         */
 		public static void RGBToHSV (Color rgbColor, out float H, out float S, out float V)
 		{
 			if (rgbColor.b > rgbColor.g && rgbColor.b > rgbColor.r) {
@@ -122,6 +135,17 @@ namespace Framework
 			}
 		}
 		
+        /**
+         * 
+         * \param offset
+         * \param dominantcolor
+         * \param colorone
+         * \param colortwo
+         * \param H
+         * \param S
+         * \param V
+         * 
+         */
 		private static void RGBToHSVHelper (float offset, float dominantcolor, float colorone, float colortwo, out float H, out float S, out float V)
 		{
 			V = dominantcolor;
