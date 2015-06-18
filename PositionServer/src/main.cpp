@@ -15,13 +15,20 @@ const short multicast_port = 2000;
 class sender
 {
 public:
-    sender(asio::io_service& io_service,
-            const asio::ip::address& multicast_address)
-        : endpoint(multicast_address, multicast_port),
-        socket(io_service, endpoint.protocol())
+	/**
+	*	Constructor
+	*	\param io_service
+	*	\param multicast_adress
+	*/
+    sender(asio::io_service& io_service, const asio::ip::address& multicast_address): 
+		endpoint(multicast_address, multicast_port), 
+		socket(io_service, endpoint.protocol())
     {
     }
-
+	/**
+	*	Sends a position
+	*	\param position The position to be sent
+	*/
     void send_position(std::array<float, 6> position) 
     {
         socket.async_send_to(asio::buffer(position), endpoint,
@@ -31,10 +38,14 @@ public:
     }
 
 private:
-    asio::ip::udp::endpoint endpoint;
-    asio::ip::udp::socket socket;
+    asio::ip::udp::endpoint endpoint;		//a variable
+    asio::ip::udp::socket socket;			//a variable
 };
 
+	/**
+	*	Something??
+	*	\param kc Converts a keypointcolor to an array
+	*/
 std::array<float, 6> keypointcolor_to_array(const KeyPointColor& kc)
 {
     return {{
