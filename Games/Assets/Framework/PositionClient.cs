@@ -8,7 +8,7 @@ using System.Threading;
 
 namespace Framework
 {
-	public class PositionClient : MonoBehaviour, LocationProvider
+    public class PositionClient : MonoBehaviour, LocationProvider
 	{
 		public event LocationUpdateHandler OnLocationUpdate;
 
@@ -17,6 +17,11 @@ namespace Framework
 		Thread socketListener;
 		List<LocationUpdateArgs> locqueue;
 
+        /**
+         * 
+         * Initialize Listener
+         * 
+         */
 		void Start ()
 		{
 			locqueue = new List<LocationUpdateArgs> ();
@@ -33,11 +38,21 @@ namespace Framework
 			socketListener.Start ();
 		}
 
+        /**
+         * 
+         * Quit Network Connection when application quits
+         * 
+         */
 		void OnApplicationQuit ()
 		{
 			socketListener.Abort ();
 		}
 
+        /**
+         * 
+         * On each monobehavier update check for new locations in the location que
+         * 
+         */
 		void Update ()
 		{
 			lock (locqueue) {
@@ -51,6 +66,11 @@ namespace Framework
 			}
 		}
 		
+        /**
+         * 
+         * Endless loop listening on socket for new locations
+         * 
+         */
 		void ReceiveLocation ()
 		{
 			while (true) {
@@ -70,7 +90,6 @@ namespace Framework
 
 				var loc = new LocationUpdateArgs ((int)objid, location, 1);
 
-				//Debug.Log (loc + " h:" + (h * 360.0f));
 				lock (locqueue) {
 					locqueue.Add (loc);
 				}
