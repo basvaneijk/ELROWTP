@@ -1,5 +1,5 @@
 # ELROWTP
-![alt tag]http://sites.usa.gov/wp-content/uploads/2012/11/read-me.jpg
+![alt tag](http://sites.usa.gov/wp-content/uploads/2012/11/read-me.jpg)
 How to compile the position server:
 
 The project uses Cmake. For instruction on how to use Cmake refer to:
