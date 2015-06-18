@@ -9,7 +9,23 @@ namespace Assets.Scripts.Entity.Character
         //Speed/Sensitivity
         private const float MouseSensitivityX = 250f;
         private const float MouseSensitivityY = 250f;
-        private const float MovementSpeed = 10f;
+
+        private static float MovementSpeed
+        {
+            get
+            {
+                const float baseMovementSpeed = 10f;
+                float movementSpeed = baseMovementSpeed;
+
+                //This is for debugging
+                if (Input.GetButton(KeyBindingHelper.Boost))
+                {
+                    movementSpeed = baseMovementSpeed * 10f;
+                }
+
+                return movementSpeed;
+            }
+        }
 
         //Others
         private Vector3 moveAmount;
@@ -39,7 +55,7 @@ namespace Assets.Scripts.Entity.Character
             verticalLookRotation += Input.GetAxis(KeyBindingHelper.MouseY) * Time.deltaTime * MouseSensitivityY;
             verticalLookRotation = Mathf.Clamp(verticalLookRotation, -60, 60);
             GameObject.FindGameObjectWithTag(TagHelper.MainCamera).transform.localEulerAngles = Vector3.left *
-                                                                                            verticalLookRotation;
+                                                                                                verticalLookRotation;
         }
 
         private void MovementControl()
