@@ -7,7 +7,6 @@ public class ScoreTimer : MonoBehaviour {
 	private float seconds = 0f;
 	private float milliseconds = 0f;
 
-
 	private float highScoreMinutes;
 	private float highScoreSeconds;
 	Text timerText;
@@ -23,8 +22,16 @@ public class ScoreTimer : MonoBehaviour {
 	void Update () {
 		if (Input.GetKeyDown("space")){
 			PlayerPrefs.SetFloat("minutescore", minutes);
-				//if(
 			PlayerPrefs.SetFloat("secondsscore", seconds);
+		}
+
+		if (!GameObject.FindGameObjectWithTag ("MainCamera").GetComponent<CoinCollection> ().isStarted) {
+			if(milliseconds > 10 || seconds > 1 || minutes > 1 ){
+				if(minutes < PlayerPrefs.GetFloat("minutescore") && seconds < PlayerPrefs.GetFloat("secondsscore")){
+					PlayerPrefs.SetFloat("minutescore", minutes);
+					PlayerPrefs.SetFloat("secondsscore", seconds);
+				}
+			}
 		}
 
 		/*
@@ -53,8 +60,7 @@ public class ScoreTimer : MonoBehaviour {
             }
             else
                 timerText.text = "" + minutes.ToString("f0") + ":" + seconds.ToString("f0") + ":";
-
-
+				
             if (milliseconds >= 1000)
             {
                 seconds += 1;
@@ -67,6 +73,5 @@ public class ScoreTimer : MonoBehaviour {
                 seconds = 0;
             }
         }
-
 	}
 }
