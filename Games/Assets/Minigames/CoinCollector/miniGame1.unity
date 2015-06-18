@@ -852,6 +852,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2001560, guid: 5f508ad1c42569049815001191b3e2ae, type: 2}
+      propertyPath: field of view
+      value: 45
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5f508ad1c42569049815001191b3e2ae, type: 2}
   m_IsPrefabParent: 0
@@ -865,13 +869,24 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1747334839}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dd1069009cf4e46a4bea714dda9b5e64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   printDebug: 1
   rotationOffset: -90
+--- !u!114 &1747334841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1747334839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7df69806b21170a4ebd2e901db5e39e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1988941989
 GameObject:
   m_ObjectHideFlags: 0
