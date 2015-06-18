@@ -8,6 +8,9 @@ public class miniGame1Menu : MonoBehaviour {
 	public Button CoinsLevel1, CoinsLevel2, CoinsLevel3;
 	public Sprite CoinsLevel1Normal, CoinsLevel1Lock, CoinsLevel2Normal, CoinsLevel2Lock, CoinsLevel3Normal, CoinsLevel3Lock;
 	
+	/**
+	*	Check the "PlayerPrefs" and set the corresponding sprites. Also disables the levels that are not achieved.
+	*/
 	void Start () {
 
 		PlayerPrefs.SetInt("levelCleared", 0);
@@ -31,7 +34,10 @@ public class miniGame1Menu : MonoBehaviour {
 	void Update () {
 		 
 	}
-
+	
+	/**
+	*	Toggle the help screen. The help screen is used to inform the player of the possibilities.
+	*/
 	public void toggleHelp() {
 		if (helpFrame.activeSelf == true) {
 			helpFrame.SetActive(false);
@@ -39,14 +45,20 @@ public class miniGame1Menu : MonoBehaviour {
 			helpFrame.SetActive(true);
 		}
 	}
-
+	
+	/**
+	*	Set the type of level.
+	*	\param level The level to be loaded.
+	*/
 	public void startCoinsLevel(int level) {
 		PlayerPrefs.SetString("menu", "miniGame1Menu");
         PlayerPrefs.SetInt("CurrentLevel",level);
 		Application.LoadLevel("miniGame1");
 	}
 	
-
+	/**
+	*	Change the scene back to "main".
+	*/
 	public void returnToMain() {
 		Application.LoadLevel("main");
 	}

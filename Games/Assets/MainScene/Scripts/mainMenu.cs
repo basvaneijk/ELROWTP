@@ -9,6 +9,9 @@ public class mainMenu : MonoBehaviour {
 	public Button ButtonBlue, ButtonRed, ButtonGreen, MiniGame1, MiniGame2, MiniGame3;
 	public Sprite ButtonBlueNormal, ButtonBlueActive, ButtonRedNormal, ButtonRedActive, ButtonGreenNormal, ButtonGreenActive, MiniGame1Normal, MiniGame1Active, MiniGame2Normal, MiniGame2Active, MiniGame3Normal, MiniGame3Active;
 	
+	/**
+	*	Check the "PlayerPrefs" and set the corresponding sprites.
+	*/
 	void Start () {
 		string levelLengthString = PlayerPrefs.GetFloat("length").ToString();
 		string levelWidthString = PlayerPrefs.GetFloat("width").ToString();
@@ -53,7 +56,7 @@ public class mainMenu : MonoBehaviour {
 	}
 	
 	/**
-	*	Toggles the help screen. The help screen is used to inform the player of the possibilities.
+	*	Toggle the help screen. The help screen is used to inform the player of the possibilities.
 	*/
 	public void toggleHelp() {
 		if (helpFrame.activeSelf == true) {
@@ -65,7 +68,7 @@ public class mainMenu : MonoBehaviour {
 	}
 	
 	/**
-	*	Toggles the settings screen. The settings screen is used to input the dimensios of the room.
+	*	Toggle the settings screen. The settings screen is used to input the dimensios of the room.
 	*/
 	public void toggleSettings() {
 		if (settingsFrame.activeSelf == true) {
@@ -79,7 +82,7 @@ public class mainMenu : MonoBehaviour {
 	}
 	
 	/**
-	*	Saves the input from the settings screen. Saves only on submit.
+	*	Save the input from the settings screen. Saves only on submit.
 	*/
 	public void saveSettings() {
 		PlayerPrefs.SetFloat("width", float.Parse(inputWidth.text));
@@ -88,7 +91,7 @@ public class mainMenu : MonoBehaviour {
 	}
 	
 	/**
-	*	Starts the chosen game. The type of game is stored in "PlayerPrefs". It also sets the menu in "PlayerPrefs" where it came from.
+	*	Start the chosen game. The type of game is stored in "PlayerPrefs". It also sets the menu in "PlayerPrefs" where it came from.
 	*/
 	public void startGame() {
 		//if (PlayerPrefs.GetString ("color") && PlayerPrefs.GetString ("game") && PlayerPrefs.GetFloat ("length") && PlayerPrefs.GetFloat ("width")) {
@@ -156,6 +159,9 @@ public class mainMenu : MonoBehaviour {
 		MiniGame3.image.sprite = MiniGame3Normal;
 	}
 	
+	/**
+	*	Not applicable!?
+	*/
 	public void setMiniGame3() {
 		PlayerPrefs.SetString("game", "miniGame1");
 		MiniGame1.image.sprite = MiniGame1Normal;

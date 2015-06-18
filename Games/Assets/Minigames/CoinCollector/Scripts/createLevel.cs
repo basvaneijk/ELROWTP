@@ -8,7 +8,9 @@ public class createLevel : MonoBehaviour {
 	float width;
 	float length;
 
-	// Use this for initialization
+	/**
+	*	Check the "PlayerPrefs" and set the scale of the plane according to the dimensions.
+	*/
 	void Start () {
 
         if (PlayerPrefs.GetFloat("width") > 0 && PlayerPrefs.GetFloat("length") > 0)
@@ -18,10 +20,9 @@ public class createLevel : MonoBehaviour {
 	
 	}
 	
-	// Update is called once per frame
 	void Update () {
 
-		if (Input.GetKeyDown("1")) {
+		/*if (Input.GetKeyDown("1")) {
 
 			width = 10;
 			length = 10;
@@ -41,10 +42,15 @@ public class createLevel : MonoBehaviour {
 			PlayerPrefs.SetFloat("length", length);
 
             GameObject.FindGameObjectWithTag("LevelPlane").gameObject.transform.localScale = new Vector3(getScale(width), 0.1F, getScale(length));
-		}
+		}*/
 	
 	}
-
+	
+	/**
+	*	Get the scale. 
+	*	\param data The length or width (dimensions)
+	*	\return The data divided by 10 (scaling)
+	*/
 	float getScale(float data) {
 		return data / 10;
 	}
