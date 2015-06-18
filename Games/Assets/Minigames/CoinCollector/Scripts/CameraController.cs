@@ -9,7 +9,6 @@ public class CameraController : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-		Debug.Log ("Script has been started");
 		plane = GameObject.FindWithTag ("Webcamtexture");
 		float height = (float) Camera.main.orthographicSize * 2.0f;
 		float width = (float) height * Screen.width / Screen.height;
@@ -17,11 +16,7 @@ public class CameraController : MonoBehaviour
         mCamera = new WebCamTexture();
 		plane.GetComponent<Renderer>().material.mainTexture = mCamera;
 		mCamera.Play();
-        foreach (WebCamDevice g in WebCamTexture.devices)
-        {
-            Debug.Log(g.name);
-        }
-
+     
 	}
 	
 	// Update is called once per frame

@@ -35,28 +35,37 @@ public class ScoreTimer : MonoBehaviour {
 			highScoreText.text = highScoreMinutes.ToString ("f0") + highScoreSeconds.ToString ("f0");
 		}
 		*/
-		milliseconds += (Time.deltaTime * 1000);
-
-		if (seconds < 10 && minutes < 10) {
-			timerText.text = "0" + minutes.ToString ("f0") + ":0" + seconds.ToString ("f0");
-		} else if (seconds <= 9) {
-            timerText.text = "0" + minutes.ToString("f0") + ":" + seconds.ToString("f0");
-		} else if (minutes <=9){
-            timerText.text = "0" + minutes.ToString("f0") + ":" + seconds.ToString("f0");
-        } else
-        timerText.text = "" + minutes.ToString("f0") + ":" + seconds.ToString("f0") + ":";
-
-   
-        if (milliseconds >= 1000)
+        if (GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CoinCollection>().isStarted)
         {
-            seconds += 1;
-            milliseconds = 0;
-        }
+            milliseconds += (Time.deltaTime * 1000);
 
-        if (seconds >= 60)
-        {
-            minutes += 1;
-            seconds = 0;
+            if (seconds < 10 && minutes < 10)
+            {
+                timerText.text = "0" + minutes.ToString("f0") + ":0" + seconds.ToString("f0");
+            }
+            else if (seconds <= 9)
+            {
+                timerText.text = "0" + minutes.ToString("f0") + ":" + seconds.ToString("f0");
+            }
+            else if (minutes <= 9)
+            {
+                timerText.text = "0" + minutes.ToString("f0") + ":" + seconds.ToString("f0");
+            }
+            else
+                timerText.text = "" + minutes.ToString("f0") + ":" + seconds.ToString("f0") + ":";
+
+
+            if (milliseconds >= 1000)
+            {
+                seconds += 1;
+                milliseconds = 0;
+            }
+
+            if (seconds >= 60)
+            {
+                minutes += 1;
+                seconds = 0;
+            }
         }
 
 	}

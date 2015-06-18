@@ -59,6 +59,11 @@ public class LevelGenerator : MonoBehaviour {
         // timer start
       
     }
+
+    public void stopGame()
+    {
+
+    }
     private void level1()
     {
         ArrayList level1Positions = new ArrayList();
@@ -79,5 +84,9 @@ public class LevelGenerator : MonoBehaviour {
         level1Positions.Add(new Vector3(0.40f, 0f, -0.40f));
         Level level1 = new Level(1,coin, level1Positions);
         levels.Add(level1);
+    }
+    public int getCoinCount()
+    {
+        return CurrentLevel.coinPositions.Count;
     }
 }
