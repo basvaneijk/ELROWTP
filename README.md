@@ -1,5 +1,5 @@
 # ELROWTP
-![alt tag](http://sites.usa.gov/wp-content/uploads/2012/11/read-me.jpg)<br />
+![alt tag](https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTl9WZvf-GpV6IcSPmwOsYkQ6u-dpKj5sJavbh7hZbPq1mYzaMT)<br />
 **The project exists out of 2 parts:**<br />
 1. A Position server<br />
 2. A Game client
