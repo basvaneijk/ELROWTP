@@ -4,6 +4,7 @@ using System.Collections;
 public class CompassOrientation : MonoBehaviour
 {
 	public bool printDebug = false;
+	public int rotationOffset = 0;
 	float speed;
 	Quaternion targetRotation;
 	GUIStyle debugTextStyle;
@@ -23,14 +24,15 @@ public class CompassOrientation : MonoBehaviour
 	void Update ()
 	{
 
-		targetRotation = Quaternion.Euler (new Vector3 (0.0f, Input.compass.trueHeading, 0.0f));
+		targetRotation = Quaternion.Euler (new Vector3 (0.0f, Input.compass.trueHeading + rotationOffset, 0.0f));
 
 		speed = Mathf.Abs (Input.gyro.rotationRate.y) * 100.0f;
 
 		direction = Quaternion.Dot (targetRotation, transform.localRotation);
 		if (Mathf.Abs (direction) < 0.99f) {
-			transform.localRotation = targetRotation;
-		} else if (speed > 0.1f) {
+			//transform.localRotation = targetRotation;
+			transform.localRotation = Quaternion.RotateTowards (transform.rotation, targetRotation, 10.0f);
+		} else if (speed > 10.0f) {
 			//transform.localRotation = Quaternion.RotateTowards (transform.rotation, targetRotation, speed);
 			transform.localRotation = transform.localRotation * Quaternion.AngleAxis (-Input.gyro.rotationRate.y, Vector3.up);
 		}
