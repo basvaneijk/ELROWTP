@@ -13,7 +13,6 @@ public class CompassOrientation : MonoBehaviour
 	void Start ()
 	{
 		Input.compass.enabled = true;
-		Input.location.Start ();
 		Input.gyro.enabled = true;
 
 		debugTextStyle = new GUIStyle ();
