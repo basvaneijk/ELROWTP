@@ -10,6 +10,8 @@ TagManager:
   - Webcamtexture
   - LevelPlane
   - StartGameButton
+  - UI_CoinCount
+  - Cords
   layers:
   - Default
   - TransparentFX

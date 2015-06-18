@@ -3,16 +3,17 @@ using System.Collections;
 
 public class gameMenu : MonoBehaviour {
 
-	// Use this for initialization
 	void Start () {
 	
 	}
 	
-	// Update is called once per frame
 	void Update () {
 	
 	}
-
+	
+	/**
+	*	Determines to which menu it should return to. Check the "PlayerPrefs" for the corresponding menu. 
+	*/
 	public void returnToMenu() {
 		Application.LoadLevel(PlayerPrefs.GetString("menu"));
 	}

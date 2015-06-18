@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 namespace Framework
@@ -16,6 +17,7 @@ namespace Framework
 			locationProvider.OnLocationUpdate += (object source, LocationUpdateArgs e) => {
 				if ((PlayerColor)e.ObjectId == color) {
 					transform.position = e.Location;
+                    GameObject.FindGameObjectWithTag("Cords").GetComponent<Text>().text = transform.position.ToString();
 				}
 			};
 		}

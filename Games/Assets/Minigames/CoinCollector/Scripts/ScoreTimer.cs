@@ -7,7 +7,6 @@ public class ScoreTimer : MonoBehaviour {
 	private float seconds = 0f;
 	private float milliseconds = 0f;
 
-
 	private float highScoreMinutes;
 	private float highScoreSeconds;
 	Text timerText;
@@ -23,8 +22,16 @@ public class ScoreTimer : MonoBehaviour {
 	void Update () {
 		if (Input.GetKeyDown("space")){
 			PlayerPrefs.SetFloat("minutescore", minutes);
-				//if(
 			PlayerPrefs.SetFloat("secondsscore", seconds);
+		}
+
+		if (!GameObject.FindGameObjectWithTag ("MainCamera").GetComponent<CoinCollection> ().isStarted) {
+			if(milliseconds > 10 || seconds > 1 || minutes > 1 ){
+				if(minutes < PlayerPrefs.GetFloat("minutescore") && seconds < PlayerPrefs.GetFloat("secondsscore")){
+					PlayerPrefs.SetFloat("minutescore", minutes);
+					PlayerPrefs.SetFloat("secondsscore", seconds);
+				}
+			}
 		}
 
 		/*
@@ -35,29 +42,36 @@ public class ScoreTimer : MonoBehaviour {
 			highScoreText.text = highScoreMinutes.ToString ("f0") + highScoreSeconds.ToString ("f0");
 		}
 		*/
-		milliseconds += (Time.deltaTime * 1000);
-
-		if (seconds < 10 && minutes < 10) {
-			timerText.text = "0" + minutes.ToString ("f0") + ":0" + seconds.ToString ("f0");
-		} else if (seconds <= 9) {
-            timerText.text = "0" + minutes.ToString("f0") + ":" + seconds.ToString("f0");
-		} else if (minutes <=9){
-            timerText.text = "0" + minutes.ToString("f0") + ":" + seconds.ToString("f0");
-        } else
-        timerText.text = "" + minutes.ToString("f0") + ":" + seconds.ToString("f0") + ":";
-
-   
-        if (milliseconds >= 1000)
+        if (GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CoinCollection>().isStarted)
         {
-            seconds += 1;
-            milliseconds = 0;
-        }
+            milliseconds += (Time.deltaTime * 1000);
 
-        if (seconds >= 60)
-        {
-            minutes += 1;
-            seconds = 0;
-        }
+            if (seconds < 10 && minutes < 10)
+            {
+                timerText.text = "0" + minutes.ToString("f0") + ":0" + seconds.ToString("f0");
+            }
+            else if (seconds <= 9)
+            {
+                timerText.text = "0" + minutes.ToString("f0") + ":" + seconds.ToString("f0");
+            }
+            else if (minutes <= 9)
+            {
+                timerText.text = "0" + minutes.ToString("f0") + ":" + seconds.ToString("f0");
+            }
+            else
+                timerText.text = "" + minutes.ToString("f0") + ":" + seconds.ToString("f0") + ":";
+				
+            if (milliseconds >= 1000)
+            {
+                seconds += 1;
+                milliseconds = 0;
+            }
 
+            if (seconds >= 60)
+            {
+                minutes += 1;
+                seconds = 0;
+            }
+        }
 	}
 }

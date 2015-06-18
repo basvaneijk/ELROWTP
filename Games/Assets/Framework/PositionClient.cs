@@ -8,7 +8,7 @@ using System.Threading;
 
 namespace Framework
 {
-	public class PositionClient : MonoBehaviour, LocationProvider
+    public class PositionClient : MonoBehaviour, LocationProvider
 	{
 		public event LocationUpdateHandler OnLocationUpdate;
 
@@ -17,6 +17,11 @@ namespace Framework
 		Thread socketListener;
 		List<LocationUpdateArgs> locqueue;
 
+        /**
+         * 
+         * Initialize Listener
+         * 
+         */
 		void Start ()
 		{
 			locqueue = new List<LocationUpdateArgs> ();
@@ -33,11 +38,21 @@ namespace Framework
 			socketListener.Start ();
 		}
 
+        /**
+         * 
+         * Quit Network Connection when application quits
+         * 
+         */
 		void OnApplicationQuit ()
 		{
 			socketListener.Abort ();
 		}
 
+        /**
+         * 
+         * On each monobehavier update check for new locations in the location que
+         * 
+         */
 		void Update ()
 		{
 			lock (locqueue) {
@@ -51,14 +66,19 @@ namespace Framework
 			}
 		}
 		
+        /**
+         * 
+         * Endless loop listening on socket for new locations
+         * 
+         */
 		void ReceiveLocation ()
 		{
 			while (true) {
 				Byte[] data = client.Receive (ref localEp);
-				
-				Vector3 location = new Vector3 (Mathf.Floor (BitConverter.ToSingle (data, 0)), 
+
+                Vector3 location = new Vector3(Mathf.Floor(BitConverter.ToSingle(data, 0)) - 200, 
 				                                Mathf.Floor (BitConverter.ToSingle (data, 8)), 
-				                                Mathf.Floor (BitConverter.ToSingle (data, 4))) / 10.0f;
+				                                Mathf.Floor (BitConverter.ToSingle (data, 4))-200) / 10.0f;
 
 				Color rgb = new Color (BitConverter.ToSingle (data, 20) / 255.0f, 
 				                       BitConverter.ToSingle (data, 16) / 255.0f, 
@@ -70,13 +90,17 @@ namespace Framework
 
 				var loc = new LocationUpdateArgs ((int)objid, location, 1);
 
-				//Debug.Log (loc + " h:" + (h * 360.0f));
 				lock (locqueue) {
 					locqueue.Add (loc);
 				}
 			}
 		}
 
+        /**
+         * 
+         * \param hue
+         * 
+         */
 		PlayerColor HueObject (float hue)
 		{
 			if (hue >= 330 || hue <= 60) {
@@ -90,6 +114,14 @@ namespace Framework
 			}
 		}
 
+        /**
+         * 
+         * \param rgbColor
+         * \param H
+         * \param S
+         * \param V
+         * 
+         */
 		public static void RGBToHSV (Color rgbColor, out float H, out float S, out float V)
 		{
 			if (rgbColor.b > rgbColor.g && rgbColor.b > rgbColor.r) {
@@ -103,6 +135,17 @@ namespace Framework
 			}
 		}
 		
+        /**
+         * 
+         * \param offset
+         * \param dominantcolor
+         * \param colorone
+         * \param colortwo
+         * \param H
+         * \param S
+         * \param V
+         * 
+         */
 		private static void RGBToHSVHelper (float offset, float dominantcolor, float colorone, float colortwo, out float H, out float S, out float V)
 		{
 			V = dominantcolor;
