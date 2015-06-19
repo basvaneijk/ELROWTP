@@ -12,6 +12,7 @@ TagManager:
   - StartGameButton
   - UI_CoinCount
   - Cords
+  - CoinLocatorArrow
   layers:
   - Default
   - TransparentFX
