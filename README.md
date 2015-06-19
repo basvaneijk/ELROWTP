@@ -28,3 +28,18 @@ The multicast ip corresponds to the address the client is listening to.
 
 The debug keyword enables debug mode in which additional debug screens are opened (recommended). Simply type "debug" to enable.
 
+**How to adapt the lighting**
+
+1. Make sure the exposure time is as low as possible<br />
+2. Adjust the Saturation low and high value so that only the light bulbs are visibble<br />
+3. Adjust the values assossiated with blob detection:<br />
+
+- Convexity: How perfect is the blob (e.g. a chip is missing)<br />
+- BlobColor: Color of the blob (Best left default value)<br />
+- Circularity: Roundness of the blob<br />
+- Inertia: Deformation of the blob<br />
+- Area: How many pixels in size<br />
+
+
+
+
