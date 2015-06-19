@@ -172,6 +172,16 @@ std::vector<KeyPointColor> tracker::trackObjects(const std::string& img_filename
     return trackObjects(img);
 }
 
+std::vector<KeyPointColor> normalizeKeyPoints(const std::vector<KeyPointColor>& keypoints, int width, int height)
+{
+    std::vector<KeyPointColor> norm_keypoints(keypoints);
+    for (auto & kp : norm_keypoints) {
+        kp.keypoint.pt.x - width;
+        kp.keypoint.pt.y - height;
+    }
+    return norm_keypoints;
+}
+
 std::vector<KeyPointColor> tracker::trackObjects(const Mat& imgOriginal)
 {
     Mat imgThresholded = filterUsingHSV(imgOriginal);
