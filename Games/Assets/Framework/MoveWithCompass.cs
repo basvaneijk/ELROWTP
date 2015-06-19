@@ -47,6 +47,7 @@ public class MoveWithCompass : MonoBehaviour
 
         // Easy bit :)
         Quaternion temp = new Quaternion(transform.rotation.x, -_correction.y * gyroOrientation.y, transform.rotation.z, transform.rotation.w);
-        transform.rotation = temp;
+       // transform.rotation = temp;
+        transform.rotation = _correction * gyroOrientation;
     }
 }
