@@ -10,6 +10,7 @@ public class LevelGenerator : MonoBehaviour {
     private Vector3 offset;
     public bool canStart;
     private float coinOffset;
+    public GameObject endScreen;
 
 	// Use this for initialization
 	void Start () {
@@ -64,14 +65,28 @@ public class LevelGenerator : MonoBehaviour {
     {
         GameObject.FindGameObjectWithTag("StartGameButton").GetComponent<RectTransform>().anchoredPosition = new Vector3(0, 1000, 0);
         GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CoinCollection>().isStarted = true;
-        
-        // timer start
+
+
       
     }
 
-    public void stopGame()
+    public void stopGame(int seconds, int minutes)
     {
 
+        endScreen.SetActive(true);
+      
+        if (seconds < PlayerPrefs.GetFloat("secondsscore"))
+        {
+            if (minutes <= PlayerPrefs.GetFloat("minutescore"))
+            {
+                PlayerPrefs.SetFloat("minutescore", minutes);
+                PlayerPrefs.SetFloat("secondsscore", seconds);
+               
+            }
+            else
+            {
+            }
+        }
     }
     private void level1()
     {
