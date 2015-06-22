@@ -30,10 +30,12 @@ public class kitchenScript : MonoBehaviour {
 		} else {
 			
 		}
+
 	}
 	
 	void prepareFood(){
 		if (!foodReady) {
+			foodOnTableModel.SetActive(true);
 			print("Food Ready for pickup!");
 			foodReady = true;
 			timer = foodInterval;
@@ -43,8 +45,11 @@ public class kitchenScript : MonoBehaviour {
 	void presentFood(){
 		presentedFood = Random.Range (0,foodCount -1);
 		GameObject tmp = Instantiate (foodModels [presentedFood], foodOnTableModel.transform.position, foodOnTableModel.transform.rotation) as GameObject;
-		//Destroy (foodOnTableModel);
+		Destroy (foodOnTableModel);
 		foodOnTableModel = tmp;
+	}
+	void OnCollisionEnter(Collision col){
+		print (col);
 	}
 	void OnTriggerEnter (Collider col)
 	{
@@ -52,11 +57,10 @@ public class kitchenScript : MonoBehaviour {
 		if(col.gameObject.name == "waiter")
 		{
 			if(foodReady){
-				GameObject a = col.gameObject;
 				presentTray.GetComponent<trayScript>().setFood(presentedFood); //cookingRequests.Dequeue()
 				foodReady = false;
 				timer = foodInterval;
-				//Destroy(foodOnTableModel);
+				foodOnTableModel.SetActive (false);
 			}
 			
 			
