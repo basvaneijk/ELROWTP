@@ -53,7 +53,7 @@ public class kitchenScript : MonoBehaviour {
 		{
 			if(foodReady){
 				GameObject a = col.gameObject;
-				presentTray.GetComponent<trayScript>().giveFood(presentedFood); //cookingRequests.Dequeue()
+				presentTray.GetComponent<trayScript>().setFood(presentedFood); //cookingRequests.Dequeue()
 				foodReady = false;
 				timer = foodInterval;
 				//Destroy(foodOnTableModel);
