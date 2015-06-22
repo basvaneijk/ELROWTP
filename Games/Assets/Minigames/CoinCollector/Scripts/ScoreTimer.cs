@@ -1,77 +1,43 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System;
 
-public class ScoreTimer : MonoBehaviour {
-	private float minutes = 0f;
-	private float seconds = 0f;
-	private float milliseconds = 0f;
+public class ScoreTimer : MonoBehaviour
+{
+	private DateTime start;
 
 	Text timerText;
-	//Text highScoreText;
 
-	// Use this for initialization
-	void Start () {
+	void Start ()
+	{
 		timerText = GameObject.Find ("Timer").GetComponent<Text> ();
-		//highScoreText = GameObject.Find ("HighScoreText").GetComponent<Text> ();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		if (Input.GetKeyDown("space")){
-			PlayerPrefs.SetFloat("minutescore", minutes);
-			PlayerPrefs.SetFloat("secondsscore", seconds);
-		}
 
-		
-
-		/*
-		if (Input.GetKeyDown("up")){
-			highScoreMinutes = PlayerPrefs.GetFloat("minutescore");
-			highScoreSeconds = PlayerPrefs.GetFloat("secondsscore");
-
-			highScoreText.text = highScoreMinutes.ToString ("f0") + highScoreSeconds.ToString ("f0");
-		}
-		*/
-        if (GameObject.FindGameObjectWithTag("Wheelchair").GetComponent<CoinCollection>().isStarted)
-        {
-            milliseconds += (Time.deltaTime * 1000);
-
-            if (seconds < 10 && minutes < 10)
-            {
-                timerText.text = "0" + minutes.ToString("f0") + ":0" + seconds.ToString("f0");
-            }
-            else if (seconds <= 9)
-            {
-                timerText.text = "0" + minutes.ToString("f0") + ":" + seconds.ToString("f0");
-            }
-            else if (minutes <= 9)
-            {
-                timerText.text = "0" + minutes.ToString("f0") + ":" + seconds.ToString("f0");
-            }
-            else
-                timerText.text = "" + minutes.ToString("f0") + ":" + seconds.ToString("f0") + ":";
-				
-            if (milliseconds >= 1000)
-            {
-                seconds += 1;
-                milliseconds = 0;
-            }
-
-            if (seconds >= 60)
-            {
-                minutes += 1;
-                seconds = 0;
-            }
-        }
+	void ResetTimer ()
+	{
+		start = DateTime.Now;
 	}
-    public int GetMinutes()
-    {
-        return (int)minutes;
-    }
 
-    public int GetSeconds()
-    {
-        return (int)seconds;
-    }
+	void Update ()
+	{
+		if (GameObject.FindGameObjectWithTag ("Wheelchair").GetComponent<CoinCollection> ().isStarted) {
+			TimeSpan duration = DateTime.Now - start;
+			timerText.text = duration.Minutes + ":" + duration.Seconds;
+		}
+	}
+	public int GetMinutes ()
+	{
+		return (DateTime.Now - start).Minutes;
+	}
+
+	public long GetSeconds ()
+	{
+		return (DateTime.Now - start).Seconds;
+	}
+
+	public long GetTicks ()
+	{
+		return (DateTime.Now - start).Ticks;
+	}
 }
