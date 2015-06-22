@@ -335,8 +335,6 @@ MonoBehaviour:
   - {fileID: 155598, guid: 64bb52cf5eaee7f4cb9c61b47346c7e8, type: 2}
   - {fileID: 191328, guid: 421a108a5b1e0d94e98920cc3333ffc6, type: 2}
   - {fileID: 182976, guid: 5bea7b3554a743b449cd779b69c259d4, type: 2}
-  foodOnTableModel: {fileID: 1733268664}
-  presentTray: {fileID: 0}
 --- !u!1001 &1536563097
 Prefab:
   m_ObjectHideFlags: 0
@@ -533,10 +531,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
---- !u!1 &1733268664
-GameObject:
-  m_PrefabParentObject: {fileID: 170062, guid: 84d3281cf3d0f82418984ebfa1db197c, type: 2}
-  m_PrefabInternal: {fileID: 259513087}
 --- !u!1001 &1925536126
 Prefab:
   m_ObjectHideFlags: 0
