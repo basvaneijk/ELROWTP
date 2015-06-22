@@ -20,7 +20,7 @@ public class tipCounter : MonoBehaviour {
         if (isStarted)
         {
             tempTime = DateTime.Now;
-            if (tip > 0f && (tempTime.Hour > time.Hour || tempTime.Minute > time.Minute || tempTime.Second > time.Second))
+            if (tip > 0f && (tempTime.Subtract(time).TotalSeconds > 0))
             {
                 if(pause > 0){
                     pause--;
