@@ -77,18 +77,19 @@ public class LevelGenerator : MonoBehaviour
 	
 	public void stopGame (int ticks)
 	{
+        endScreen.SetActive(true);
 		TimeSpan duration = new TimeSpan (ticks);
 
 		if (ticks > PlayerPrefs.GetInt ("GameScore")) {
 			PlayerPrefs.SetInt ("GameScore", ticks);
-			GameObject.Find ("Canvas/GameEndScreen/HighScore").GetComponent<Text> ().text = "TopScore!";
+			GameObject.Find("Canvas/GameEndScreen/HighScore").GetComponent<Text>().text = "TopScore!";
 		} else {
-			GameObject.Find ("Canvas/GameEndScreen/HighScore").GetComponent<Text> ().text = "Geen TopScore!";
+			GameObject.Find("Canvas/GameEndScreen/HighScore").GetComponent<Text>().text = "Geen TopScore!";
 		}
 
 		Debug.Log (duration.Minutes + ":" + duration.Seconds);
 		
-		endScreen.SetActive (true);
+		
 		GameObject.Find ("Canvas/GameEndScreen/EndAmount").GetComponent<Text> ().text = "" + GameObject.FindGameObjectWithTag ("Wheelchair").GetComponent<CoinCollection> ().getCoinCount ();
 		GameObject.Find ("Canvas/GameEndScreen/EndTime").GetComponent<Text> ().text = duration.Minutes + ":" + duration.Seconds;
 		
