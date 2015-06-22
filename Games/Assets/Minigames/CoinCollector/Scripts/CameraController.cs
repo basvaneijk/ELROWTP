@@ -13,7 +13,10 @@ public class CameraController : MonoBehaviour
 		float height = (float) Camera.main.orthographicSize * 2.0f;
 		float width = (float) height * Screen.width / Screen.height;
 		plane.transform.localScale = new Vector3(width/10,0.1f,height/17);
-        mCamera = new WebCamTexture();
+		WebCamTexture tCamera = new WebCamTexture();
+		int h = tCamera.requestedHeight;
+		int w = tCamera.requestedWidth;
+		mCamera = new WebCamTexture (WebCamTexture.devices [0].name, w/2, h/2, 30);
 		plane.GetComponent<Renderer>().material.mainTexture = mCamera;
 		mCamera.Play();
      

@@ -63,3 +63,5 @@ Temporary Items
 .apdisk
 Games/ProjectSettings/ProjectSettings.asset
 *.txt
+*.asset
+*.meta

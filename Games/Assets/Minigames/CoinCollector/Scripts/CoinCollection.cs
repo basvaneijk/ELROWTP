@@ -47,12 +47,13 @@ public class CoinCollection : MonoBehaviour {
         {
             playPickupSound();
             Coins++;
-           // UpdateUi();
+            UpdateUi();
             Destroy(other.gameObject);
+               Debug.Log(GameObject.FindGameObjectWithTag("GameManager").GetComponent<LevelGenerator>().getCoinCount() + " | " + Coins);
             if (Coins == GameObject.FindGameObjectWithTag("GameManager").GetComponent<LevelGenerator>().getCoinCount())
             {
                 isStarted = false;
-                GameObject.FindGameObjectWithTag("GameManager").GetComponent<LevelGenerator>().stopGame();
+                GameObject.FindGameObjectWithTag("GameManager").GetComponent<LevelGenerator>().stopGame(GameObject.FindGameObjectWithTag("Canvas").GetComponent<ScoreTimer>().GetSeconds(), GameObject.FindGameObjectWithTag("Canvas").GetComponent<ScoreTimer>().GetMinutes());
             }
         }
         }
