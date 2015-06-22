@@ -2,7 +2,7 @@
 using System.Collections;
 using System;
 
-public class ScoreTimer : MonoBehaviour {
+public class tipCounter : MonoBehaviour {
 
     private float score;
     private float tip;
