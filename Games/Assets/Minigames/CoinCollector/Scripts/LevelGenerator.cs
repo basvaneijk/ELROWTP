@@ -19,7 +19,7 @@ public class LevelGenerator : MonoBehaviour {
         offset = new Vector3(0, 0f, 0);
         coinOffset = -0.35f;
         levels = new ArrayList();
-        level1();
+		level1(); level2(); level3();
 		startPosition = new Vector3(0f,1f,0f);
 		Camera.main.transform.position = startPosition;
 		CurrentLevel = (Level)levels[PlayerPrefs.GetInt("level")];
@@ -109,6 +109,48 @@ public class LevelGenerator : MonoBehaviour {
         Level level1 = new Level(1,coin, level1Positions);
         levels.Add(level1);
     }
+	private void level2()
+	{
+		ArrayList level2Positions = new ArrayList();
+		level2Positions.Add(new Vector3(-0.38f, 0f, -0.40f));
+		level2Positions.Add(new Vector3(-0.28f, 0f, -0.40f));
+		level2Positions.Add(new Vector3(-0.20f, 0f, -0.40f));
+		level2Positions.Add(new Vector3(-0.15f, 0f, -0.40f));
+		level2Positions.Add(new Vector3(-0.10f, 0f, -0.40f));
+		level2Positions.Add(new Vector3(-0.05f, 0f, -0.40f));
+		level2Positions.Add(new Vector3(-0f, 0f, -0.40f));
+		level2Positions.Add(new Vector3(0f, 0f, -0.35f));
+		level2Positions.Add(new Vector3(0f, 0f, -0.30f));
+		level2Positions.Add(new Vector3(0f, 0f, -0.25f));
+		level2Positions.Add(new Vector3(0f, 0f, -0.20f));
+		level2Positions.Add(new Vector3(0f, 0f, -0.15f));
+		level2Positions.Add(new Vector3(0f, 0f, -0.10f));
+		level2Positions.Add(new Vector3(0f, 0f, -0.05f));
+		level2Positions.Add(new Vector3(0f, 0f, -0f));
+		Level level2 = new Level(2,coin, level2Positions);
+		levels.Add(level2);
+	}
+	private void level3()
+	{
+		ArrayList level3Positions = new ArrayList();
+		level3Positions.Add(new Vector3(-0.38f, 0f, -0.40f));
+		level3Positions.Add(new Vector3(-0.28f, 0f, -0.40f));
+		level3Positions.Add(new Vector3(-0.20f, 0f, -0.40f));
+		level3Positions.Add(new Vector3(-0.15f, 0f, -0.35f));
+		level3Positions.Add(new Vector3(-0.10f, 0f, -0.30f));
+		level3Positions.Add(new Vector3(-0.05f, 0f, -0.25f));
+		level3Positions.Add(new Vector3(-0f, 0f, -0.20f));
+		level3Positions.Add(new Vector3(0.05f, 0f, -0.15f));
+		level3Positions.Add(new Vector3(0.10f, 0f, -0.10f));
+		level3Positions.Add(new Vector3(0.15f, 0f, -0.05f));
+		level3Positions.Add(new Vector3(0.20f, 0f, 0f));
+		level3Positions.Add(new Vector3(0.25f, 0f, 0.05f));
+		level3Positions.Add(new Vector3(0.3f, 0f, 0.10f));
+		level3Positions.Add(new Vector3(0.35f, 0f, 0.15f));
+		level3Positions.Add(new Vector3(0.4f, 0f, 0.2f));
+		Level level3 = new Level(2,coin, level3Positions);
+		levels.Add(level3);
+	}
     public int getCoinCount()
     {
         return CurrentLevel.coinPositions.Count;
