@@ -15,8 +15,8 @@ public class LevelGenerator : MonoBehaviour {
 	void Start () {
         GameObject.FindGameObjectWithTag("StartGameButton").GetComponent<RectTransform>().anchoredPosition = new Vector3(0, 1000, 0);
         canStart = false;
-        offset = new Vector3(0, 0.6f, 0);
-        coinOffset = 0.30f;
+        offset = new Vector3(0, 0f, 0);
+        coinOffset = -0.35f;
         levels = new ArrayList();
         level1();
 		startPosition = new Vector3(0f,1f,0f);
@@ -24,7 +24,11 @@ public class LevelGenerator : MonoBehaviour {
 		CurrentLevel = (Level)levels[PlayerPrefs.GetInt("level")];
 
         Vector3 StartSignPos = (Vector3)CurrentLevel.coinPositions[0] + offset;
-        (Instantiate(StartSign, new Vector3(StartSignPos.x * PlayerPrefs.GetFloat("width"), StartSignPos.y, StartSignPos.z * PlayerPrefs.GetFloat("length")), StartSign.transform.rotation) as GameObject).transform.parent = GameObject.FindGameObjectWithTag("LevelPlane").transform;
+        (Instantiate(StartSign, 
+                     new Vector3(StartSignPos.x * PlayerPrefs.GetFloat("width"), 
+                                 StartSignPos.y, 
+                                 StartSignPos.z * PlayerPrefs.GetFloat("length")), 
+                     StartSign.transform.rotation) as GameObject).transform.parent = GameObject.FindGameObjectWithTag("LevelPlane").transform;
         CurrentLevel.coinPositions.RemoveAt(0);
         
 		
@@ -39,7 +43,12 @@ public class LevelGenerator : MonoBehaviour {
             GameObject.FindGameObjectWithTag("StartGameButton").GetComponent<RectTransform>().anchoredPosition = new Vector3(0, 0, 0);
             foreach (Vector3 v in CurrentLevel.coinPositions)
             {
-                (Instantiate(coin, new Vector3(v.x * PlayerPrefs.GetFloat("width"), v.y + coinOffset, v.z * PlayerPrefs.GetFloat("length")), coin.transform.rotation) as GameObject).transform.parent = GameObject.FindGameObjectWithTag("LevelPlane").transform;
+                (Instantiate(coin, 
+                             new Vector3(v.x * PlayerPrefs.GetFloat("width"), 
+                                         v.y + coinOffset, 
+                                         v.z * PlayerPrefs.GetFloat("length")), 
+                             coin.transform.rotation) 
+                    as GameObject).transform.parent = GameObject.FindGameObjectWithTag("LevelPlane").transform;
             }
             canStart = false;
         }

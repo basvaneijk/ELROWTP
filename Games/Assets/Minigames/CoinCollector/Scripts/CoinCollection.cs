@@ -47,7 +47,7 @@ public class CoinCollection : MonoBehaviour {
         {
             playPickupSound();
             Coins++;
-            UpdateUi();
+           // UpdateUi();
             Destroy(other.gameObject);
             if (Coins == GameObject.FindGameObjectWithTag("GameManager").GetComponent<LevelGenerator>().getCoinCount())
             {
