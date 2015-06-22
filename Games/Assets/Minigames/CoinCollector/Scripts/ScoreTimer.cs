@@ -33,7 +33,7 @@ public class ScoreTimer : MonoBehaviour {
 			highScoreText.text = highScoreMinutes.ToString ("f0") + highScoreSeconds.ToString ("f0");
 		}
 		*/
-        if (GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CoinCollection>().isStarted)
+        if (GameObject.FindGameObjectWithTag("Wheelchair").GetComponent<CoinCollection>().isStarted)
         {
             milliseconds += (Time.deltaTime * 1000);
 

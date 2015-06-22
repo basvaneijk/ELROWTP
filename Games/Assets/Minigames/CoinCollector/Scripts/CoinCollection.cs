@@ -49,7 +49,7 @@ public class CoinCollection : MonoBehaviour {
             Coins++;
             UpdateUi();
             Destroy(other.gameObject);
-               Debug.Log(GameObject.FindGameObjectWithTag("GameManager").GetComponent<LevelGenerator>().getCoinCount() + " | " + Coins);
+             //  Debug.Log(GameObject.FindGameObjectWithTag("GameManager").GetComponent<LevelGenerator>().getCoinCount() + " | " + Coins);
             if (Coins == GameObject.FindGameObjectWithTag("GameManager").GetComponent<LevelGenerator>().getCoinCount())
             {
                 isStarted = false;

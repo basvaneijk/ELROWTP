@@ -20,7 +20,7 @@ public class LevelGenerator : MonoBehaviour {
         coinOffset = -0.35f;
         levels = new ArrayList();
 		level1(); level2(); level3();
-		startPosition = new Vector3(0f,1f,0f);
+		startPosition = new Vector3(0f,0.3f,0f);
 		Camera.main.transform.position = startPosition;
 		CurrentLevel = (Level)levels[PlayerPrefs.GetInt("level")];
 
@@ -64,7 +64,7 @@ public class LevelGenerator : MonoBehaviour {
     public void startGame()
     {
         GameObject.FindGameObjectWithTag("StartGameButton").GetComponent<RectTransform>().anchoredPosition = new Vector3(0, 1000, 0);
-        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CoinCollection>().isStarted = true;
+        GameObject.FindGameObjectWithTag("Wheelchair").GetComponent<CoinCollection>().isStarted = true;
 
 
       

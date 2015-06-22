@@ -14,6 +14,7 @@ TagManager:
   - Cords
   - CoinLocatorArrow
   - Canvas
+  - Wheelchair
   layers:
   - Default
   - TransparentFX
