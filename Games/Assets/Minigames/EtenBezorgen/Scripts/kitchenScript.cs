@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿
+using UnityEngine;
 using System.Collections;
 using System.Timers;
 using System.Collections.Generic;
@@ -11,7 +12,9 @@ public class kitchenScript : MonoBehaviour {
 	public GameObject[] foodModels;
 	private int foodCount = 0;
 	private int presentedFood = 0;
-	private GameObject foodOnTableModel;
+	public GameObject foodOnTableModel;
+	public GameObject presentTray;
+
 	// Use this for initialization
 	void Start () {
 		timer = foodInterval;
@@ -40,18 +43,20 @@ public class kitchenScript : MonoBehaviour {
 	void presentFood(){
 		presentedFood = Random.Range (0,foodCount -1);
 		GameObject tmp = Instantiate (foodModels [presentedFood], foodOnTableModel.transform.position, foodOnTableModel.transform.rotation) as GameObject;
-		Destroy (foodOnTableModel);
+		//Destroy (foodOnTableModel);
 		foodOnTableModel = tmp;
 	}
-	void OnCollisionEnter (Collision col)
+	void OnTriggerEnter (Collider col)
 	{
+		print ("Collision with: " + col.gameObject.name);
 		if(col.gameObject.name == "waiter")
 		{
 			if(foodReady){
 				GameObject a = col.gameObject;
-				//a.GetComponent<waiter_plate>().giveFood(presentedFood); //cookingRequests.Dequeue()
+				presentTray.GetComponent<trayScript>().giveFood(presentedFood); //cookingRequests.Dequeue()
 				foodReady = false;
 				timer = foodInterval;
+				//Destroy(foodOnTableModel);
 			}
 			
 			
