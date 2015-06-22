@@ -73,6 +73,10 @@ public class CoinCollection : MonoBehaviour {
         GameObject.FindGameObjectWithTag("UI_CoinCount").GetComponent<Text>().text = "" + Coins;
 
     }
+    public int getCoinCount()
+    {
+        return Coins;
+    }
 
 
 }

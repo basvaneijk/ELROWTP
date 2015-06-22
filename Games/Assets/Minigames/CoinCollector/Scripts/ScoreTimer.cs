@@ -18,21 +18,7 @@ public class ScoreTimer : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetKeyDown("space")){
-			PlayerPrefs.SetFloat("minutescore", minutes);
-			PlayerPrefs.SetFloat("secondsscore", seconds);
-		}
-
-		
-
-		/*
-		if (Input.GetKeyDown("up")){
-			highScoreMinutes = PlayerPrefs.GetFloat("minutescore");
-			highScoreSeconds = PlayerPrefs.GetFloat("secondsscore");
-
-			highScoreText.text = highScoreMinutes.ToString ("f0") + highScoreSeconds.ToString ("f0");
-		}
-		*/
+	
         if (GameObject.FindGameObjectWithTag("Wheelchair").GetComponent<CoinCollection>().isStarted)
         {
             milliseconds += (Time.deltaTime * 1000);

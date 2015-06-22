@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class LevelGenerator : MonoBehaviour {
@@ -72,19 +73,33 @@ public class LevelGenerator : MonoBehaviour {
 
     public void stopGame(int seconds, int minutes)
     {
+        Debug.Log(minutes + ":" + seconds);
 
         endScreen.SetActive(true);
+        GameObject.Find("Canvas/GameEndScreen/EndAmount").GetComponent<Text>().text = "" + GameObject.FindGameObjectWithTag("Wheelchair").GetComponent<CoinCollection>().getCoinCount();
+        GameObject.Find("Canvas/GameEndScreen/EndTime").GetComponent<Text>().text = minutes + ":" + seconds;
       
-        if (seconds < PlayerPrefs.GetFloat("secondsscore"))
+
+        if (PlayerPrefs.GetFloat("minutescore") == 0 && PlayerPrefs.GetFloat("secondsscore") == 0)
         {
-            if (minutes <= PlayerPrefs.GetFloat("minutescore"))
-            {
+            PlayerPrefs.SetFloat("minutescore", minutes);
+            PlayerPrefs.SetFloat("secondsscore", seconds);
+            GameObject.Find("Canvas/GameEndScreen/HighScore").GetComponent<Text>().text = "TopScore!";
+        }
+        if (minutes <= PlayerPrefs.GetFloat("minutescore"))
+        {
+               if (seconds < PlayerPrefs.GetFloat("secondsscore"))
+               {
+           
+           
+                
                 PlayerPrefs.SetFloat("minutescore", minutes);
                 PlayerPrefs.SetFloat("secondsscore", seconds);
-               
+                GameObject.Find("Canvas/GameEndScreen/HighScore").GetComponent<Text>().text = "TopScore!";
             }
             else
             {
+                GameObject.Find("Canvas/GameEndScreen/HighScore").GetComponent<Text>().text = "Geen TopScore!";
             }
         }
     }
