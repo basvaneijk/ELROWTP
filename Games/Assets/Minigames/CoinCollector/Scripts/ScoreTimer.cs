@@ -14,7 +14,7 @@ public class ScoreTimer : MonoBehaviour
 		timerText = GameObject.Find ("Timer").GetComponent<Text> ();
 	}
 
-	void ResetTimer ()
+	public void ResetTimer ()
 	{
 		start = DateTime.Now;
 	}

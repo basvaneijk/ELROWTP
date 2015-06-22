@@ -18,4 +18,9 @@ public class gameMenu : MonoBehaviour {
 		Application.LoadLevel(PlayerPrefs.GetString("menu"));
 	}
 
+    public void MenuView()
+    {
+        Application.LoadLevel(1);
+    }
+
 }

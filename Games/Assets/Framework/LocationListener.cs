@@ -24,9 +24,9 @@ namespace Framework
 			targetLocation = transform.position;
 		}
 
-		void FixedUpdate ()
+		void Update ()
 		{
-			transform.position = Vector3.MoveTowards (transform.position, targetLocation, 0.4f);
+			transform.position = Vector3.MoveTowards (transform.position, targetLocation, 0.08f);
 		}
 	}
 }

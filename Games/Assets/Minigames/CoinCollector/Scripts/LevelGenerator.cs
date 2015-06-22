@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
+using System;
 
 public class LevelGenerator : MonoBehaviour
 {
@@ -72,14 +74,28 @@ public class LevelGenerator : MonoBehaviour
 
       
 	}
-
+	
 	public void stopGame (int ticks)
 	{
+		TimeSpan duration = new TimeSpan (ticks);
 
+		if (ticks > PlayerPrefs.GetInt ("GameScore")) {
+			PlayerPrefs.SetInt ("GameScore", ticks);
+			GameObject.Find ("Canvas/GameEndScreen/HighScore").GetComponent<Text> ().text = "TopScore!";
+		} else {
+			GameObject.Find ("Canvas/GameEndScreen/HighScore").GetComponent<Text> ().text = "Geen TopScore!";
+		}
+
+		Debug.Log (duration.Minutes + ":" + duration.Seconds);
+		
 		endScreen.SetActive (true);
-
-		if (ticks > PlayerPrefs.GetInt ("GameDuration")) {
-			PlayerPrefs.SetInt ("GameDuration", ticks);
+		GameObject.Find ("Canvas/GameEndScreen/EndAmount").GetComponent<Text> ().text = "" + GameObject.FindGameObjectWithTag ("Wheelchair").GetComponent<CoinCollection> ().getCoinCount ();
+		GameObject.Find ("Canvas/GameEndScreen/EndTime").GetComponent<Text> ().text = duration.Minutes + ":" + duration.Seconds;
+		
+		
+		if (PlayerPrefs.GetFloat ("GameScore") == 0) {
+			PlayerPrefs.SetFloat ("GameScore", ticks);
+			GameObject.Find ("Canvas/GameEndScreen/HighScore").GetComponent<Text> ().text = "TopScore!";
 		}
 	}
 
@@ -104,6 +120,7 @@ public class LevelGenerator : MonoBehaviour
 		Level level1 = new Level (1, coin, level1Positions);
 		levels.Add (level1);
 	}
+
 	private void level2 ()
 	{
 		ArrayList level2Positions = new ArrayList ();
@@ -125,6 +142,7 @@ public class LevelGenerator : MonoBehaviour
 		Level level2 = new Level (2, coin, level2Positions);
 		levels.Add (level2);
 	}
+
 	private void level3 ()
 	{
 		ArrayList level3Positions = new ArrayList ();
@@ -146,6 +164,7 @@ public class LevelGenerator : MonoBehaviour
 		Level level3 = new Level (2, coin, level3Positions);
 		levels.Add (level3);
 	}
+
 	public int getCoinCount ()
 	{
 		return CurrentLevel.coinPositions.Count;
