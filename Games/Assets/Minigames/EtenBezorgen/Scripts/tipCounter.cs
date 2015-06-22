@@ -18,20 +18,21 @@ public class tipCounter : MonoBehaviour
 	}
 	
 	// Update is called once per frame
-	void Update ()
-	{
-		if (isStarted) {
-			tempTime = DateTime.Now;
-			if (tip > 0f && (tempTime.Hour > time.Hour || tempTime.Minute > time.Minute || tempTime.Second > time.Second)) {
-				if (pause > 0) {
-					pause--;
-				} else {
-					tip -= 0.20f;
-					time = tempTime;
-				}
-			}
-		}
-	}
+	void Update () {
+        if (isStarted)
+        {
+            tempTime = DateTime.Now;
+            if (tip > 0f && (tempTime.Subtract(time).TotalSeconds > 0))
+            {
+                if(pause > 0){
+                    pause--;
+                }else{
+                    tip -= 0.20f;
+                    time = tempTime;
+                }
+            }
+        }
+        }
 
 	public void startGame ()
 	{
