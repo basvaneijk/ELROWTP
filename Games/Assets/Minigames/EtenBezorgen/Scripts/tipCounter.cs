@@ -8,6 +8,8 @@ public class tipCounter : MonoBehaviour {
     private float tip;
     private DateTime time;
     private Boolean isStarted = false;
+    private DateTime tempTime;
+    private int pause = 30;
 
 	// Use this for initialization
 	void Start () {
@@ -17,11 +19,15 @@ public class tipCounter : MonoBehaviour {
 	void Update () {
         if (isStarted)
         {
-            DateTime tempTime = DateTime.Now;
+            tempTime = DateTime.Now;
             if (tip > 0f && (tempTime.Hour > time.Hour || tempTime.Minute > time.Minute || tempTime.Second > time.Second))
             {
-                tip -= 0.20f;
-                time = tempTime;
+                if(pause > 0){
+                    pause--;
+                }else{
+                    tip -= 0.20f;
+                    time = tempTime;
+                }
             }
         }
 	}
