@@ -27,7 +27,6 @@ public class tipCounter : MonoBehaviour
             tempTime = DateTime.Now;
             if (pause > 0 && (tempTime.Subtract(time).TotalSeconds > 1))
             {
-                Debug.Log(pause);
                 pause -= 1;
                 time = tempTime;
             }
@@ -35,47 +34,16 @@ public class tipCounter : MonoBehaviour
             {
                 if (tip < 0.30f)
                 {
-                    Debug.Log(tip);
                     tip = 0.0f;
-                    Debug.Log(tip);
                 }
                 else
                 {
-                    Debug.Log(tip);
                     tip -= 0.20f;
-                    Debug.Log(tip);
                 }
                 time = tempTime;
             }
         }
     }
-
-
-    /*tempTime = DateTime.Now;
-            /if (pause > 0 && (tempTime.Subtract(time).TotalSeconds > 1))
-            {
-                pause--;
-            }
-            else
-            {
-                if (pause <= 0 && tip > 0.1f && (tempTime.Subtract(time).TotalSeconds > 5))
-                {
-                    if (tip < 0.20f)
-                    {
-                        Debug.Log(tip);
-                        tip = 0.0f;
-                        Debug.Log(tip);
-                    }
-                    else
-                    {
-                        Debug.Log(tip);
-                        tip -= 0.20f;
-                        Debug.Log(tip);
-                    }
-                }
-              }*
-                time = tempTime;
-           }*/
 
 	public void startCounter ()
 	{

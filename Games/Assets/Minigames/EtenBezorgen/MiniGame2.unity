@@ -213,6 +213,10 @@ Prefab:
       propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 169986, guid: 5724f4943b051d64387f115e3b86e51f, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5724f4943b051d64387f115e3b86e51f, type: 2}
   m_IsPrefabParent: 0
@@ -393,6 +397,7 @@ MonoBehaviour:
   TipTransform: {fileID: 1182816844}
   tipText: {fileID: 1115440492}
   kitchen: {fileID: 1530978194}
+  tipHUD: {fileID: 1121006737}
 --- !u!81 &530387046
 AudioListener:
   m_ObjectHideFlags: 0
@@ -446,6 +451,7 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: .0219999999
+  m_StereoMirrorMode: 0
 --- !u!4 &530387050
 Transform:
   m_ObjectHideFlags: 0
@@ -581,26 +587,30 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
---- !u!1 &578313377
+--- !u!1 &578313377 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 170062, guid: 84d3281cf3d0f82418984ebfa1db197c, type: 2}
   m_PrefabInternal: {fileID: 259513087}
---- !u!114 &1115440492
+--- !u!114 &1115440492 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 11411390, guid: 5724f4943b051d64387f115e3b86e51f,
     type: 2}
   m_PrefabInternal: {fileID: 62977809}
   m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
---- !u!4 &1160696066
+--- !u!1 &1121006737 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 169986, guid: 5724f4943b051d64387f115e3b86e51f, type: 2}
+  m_PrefabInternal: {fileID: 62977809}
+--- !u!4 &1160696066 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400912, guid: a2af6c952bf8ab242aac2787e7a80fae, type: 2}
   m_PrefabInternal: {fileID: 1536563097}
---- !u!224 &1182816844
+--- !u!224 &1182816844 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 22481904, guid: 5724f4943b051d64387f115e3b86e51f,
     type: 2}
   m_PrefabInternal: {fileID: 62977809}
---- !u!1 &1530978194
+--- !u!1 &1530978194 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 114174, guid: 84d3281cf3d0f82418984ebfa1db197c, type: 2}
   m_PrefabInternal: {fileID: 259513087}
@@ -716,7 +726,7 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a2af6c952bf8ab242aac2787e7a80fae, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &1536563098
+--- !u!1 &1536563098 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 117196, guid: a2af6c952bf8ab242aac2787e7a80fae, type: 2}
   m_PrefabInternal: {fileID: 1536563097}
@@ -741,6 +751,7 @@ MonoBehaviour:
   foodOnTableModel: {fileID: 2102966493}
   kitchenObject: {fileID: 1530978194}
   presentTray: {fileID: 1925536127}
+  kitchen: {fileID: 1530978194}
 --- !u!65 &1536563100
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -753,7 +764,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2, y: 2, z: 2}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!4 &1694050339
+--- !u!4 &1694050339 stripped
 Transform:
   m_PrefabParentObject: {fileID: 410904, guid: 6767c64c6081f254ca0f63a6935eafc1, type: 2}
   m_PrefabInternal: {fileID: 1925536126}
@@ -953,7 +964,7 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6767c64c6081f254ca0f63a6935eafc1, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &1925536127
+--- !u!1 &1925536127 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 177486, guid: 6767c64c6081f254ca0f63a6935eafc1, type: 2}
   m_PrefabInternal: {fileID: 1925536126}
