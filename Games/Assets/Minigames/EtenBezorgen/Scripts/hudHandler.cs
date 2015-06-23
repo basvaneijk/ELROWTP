@@ -8,7 +8,7 @@ public class hudHandler : MonoBehaviour {
     private float minXValue;
     private float maxXValue;
     public Text tipText;
-    public GameObject kitchen;
+    private GameObject kitchen;
 	// Use this for initialization
     void Start()
     {
