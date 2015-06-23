@@ -98,19 +98,19 @@ public class miniGame1Menu : MonoBehaviour
     }
     public void OnEnable()
     {
-        int numberOfGames = 3;
+        int numberOfGames = 4;
         for (int i = 1; i < numberOfGames; i++)
         {
             int GameScore = PlayerPrefs.GetInt("GameScore" + (i - 1));
             Text g = GameObject.Find("Canvas/GamesFrame/CoinsLevel" + i + "/Text").GetComponent<Text>();
-            if (GameScore != 0 && g.text != "TopScore :\n" + GameScore)
+            if (GameScore != 0 && g.text != SecondsToHhMmSs(new TimeSpan(GameScore)))
             {
                 TimeSpan duration = new TimeSpan(GameScore);
-                g.text = "TopScore :\n" + SecondsToHhMmSs(duration);
+                g.text = SecondsToHhMmSs(duration);
             }
             else if (GameScore == 0)
             {
-                g.text = "";
+                g.text = "Geen score";
             }
         }
     }
