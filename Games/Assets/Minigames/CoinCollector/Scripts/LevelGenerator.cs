@@ -18,6 +18,10 @@ public class LevelGenerator : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
+        if (PlayerPrefs.GetInt("GameScore" + PlayerPrefs.GetInt("level")) == null)
+        {
+            PlayerPrefs.SetInt("GameScore" + PlayerPrefs.GetInt("level"), 0);
+        }
 		GameObject.FindGameObjectWithTag ("StartGameButton").GetComponent<RectTransform> ().anchoredPosition = new Vector3 (0, 1000, 0);
 		canStart = false;
 		offset = new Vector3 (0, 0f, 0);
@@ -46,6 +50,11 @@ public class LevelGenerator : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
+        if (Input.GetKey(KeyCode.T))
+        {
+            PlayerPrefs.SetInt("GameScore" + PlayerPrefs.GetInt("level"), 0);
+            Debug.Log("reset scores");
+        }
 		if (canStart) {
 			GameObject.FindGameObjectWithTag ("StartGameButton").GetComponent<RectTransform> ().anchoredPosition = new Vector3 (0, 0, 0);
 			foreach (Vector3 v in CurrentLevel.coinPositions) {
@@ -78,26 +87,31 @@ public class LevelGenerator : MonoBehaviour
 	public void stopGame (int ticks)
 	{
         endScreen.SetActive(true);
+        int GameScore = PlayerPrefs.GetInt("GameScore" + PlayerPrefs.GetInt("level"));
+
+        PlayerPrefs.SetInt("levelCleared", PlayerPrefs.GetInt("level") +1); 
 		TimeSpan duration = new TimeSpan (ticks);
 
-		if (ticks > PlayerPrefs.GetInt ("GameScore")) {
-			PlayerPrefs.SetInt ("GameScore", ticks);
+        if (GameScore == 0)
+        {
+            PlayerPrefs.SetInt("GameScore" + PlayerPrefs.GetInt("level"), ticks);
+            GameObject.Find("Canvas/GameEndScreen/HighScore").GetComponent<Text>().text = "TopScore!";
+        }
+
+        else if (ticks < GameScore )
+        {
+            PlayerPrefs.SetInt("GameScore" + PlayerPrefs.GetInt("level"), ticks);
 			GameObject.Find("Canvas/GameEndScreen/HighScore").GetComponent<Text>().text = "TopScore!";
 		} else {
 			GameObject.Find("Canvas/GameEndScreen/HighScore").GetComponent<Text>().text = "Geen TopScore!";
 		}
-
-		Debug.Log (duration.Minutes + ":" + duration.Seconds);
-		
+	
 		
 		GameObject.Find ("Canvas/GameEndScreen/EndAmount").GetComponent<Text> ().text = "" + GameObject.FindGameObjectWithTag ("Wheelchair").GetComponent<CoinCollection> ().getCoinCount ();
 		GameObject.Find ("Canvas/GameEndScreen/EndTime").GetComponent<Text> ().text = duration.Minutes + ":" + duration.Seconds;
 		
 		
-		if (PlayerPrefs.GetFloat ("GameScore") == 0) {
-			PlayerPrefs.SetFloat ("GameScore", ticks);
-			GameObject.Find ("Canvas/GameEndScreen/HighScore").GetComponent<Text> ().text = "TopScore!";
-		}
+		
 	}
 
 	private void level1 ()

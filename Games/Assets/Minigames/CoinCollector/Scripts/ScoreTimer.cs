@@ -25,7 +25,7 @@ public class ScoreTimer : MonoBehaviour
 		if (GameObject.FindGameObjectWithTag ("Wheelchair").GetComponent<CoinCollection> ().isStarted) {
 			TimeSpan duration = DateTime.Now - start;
 			timerText.text = duration.Minutes + ":" + duration.Seconds;
-            Debug.Log(duration.Ticks + " | " + duration.Minutes + ":" + duration.Seconds);
+           
 		}
 	}
 	public int GetMinutes ()

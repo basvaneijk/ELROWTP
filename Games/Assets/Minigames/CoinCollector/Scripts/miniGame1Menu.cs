@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System;
 
 public class miniGame1Menu : MonoBehaviour {
 	
@@ -13,7 +14,11 @@ public class miniGame1Menu : MonoBehaviour {
 	*/
 	void Start () {
 
-		PlayerPrefs.SetInt("levelCleared", 0);
+        if (PlayerPrefs.GetInt("levelCleared") == null)
+        {
+            PlayerPrefs.SetInt("levelCleared", 0);
+        }
+
 
 		int levelCleared = PlayerPrefs.GetInt("levelCleared");
 		if (levelCleared >= 1) {
@@ -30,9 +35,42 @@ public class miniGame1Menu : MonoBehaviour {
 		}
 
 	}
-
+   
 	void Update () {
-		 
+        if (PlayerPrefs.GetInt("levelCleared") != PlayerPrefs.GetInt("level"))
+        {
+
+        int levelCleared = PlayerPrefs.GetInt("levelCleared");
+        if (levelCleared >= 1)
+        {
+            CoinsLevel2.interactable = true;
+        }
+        else
+        {
+            CoinsLevel2.interactable = false;
+            CoinsLevel2.image.sprite = CoinsLevel2Lock;
+        }
+        if (levelCleared >= 2)
+        {
+            CoinsLevel3.interactable = true;
+        }
+        else
+        {
+            CoinsLevel3.interactable = false;
+            CoinsLevel3.image.sprite = CoinsLevel3Lock;
+        }
+       }
+        else
+        {
+            CoinsLevel2.interactable = false;
+        }
+        
+        
+        if (Input.GetKey(KeyCode.R))
+        {
+            PlayerPrefs.SetInt("levelCleared", 0);
+        }
+
 	}
 	
 	/**
@@ -45,14 +83,31 @@ public class miniGame1Menu : MonoBehaviour {
 			helpFrame.SetActive(true);
 		}
 	}
-	
+    public void OnEnable()
+    {
+        int numberOfGames = 3;
+        for (int i = 1; i < numberOfGames; i++)
+        {
+            int GameScore = PlayerPrefs.GetInt("GameScore" + (i -1));
+            Text g = GameObject.Find("Canvas/GamesFrame/CoinsLevel" + i + "/Text").GetComponent<Text>();
+            if (GameScore != 0 && g.text != "TopScore :\n" + GameScore)
+            {
+                TimeSpan duration = new TimeSpan(GameScore);
+                g.text = "TopScore :\n" + SecondsToHhMmSs(duration);
+            }
+            else if (GameScore == 0)
+            {
+                g.text = "";
+            }
+        }
+    }
 	/**
 	*	Set the type of level.
 	*	\param level The level to be loaded.
 	*/
 	public void startCoinsLevel(int level) {
 		PlayerPrefs.SetString("menu", "miniGame1Menu");
-        PlayerPrefs.SetInt("CurrentLevel",level);
+        PlayerPrefs.SetInt("level",level);
 		Application.LoadLevel("miniGame1");
 	}
 	
@@ -62,5 +117,10 @@ public class miniGame1Menu : MonoBehaviour {
 	public void returnToMain() {
 		Application.LoadLevel("main");
 	}
+
+    private string SecondsToHhMmSs(TimeSpan myTimeSpan)
+    {
+        return string.Format("{0:00}:{1:00}", myTimeSpan.Minutes, myTimeSpan.Seconds);
+    }
 
 }
