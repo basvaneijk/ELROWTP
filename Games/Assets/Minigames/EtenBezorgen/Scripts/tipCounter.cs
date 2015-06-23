@@ -5,9 +5,8 @@ using System;
 public class tipCounter : MonoBehaviour
 {
 
-    private float score;
-    private float tip;
-    private float maxtip;
+	private float score;
+	private float tip;
 	private DateTime time;
 	private Boolean isStarted = false;
 	private DateTime tempTime;
@@ -15,9 +14,7 @@ public class tipCounter : MonoBehaviour
 
 	// Use this for initialization
 	void Start ()
-    {
-        score = 15f;
-        tip = 5f;
+	{
 	}
 	
 	// Update is called once per frame
@@ -30,33 +27,24 @@ public class tipCounter : MonoBehaviour
                 if(pause > 0){
                     pause--;
                 }else{
-                    if (tip < 0.20)
-                    {
-                        tip = 0.0f;
-                    }
-                    else
-                    {
-                        tip -= 0.20f;
-                    }
+                    tip -= 0.20f;
                     time = tempTime;
                 }
             }
         }
         }
 
-	public void startCounter ()
+	public void startGame ()
 	{
 		time = DateTime.Now;
 		isStarted = true;
-        maxtip = tip;
+		if (score == 0.0f) {
+			score = 15f;
+		}
+		if (tip == 0.0f) {
+			tip = 5f;
+		}
 	}
-
-    public void stopCounter()
-    {
-        isStarted = false;
-        score = 15f;
-        tip = 5f;
-    }
 
 	public float getScore ()
 	{
@@ -68,18 +56,8 @@ public class tipCounter : MonoBehaviour
 		this.score = points;
 	}
 
-    public void setTip(float tipmoney)
-    {
-        this.tip = tipmoney;
-    }
-
-    public float getTip()
-    {
-        return tip;
-    }
-
-    public float getMaxtip()
-    {
-        return maxtip;
-    }
+	public void setTip (float tipmoney)
+	{
+		this.tip = tipmoney;
+	}
 }

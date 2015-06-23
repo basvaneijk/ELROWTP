@@ -16,9 +16,6 @@ public class trayScript : MonoBehaviour {
 		trayModel.transform.position = transform.position;
 		trayModel.transform.rotation = transform.rotation;
 	}
-	public void clearTray(){
-		trayModel.SetActive (false);
-	}
 	public void setFood(int a){
 		currentFood = a;
 		GameObject tmp = Instantiate (foodModels [a], trayModel.transform.position, trayModel.transform.rotation) as GameObject;
@@ -27,7 +24,7 @@ public class trayScript : MonoBehaviour {
 		trayModel = tmp;
 		trayModel.SetActive (true);
 	}
-	public int getCurrentFood(){
+	public int getFood(){
 		return currentFood;
 
 	}

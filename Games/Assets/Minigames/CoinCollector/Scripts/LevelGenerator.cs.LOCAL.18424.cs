@@ -100,12 +100,6 @@ public class LevelGenerator : MonoBehaviour
             GameObject.Find("Canvas/GameEndScreen/HighScore").GetComponent<Text>().text = "TopScore!";
         }
 
-        else if (ticks < GameScore )
-        {
-            PlayerPrefs.SetInt("GameScore" + PlayerPrefs.GetInt("level"), ticks);
-            GameObject.Find("Canvas/GameEndScreen/HighScore").GetComponent<Text>().text = "TopScore!";
-        }
-	
         else if (ticks < GameScore)
         {
             PlayerPrefs.SetInt("GameScore" + PlayerPrefs.GetInt("level"), ticks);
