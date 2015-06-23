@@ -80,7 +80,7 @@ public class LevelGenerator : MonoBehaviour
         endScreen.SetActive(true);
 		TimeSpan duration = new TimeSpan (ticks);
 
-		if (ticks > PlayerPrefs.GetInt ("GameScore")) {
+		if (ticks < PlayerPrefs.GetInt ("GameScore")) {
 			PlayerPrefs.SetInt ("GameScore", ticks);
 			GameObject.Find("Canvas/GameEndScreen/HighScore").GetComponent<Text>().text = "TopScore!";
 		} else {
