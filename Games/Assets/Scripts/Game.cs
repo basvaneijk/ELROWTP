@@ -229,7 +229,7 @@ namespace Assets.Scripts
         ///     Used to read binary data files from disk.
         /// </summary>
         /// <param name="path">The filepath to be read.</param>
-        /// <returns></returns>
+        /// <returns>Content of the file as bytearray.</returns>
         private static byte[] ReadFileBytes(string path)
         {
             if (!File.Exists(path))

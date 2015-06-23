@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Assets.Scripts.UI
@@ -19,6 +20,17 @@ namespace Assets.Scripts.UI
                 {
                     yield return transform.GetChild(i).GetComponent<Minigame>();
                 }
+            }
+        }
+
+        /// <summary>
+        /// The currently selected minigame, is null when nothing is selected.
+        /// </summary>
+        public Minigame SelectedMinigame
+        {
+            get
+            {
+                return Minigames.FirstOrDefault(x => x.IsSelected);
             }
         }
     }

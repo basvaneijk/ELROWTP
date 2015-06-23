@@ -144,10 +144,18 @@ namespace Assets.Scripts.UI
             }
         }
 
-        //Used to start the selected minigame
+        /// <summary>
+        ///     Starts the selected minigame.
+        /// </summary>
         private void StartGame()
         {
-            throw new NotImplementedException();
+            MinigameContainer mc = minigameTiles.GetComponent<MinigameContainer>();
+            Minigame selectedGame = mc.SelectedMinigame;
+            if (selectedGame == null)
+            {
+                return;
+            }
+            LaunchMinigame(selectedGame.MinigameInfo.Id);
         }
 
         /// <summary>
