@@ -25,24 +25,57 @@ public class tipCounter : MonoBehaviour
         if (isStarted)
         {
             tempTime = DateTime.Now;
-            if (tip > 0f && (tempTime.Subtract(time).TotalSeconds > 0))
+            if (pause > 0 && (tempTime.Subtract(time).TotalSeconds > 1))
             {
-                if(pause > 0){
-                    pause--;
-                }else{
-                    if (tip < 0.20)
+                Debug.Log(pause);
+                pause -= 1;
+                time = tempTime;
+            }
+            else if(tip > 0.1f && tempTime.Subtract(time).TotalSeconds > 2)
+            {
+                if (tip < 0.30f)
+                {
+                    Debug.Log(tip);
+                    tip = 0.0f;
+                    Debug.Log(tip);
+                }
+                else
+                {
+                    Debug.Log(tip);
+                    tip -= 0.20f;
+                    Debug.Log(tip);
+                }
+                time = tempTime;
+            }
+        }
+    }
+
+
+    /*tempTime = DateTime.Now;
+            /if (pause > 0 && (tempTime.Subtract(time).TotalSeconds > 1))
+            {
+                pause--;
+            }
+            else
+            {
+                if (pause <= 0 && tip > 0.1f && (tempTime.Subtract(time).TotalSeconds > 5))
+                {
+                    if (tip < 0.20f)
                     {
+                        Debug.Log(tip);
                         tip = 0.0f;
+                        Debug.Log(tip);
                     }
                     else
                     {
+                        Debug.Log(tip);
                         tip -= 0.20f;
+                        Debug.Log(tip);
                     }
-                    time = tempTime;
                 }
-            }
-        }
-        }
+              }*
+                time = tempTime;
+           }*/
 
 	public void startCounter ()
 	{
@@ -54,6 +87,7 @@ public class tipCounter : MonoBehaviour
     public void stopCounter()
     {
         isStarted = false;
+        pause = 30;
         score = 15f;
         tip = 5f;
     }
@@ -81,5 +115,10 @@ public class tipCounter : MonoBehaviour
     public float getMaxtip()
     {
         return maxtip;
+    }
+
+    public Boolean started()
+    {
+        return isStarted;
     }
 }

@@ -12,15 +12,18 @@ public class hudHandler : MonoBehaviour {
 	// Use this for initialization
     void Start()
     {
-        GameObject.Find("kitchen");
         maxXValue = TipTransform.position.x;
         minXValue = TipTransform.position.x - TipTransform.rect.width;
 	}
 	
 	// Update is called once per frame
-	void Update () {
-        tipText.text = "Fooi: " + kitchen.GetComponent<tipCounter>().getTip();
+    void Update()
+    {
+        if (kitchen.GetComponent<tipCounter>().started())
+        {
+            tipText.text = "Fooi: " + kitchen.GetComponent<tipCounter>().getTip();
 
-        TipTransform.position = new Vector3((((kitchen.GetComponent<tipCounter>().getMaxtip() - kitchen.GetComponent<tipCounter>().getTip()) * (TipTransform.rect.width / kitchen.GetComponent<tipCounter>().getMaxtip())) * -1), TipTransform.position.y);
-	}
+            //TipTransform.position = new Vector3((((kitchen.GetComponent<tipCounter>().getMaxtip() - kitchen.GetComponent<tipCounter>().getTip()) * (TipTransform.rect.width / kitchen.GetComponent<tipCounter>().getMaxtip())) * -1), TipTransform.position.y);
+        }
+    }
 }

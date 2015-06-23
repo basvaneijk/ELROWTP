@@ -72,6 +72,7 @@ public class kitchenScript : MonoBehaviour {
 				foodReady = false;
 				timer = foodInterval;
 				foodOnTableModel.SetActive (false);
+                this.GetComponent<tipCounter>().startCounter();
 				if(cookingQueue.Count == 0){
 					preparingFood = false;
 
