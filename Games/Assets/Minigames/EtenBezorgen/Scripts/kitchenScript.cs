@@ -47,6 +47,7 @@ public class kitchenScript : MonoBehaviour {
 		if (!foodReady) {
 			foodOnTableModel.SetActive(true);
 			print("Food Ready for pickup!");
+			this.GetComponent<audioBehavior>().playsound(0);
 			foodReady = true;
 			timer = foodInterval;
 			presentFood();

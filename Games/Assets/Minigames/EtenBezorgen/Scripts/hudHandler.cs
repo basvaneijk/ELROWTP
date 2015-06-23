@@ -31,7 +31,7 @@ public class hudHandler : MonoBehaviour {
         }
         if (kitchen.GetComponent<tipCounter>().started())
         {
-            tipText.text = "Fooi: " + kitchen.GetComponent<tipCounter>().getTip();
+			tipText.text = "Fooi: €" + kitchen.GetComponent<tipCounter>().getTip();
             
             
             if (kitchen.GetComponent<tipCounter>().getTip() < 0.10F)
