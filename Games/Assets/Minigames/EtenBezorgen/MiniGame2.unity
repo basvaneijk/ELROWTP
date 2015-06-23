@@ -537,11 +537,56 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400912, guid: a2af6c952bf8ab242aac2787e7a80fae, type: 2}
       propertyPath: m_LocalScale.x
-      value: 2
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400912, guid: a2af6c952bf8ab242aac2787e7a80fae, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400912, guid: a2af6c952bf8ab242aac2787e7a80fae, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a2af6c952bf8ab242aac2787e7a80fae, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1536563098
+GameObject:
+  m_PrefabParentObject: {fileID: 117196, guid: a2af6c952bf8ab242aac2787e7a80fae, type: 2}
+  m_PrefabInternal: {fileID: 1536563097}
+--- !u!114 &1536563099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1536563098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b19036e2a41447045bd64a81ed4a3337, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  foodModels:
+  - {fileID: 169716, guid: 8b03383ee324e4d45a1c68046c029d67, type: 2}
+  - {fileID: 102880, guid: a581cb1a944dc754597235e595814868, type: 2}
+  - {fileID: 113382, guid: 1ab04696402ee7a428a705607e65d5d2, type: 2}
+  - {fileID: 155598, guid: 64bb52cf5eaee7f4cb9c61b47346c7e8, type: 2}
+  - {fileID: 191328, guid: 421a108a5b1e0d94e98920cc3333ffc6, type: 2}
+  - {fileID: 182976, guid: 5bea7b3554a743b449cd779b69c259d4, type: 2}
+  foodOnTableModel: {fileID: 2102966493}
+  kitchenObject: {fileID: 1530978194}
+  presentTray: {fileID: 1925536127}
+--- !u!65 &1536563100
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1536563098}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2, z: 2}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &1694050339
 Transform:
   m_PrefabParentObject: {fileID: 410904, guid: 6767c64c6081f254ca0f63a6935eafc1, type: 2}
@@ -863,7 +908,7 @@ GameObject:
   - 135: {fileID: 2102966495}
   - 23: {fileID: 2102966494}
   m_Layer: 0
-  m_Name: Sphere
+  m_Name: customberTableModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
