@@ -118,7 +118,7 @@ public class LevelGenerator : MonoBehaviour
 
 
         GameObject.Find("Canvas/GameEndScreen/EndAmount").GetComponent<Text>().text = "" + GameObject.FindGameObjectWithTag("Wheelchair").GetComponent<CoinCollection>().getCoinCount();
-        GameObject.Find("Canvas/GameEndScreen/EndTime").GetComponent<Text>().text = duration.Minutes + ":" + duration.Seconds;
+        GameObject.Find("Canvas/GameEndScreen/EndTime").GetComponent<Text>().text = SecondsToHhMmSs(duration);
 
 
 
@@ -193,5 +193,9 @@ public class LevelGenerator : MonoBehaviour
     public int getCoinCount()
     {
         return CurrentLevel.coinPositions.Count;
+    }
+    private string SecondsToHhMmSs(TimeSpan myTimeSpan)
+    {
+        return string.Format("{0:00}:{1:00}", myTimeSpan.Minutes, myTimeSpan.Seconds);
     }
 }

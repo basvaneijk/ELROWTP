@@ -8,11 +8,13 @@ public class ScoreTimer : MonoBehaviour
 	private DateTime start;
 
 	Text timerText;
+    bool timerStarted;
 
 	void Start ()
 	{
 		timerText = GameObject.Find ("Timer").GetComponent<Text> ();
         start = DateTime.Now;
+        timerStarted = true;
 	}
 
 	public void ResetTimer ()
@@ -23,8 +25,13 @@ public class ScoreTimer : MonoBehaviour
 	void Update ()
 	{
 		if (GameObject.FindGameObjectWithTag ("Wheelchair").GetComponent<CoinCollection> ().isStarted) {
+            if (timerStarted)
+            {
+                ResetTimer();
+                timerStarted = false;
+            }
 			TimeSpan duration = DateTime.Now - start;
-			timerText.text = duration.Minutes + ":" + duration.Seconds;
+            timerText.text = SecondsToHhMmSs(duration);
            
 		}
 	}
@@ -42,4 +49,8 @@ public class ScoreTimer : MonoBehaviour
 	{
 		return (DateTime.Now - start).Ticks;
 	}
+    private string SecondsToHhMmSs(TimeSpan myTimeSpan)
+    {
+        return string.Format("{0:00}:{1:00}", myTimeSpan.Minutes, myTimeSpan.Seconds);
+    }
 }
