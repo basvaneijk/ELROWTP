@@ -14,6 +14,9 @@ public class kitchenScript : MonoBehaviour {
 	private int presentedFood = 0;
 	public GameObject foodOnTableModel;
 	public GameObject presentTray;
+	private bool preparingFood = false;
+	private Queue<int> cookingQueue = new Queue<int>();
+
 
 	// Use this for initialization
 	void Start () {
@@ -23,14 +26,21 @@ public class kitchenScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		timer -= Time.deltaTime;
-		if (timer < 0) {
-			// food ready
-			prepareFood();
-		} else {
+		if (preparingFood) {
+			timer -= Time.deltaTime;
+			if (timer < 0) {
+				// food ready
+				prepareFood ();
+			} else {
 			
+			}
 		}
 
+	}
+	public void requestFood(int i){
+		// Q
+		cookingQueue.Enqueue (i);
+		preparingFood = true;
 	}
 	
 	void prepareFood(){
@@ -43,7 +53,8 @@ public class kitchenScript : MonoBehaviour {
 		}
 	}
 	void presentFood(){
-		presentedFood = Random.Range (0,foodCount -1);
+		// debug  \\ presentedFood = Random.Range (0,foodCount -1); // deQ
+		presentedFood = cookingQueue.Dequeue ();
 		GameObject tmp = Instantiate (foodModels [presentedFood], foodOnTableModel.transform.position, foodOnTableModel.transform.rotation) as GameObject;
 		Destroy (foodOnTableModel);
 		foodOnTableModel = tmp;
@@ -53,7 +64,7 @@ public class kitchenScript : MonoBehaviour {
 	}
 	void OnTriggerEnter (Collider col)
 	{
-		print ("Collision with: " + col.gameObject.name);
+		//print ("Collision with: " + col.gameObject.name);
 		if(col.gameObject.name == "waiter")
 		{
 			if(foodReady){
@@ -61,6 +72,13 @@ public class kitchenScript : MonoBehaviour {
 				foodReady = false;
 				timer = foodInterval;
 				foodOnTableModel.SetActive (false);
+				if(cookingQueue.Count == 0){
+					preparingFood = false;
+
+				}else{
+					preparingFood = true;
+					timer = foodInterval;
+				}
 			}
 			
 			
