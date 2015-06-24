@@ -1,0 +1,25 @@
+var class_newtonsoft_1_1_json_1_1_schema_1_1_json_schema_model =
+[
+    [ "JsonSchemaModel", "class_newtonsoft_1_1_json_1_1_schema_1_1_json_schema_model.html#ae2bf39e9f5e4d7897e393886c38ac230", null ],
+    [ "Combine", "class_newtonsoft_1_1_json_1_1_schema_1_1_json_schema_model.html#adbbc392add54cefce7b1fb1563fc5427", null ],
+    [ "Create", "class_newtonsoft_1_1_json_1_1_schema_1_1_json_schema_model.html#a778e635fff69030f757b379ff9f732be", null ],
+    [ "AdditionalProperties", "class_newtonsoft_1_1_json_1_1_schema_1_1_json_schema_model.html#a46f6adb958b6b18b32bc88418492d643", null ],
+    [ "AllowAdditionalProperties", "class_newtonsoft_1_1_json_1_1_schema_1_1_json_schema_model.html#ae3c433bdcc817041f5c4e053f5d4368a", null ],
+    [ "Disallow", "class_newtonsoft_1_1_json_1_1_schema_1_1_json_schema_model.html#a286ff4ef26b83c7b4f5535f90cef0b75", null ],
+    [ "DivisibleBy", "class_newtonsoft_1_1_json_1_1_schema_1_1_json_schema_model.html#a4aee3a46903fd588d54c96b12d134569", null ],
+    [ "Enum", "class_newtonsoft_1_1_json_1_1_schema_1_1_json_schema_model.html#a33b4e9c4c257f0f4d7d7ff5d8196d291", null ],
+    [ "ExclusiveMaximum", "class_newtonsoft_1_1_json_1_1_schema_1_1_json_schema_model.html#af736121958d470b661f86bc4659356ca", null ],
+    [ "ExclusiveMinimum", "class_newtonsoft_1_1_json_1_1_schema_1_1_json_schema_model.html#abc38d41c51538d6417801b01d7957778", null ],
+    [ "Items", "class_newtonsoft_1_1_json_1_1_schema_1_1_json_schema_model.html#aa382d2184aef38d4c01dc9e5276deee4", null ],
+    [ "Maximum", "class_newtonsoft_1_1_json_1_1_schema_1_1_json_schema_model.html#a0a488ff545fe615c02bbd120e5aaebe5", null ],
+    [ "MaximumItems", "class_newtonsoft_1_1_json_1_1_schema_1_1_json_schema_model.html#a179c75fa3a16e2feaba98e6b83ac3b49", null ],
+    [ "MaximumLength", "class_newtonsoft_1_1_json_1_1_schema_1_1_json_schema_model.html#ae0ccba4ad01db6f85377ad20937e136b", null ],
+    [ "Minimum", "class_newtonsoft_1_1_json_1_1_schema_1_1_json_schema_model.html#aa6f93f0c451b0fcd5da6db5435d22f8b", null ],
+    [ "MinimumItems", "class_newtonsoft_1_1_json_1_1_schema_1_1_json_schema_model.html#a5295ad1c429b84661a520653cd45e7c6", null ],
+    [ "MinimumLength", "class_newtonsoft_1_1_json_1_1_schema_1_1_json_schema_model.html#acccc9527f10838ec00a9b06fafe3f6ae", null ],
+    [ "PatternProperties", "class_newtonsoft_1_1_json_1_1_schema_1_1_json_schema_model.html#a127e6f169f5e2a47adcdaf629a09140d", null ],
+    [ "Patterns", "class_newtonsoft_1_1_json_1_1_schema_1_1_json_schema_model.html#a54287e9a070c3e54c293357a79dc8e0e", null ],
+    [ "Properties", "class_newtonsoft_1_1_json_1_1_schema_1_1_json_schema_model.html#aa87066036765d99517d4fd1f6d08b8aa", null ],
+    [ "Required", "class_newtonsoft_1_1_json_1_1_schema_1_1_json_schema_model.html#a1b14494bb64d822d5c28884b330d2eb6", null ],
+    [ "Type", "class_newtonsoft_1_1_json_1_1_schema_1_1_json_schema_model.html#acd945bf2d0747ee269b9472ff0c9376d", null ]
+];

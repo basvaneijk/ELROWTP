@@ -1,0 +1,8 @@
+var namespace_newtonsoft_1_1_json_1_1_observable_support =
+[
+    [ "AddingNewEventArgs", "class_newtonsoft_1_1_json_1_1_observable_support_1_1_adding_new_event_args.html", "class_newtonsoft_1_1_json_1_1_observable_support_1_1_adding_new_event_args" ],
+    [ "INotifyCollectionChanged", "interface_newtonsoft_1_1_json_1_1_observable_support_1_1_i_notify_collection_changed.html", "interface_newtonsoft_1_1_json_1_1_observable_support_1_1_i_notify_collection_changed" ],
+    [ "INotifyPropertyChanging", "interface_newtonsoft_1_1_json_1_1_observable_support_1_1_i_notify_property_changing.html", "interface_newtonsoft_1_1_json_1_1_observable_support_1_1_i_notify_property_changing" ],
+    [ "NotifyCollectionChangedEventArgs", "class_newtonsoft_1_1_json_1_1_observable_support_1_1_notify_collection_changed_event_args.html", "class_newtonsoft_1_1_json_1_1_observable_support_1_1_notify_collection_changed_event_args" ],
+    [ "PropertyChangingEventArgs", "class_newtonsoft_1_1_json_1_1_observable_support_1_1_property_changing_event_args.html", "class_newtonsoft_1_1_json_1_1_observable_support_1_1_property_changing_event_args" ]
+];

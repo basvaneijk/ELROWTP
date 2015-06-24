@@ -1,0 +1,25 @@
+var class_vuforia_1_1_android_unity_player =
+[
+    [ "CheckOrientation", "class_vuforia_1_1_android_unity_player.html#a9bec4fa0b161be9927bf576844a75296", null ],
+    [ "Dispose", "class_vuforia_1_1_android_unity_player.html#ad56bc50bf5c15639b028f127ef9f3bea", null ],
+    [ "InitAndroidPlatform", "class_vuforia_1_1_android_unity_player.html#ae79311ada317701a155ef356352fda66", null ],
+    [ "InitializePlatform", "class_vuforia_1_1_android_unity_player.html#aa53b76bee50aa20b2359fbf91f46ed84", null ],
+    [ "InitializeSurface", "class_vuforia_1_1_android_unity_player.html#a886e02d3170656bdd084b46400f0eebd", null ],
+    [ "InitQCAR", "class_vuforia_1_1_android_unity_player.html#afa591358b911b6560d19e2afc5f47d2d", null ],
+    [ "LoadNativeLibraries", "class_vuforia_1_1_android_unity_player.html#a9bf241f8dea29011eb506948e01642df", null ],
+    [ "LoadNativeLibrariesFromJava", "class_vuforia_1_1_android_unity_player.html#ab30406828fe13b43b9ae01d3e3ff6ba7", null ],
+    [ "OnDestroy", "class_vuforia_1_1_android_unity_player.html#a335cbf20b4e4fb792bb1684c43779912", null ],
+    [ "OnPause", "class_vuforia_1_1_android_unity_player.html#a8a1fc8237562c30164d76062ba1d5c8c", null ],
+    [ "OnResume", "class_vuforia_1_1_android_unity_player.html#a7d7049ac5e3deb01f9bc3cd912614355", null ],
+    [ "ResetUnityScreenOrientation", "class_vuforia_1_1_android_unity_player.html#a3436717a8ca3b9b53c3b4ca7d94fb7d6", null ],
+    [ "Start", "class_vuforia_1_1_android_unity_player.html#a335b53390e01690a1fbb637cd22e3d1a", null ],
+    [ "Update", "class_vuforia_1_1_android_unity_player.html#a4b854774c0f3b218ce90e537c0c88391", null ],
+    [ "JAVA_ORIENTATION_CHECK_FRM_INTERVAL", "class_vuforia_1_1_android_unity_player.html#a422c549e854f428ec559223143acb21a", null ],
+    [ "mFramesSinceLastJavaOrientationCheck", "class_vuforia_1_1_android_unity_player.html#adbbd91ee43c072b5d7d3215c0128a5bd", null ],
+    [ "mFramesSinceLastOrientationReset", "class_vuforia_1_1_android_unity_player.html#aaa64d6456dd715221a0fef2946e460cc", null ],
+    [ "mJavaScreenOrientation", "class_vuforia_1_1_android_unity_player.html#a7a65d82d065114992d25ce19e0f10932", null ],
+    [ "mScreenHeight", "class_vuforia_1_1_android_unity_player.html#ad24a2f79f5dacb5f2347b04bf472c481", null ],
+    [ "mScreenOrientation", "class_vuforia_1_1_android_unity_player.html#abb2fc0bca701fad9ed77042e47349613", null ],
+    [ "mScreenWidth", "class_vuforia_1_1_android_unity_player.html#a6fde413000f10b30acad9bc6f36ff376", null ],
+    [ "NUM_FRAMES_TO_QUERY_ORIENTATION", "class_vuforia_1_1_android_unity_player.html#a6d05d143cc70ae060fb4fc9105c21d05", null ]
+];
