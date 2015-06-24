@@ -59,6 +59,7 @@ public class kitchenScript : MonoBehaviour {
 		GameObject tmp = Instantiate (foodModels [presentedFood], foodOnTableModel.transform.position, foodOnTableModel.transform.rotation) as GameObject;
 		Destroy (foodOnTableModel);
 		foodOnTableModel = tmp;
+		foodOnTableModel.transform.localScale /= 5;
 	}
 	void OnCollisionEnter(Collision col){
 		print (col);

@@ -22,7 +22,7 @@ public class trayScript : MonoBehaviour {
 	public void setFood(int a){
 		currentFood = a;
 		GameObject tmp = Instantiate (foodModels [a], trayModel.transform.position, trayModel.transform.rotation) as GameObject;
-		tmp.transform.localScale /= 3;
+		tmp.transform.localScale /= 4;
 		trayModel.SetActive (false);
 		trayModel = tmp;
 		trayModel.SetActive (true);
