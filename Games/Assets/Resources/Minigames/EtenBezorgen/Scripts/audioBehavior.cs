@@ -18,6 +18,10 @@ public class audioBehavior : MonoBehaviour {
 	
 	}
 
+    /**
+     * Play the sound out of the arry depending on the given index
+     * \param ind the index paramter
+     */
     public void playsound(int ind)
     {
         if(ind < soundFiles.Count){
