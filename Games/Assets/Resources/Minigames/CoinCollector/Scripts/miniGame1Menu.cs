@@ -16,13 +16,6 @@ public class miniGame1Menu : MonoBehaviour
     */
     void Start()
     {
-
-        if (PlayerPrefs.GetInt("levelCleared") == null)
-        {
-            PlayerPrefs.SetInt("levelCleared", 0);
-        }
-
-
         int levelCleared = PlayerPrefs.GetInt("levelCleared");
         if (levelCleared >= 1)
         {
