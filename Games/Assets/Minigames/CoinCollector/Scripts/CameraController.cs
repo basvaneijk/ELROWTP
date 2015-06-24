@@ -21,6 +21,9 @@ public class CameraController : MonoBehaviour
 		mCamera.Play();
      
 	}
+	void OnApplicationQuit() {
+		mCamera.Stop ();
+	}
 	
 	// Update is called once per frame
 	void Update()
