@@ -1,7 +1,7 @@
 # ELROWTP README
 
 For full server documentation check http://niekarends.github.io/ELROWTP/index.html <br />
-For full server documentation check http://niekarends.github.io/ELROWTP/launcher/index.html <br />
+For full launcher documentation check http://niekarends.github.io/ELROWTP/launcher/index.html <br />
 
 
 ![alt tag](https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTl9WZvf-GpV6IcSPmwOsYkQ6u-dpKj5sJavbh7hZbPq1mYzaMT)<br />
