@@ -265,12 +265,12 @@ MonoBehaviour:
   CoinsLevel1: {fileID: 692401195}
   CoinsLevel2: {fileID: 1448662336}
   CoinsLevel3: {fileID: 444857795}
-  CoinsLevel1Normal: {fileID: 21300000, guid: 6a8ba5a92bd290444850c936386c0a29, type: 3}
-  CoinsLevel1Lock: {fileID: 21300000, guid: 26ed23c75ce3eed4e9a2145a3f94f271, type: 3}
-  CoinsLevel2Normal: {fileID: 21300000, guid: 7f2ffba4262fc2a498110603da116f5e, type: 3}
-  CoinsLevel2Lock: {fileID: 21300000, guid: 2f0d911b8c832af47a03debcfac9ba79, type: 3}
-  CoinsLevel3Normal: {fileID: 21300000, guid: cb5b5dbfd6e8f3047ad6000847a181ee, type: 3}
-  CoinsLevel3Lock: {fileID: 21300000, guid: 5e0197ca15515b4479be588868fdff12, type: 3}
+  CoinsLevel1Normal: {fileID: 21300000, guid: 876ad64866ab6cb498498d5237731df6, type: 3}
+  CoinsLevel1Lock: {fileID: 21300000, guid: a19a1491339e5fb4094c682b8c918789, type: 3}
+  CoinsLevel2Normal: {fileID: 21300000, guid: ff5efc639cea6b94ba61a4fd359d6ff7, type: 3}
+  CoinsLevel2Lock: {fileID: 21300000, guid: 7cbe6e23385e5a24d84306c796dabc8e, type: 3}
+  CoinsLevel3Normal: {fileID: 21300000, guid: ff0c0c43a39f2c841b04f699cdfa7265, type: 3}
+  CoinsLevel3Lock: {fileID: 21300000, guid: 87a6558af483dca4c87eed3571cd67ba, type: 3}
 --- !u!1 &197371131
 GameObject:
   m_ObjectHideFlags: 0
@@ -571,7 +571,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Sprite: {fileID: 21300000, guid: cb5b5dbfd6e8f3047ad6000847a181ee, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ff0c0c43a39f2c841b04f699cdfa7265, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -814,7 +814,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Sprite: {fileID: 21300000, guid: 6a8ba5a92bd290444850c936386c0a29, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 876ad64866ab6cb498498d5237731df6, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1374,7 +1374,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Sprite: {fileID: 21300000, guid: b682dc83312ca1d49b95343d4ac57090, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a2780bfbbd0acab459fe97f007714a58, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1737,7 +1737,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Sprite: {fileID: 21300000, guid: 7f2ffba4262fc2a498110603da116f5e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ff5efc639cea6b94ba61a4fd359d6ff7, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1892,7 +1892,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 90198768}
-        m_MethodName: returnToMain
+        m_MethodName: ReturnToMain
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
