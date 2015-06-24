@@ -1114,7 +1114,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 483964, guid: bd90b939894de4e44a17232c2c8505a8, type: 2}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 402960, guid: bd90b939894de4e44a17232c2c8505a8, type: 2}
       propertyPath: m_LocalRotation.x
