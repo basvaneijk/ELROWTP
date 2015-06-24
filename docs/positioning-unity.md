@@ -8,4 +8,10 @@ The positioning for a Unity client consists of 3 components:
 
 ## Positioning
 
+Attach the PositionClient and LocationListener component to the entity. Select the desired color or change it at runtime.
+
+![Position components](Screen - position components.png)
+
 ## Orientation
+
+Attach the GyroOrientation component to the entity.
