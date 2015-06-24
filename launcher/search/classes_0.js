@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['addingneweventargs',['AddingNewEventArgs',['../class_newtonsoft_1_1_json_1_1_observable_support_1_1_adding_new_event_args.html',1,'Newtonsoft::Json::ObservableSupport']]],
-  ['androidunityplayer',['AndroidUnityPlayer',['../class_vuforia_1_1_android_unity_player.html',1,'Vuforia']]]
+  ['game',['Game',['../class_assets_1_1_scripts_1_1_game.html',1,'Assets::Scripts']]],
+  ['gamemanager',['GameManager',['../class_assets_1_1_scripts_1_1_game_manager.html',1,'Assets::Scripts']]]
 ];
