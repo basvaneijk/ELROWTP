@@ -913,8 +913,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: returnToMenu
+      - m_Target: {fileID: 998299349}
+        m_MethodName: ReturnToMain
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -965,6 +965,7 @@ GameObject:
   - 114: {fileID: 998299346}
   - 114: {fileID: 998299345}
   - 114: {fileID: 998299350}
+  - 114: {fileID: 998299349}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Canvas
@@ -1054,6 +1055,27 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &998299349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 998299344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b882a6ff5d00b9b4eb766f063c0a886d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  helpFrame: {fileID: 0}
+  CoinsLevel1: {fileID: 0}
+  CoinsLevel2: {fileID: 0}
+  CoinsLevel3: {fileID: 0}
+  CoinsLevel1Normal: {fileID: 0}
+  CoinsLevel1Lock: {fileID: 0}
+  CoinsLevel2Normal: {fileID: 0}
+  CoinsLevel2Lock: {fileID: 0}
+  CoinsLevel3Normal: {fileID: 0}
+  CoinsLevel3Lock: {fileID: 0}
 --- !u!114 &998299350
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1784,8 +1806,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: MenuView
+      - m_Target: {fileID: 998299349}
+        m_MethodName: ReturnToMain
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2284,7 +2306,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bee0c550cfa4644cbe8c5da775cb67f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  printDebug: 0
+  printDebug: 1
   highpassFilter: 0
   rotationOffset: 0
 --- !u!1 &1988941989
