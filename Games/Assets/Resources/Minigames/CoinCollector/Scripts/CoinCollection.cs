@@ -16,7 +16,9 @@ public class CoinCollection : MonoBehaviour
 		isStarted = false;
 	}
 	
-	// Update is called once per frame
+	/**
+	*	Move script for player if the game is running on pc. And location scripts are removed.
+	*/
 	void Update ()
 	{
 		if (Input.GetKey (KeyCode.W)) {
@@ -33,6 +35,9 @@ public class CoinCollection : MonoBehaviour
 		}
 	}
 
+	/**
+	*	trigger on collision to collect the arrow to start the game. And collect the coins.
+	*/
 	void OnTriggerEnter (Collider other)
 	{
         
@@ -57,13 +62,18 @@ public class CoinCollection : MonoBehaviour
        
        
 	}
+	/**
+	*	play coin sound 
+	*/
 	public void playPickupSound ()
 	{
 
 		gameObject.GetComponent<AudioSource> ().Play ();
 
 	}
-
+	/**
+	*	update UI coins collected
+	*/
 	public void UpdateUi ()
 	{
 

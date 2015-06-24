@@ -7,6 +7,12 @@ public class Level : MonoBehaviour {
 	public GameObject collectable;
 	public ArrayList coinPositions = new ArrayList();
 
+	/**
+	*	Create level object
+	*	\param int levelNum level number
+	*	\param GameObject coin prefab coin
+	*	\param ArrayList coinsPos arraylist with coin positions
+	*/
 	public Level(int levelNum, GameObject coin, ArrayList coinsPos){
 		levelNumber = levelNum;
 		collectable = coin;

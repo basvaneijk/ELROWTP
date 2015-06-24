@@ -29,7 +29,7 @@ public class LevelGenerator : MonoBehaviour
         GameObject.FindGameObjectWithTag("StartGameButton").GetComponent<RectTransform>().anchoredPosition = new Vector3(0, 1000, 0);
         canStart = false;
         offset = new Vector3(0, 0f, 0);
-        coinOffset = -0.35f;
+        coinOffset = -0.25f;
         levels = new ArrayList();
         level1();
         level2();
