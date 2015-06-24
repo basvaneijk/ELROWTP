@@ -12,10 +12,12 @@ TagManager:
   - StartGameButton
   - UI_CoinCount
   - Cords
-  - CoinLocatorArrow
-  - Canvas
-  - Wheelchair
-  - playerTray
+  - MainMenu_UI_Canvas
+  - MainMenu_UI_ColorButtons
+  - MainMenu_UI_MinigameTiles
+  - MainMenu_UI_SettingsPanel
+  - MainMenu_UI_HelpPanel
+  - MainMenu_UI_ControlButtons
   layers:
   - Default
   - TransparentFX
@@ -25,14 +27,14 @@ TagManager:
   - UI
   - 
   - 
-  - CameraSphere
   - 
   - 
   - 
   - 
   - 
   - 
-  - BackgroundCamera_MG2
+  - 
+  - 
   - 
   - 
   - 

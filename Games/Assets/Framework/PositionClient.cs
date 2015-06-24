@@ -8,7 +8,7 @@ using System.Threading;
 
 namespace Framework
 {
-	public class PositionClient : MonoBehaviour, LocationProvider
+    public class PositionClient : MonoBehaviour, LocationProvider
 	{
 		public event LocationUpdateHandler OnLocationUpdate;
 
@@ -17,7 +17,7 @@ namespace Framework
 		Thread socketListener;
 		List<LocationUpdateArgs> locqueue;
 
-		/**
+        /**
          * 
          * Initialize Listener
          * 
@@ -38,17 +38,17 @@ namespace Framework
 			socketListener.Start ();
 		}
 
-		/**
+        /**
          * 
-         * Quit Network Connection when object destroyed
+         * Quit Network Connection when application quits
          * 
          */
-		void OnDestroy ()
+		void OnApplicationQuit ()
 		{
 			socketListener.Abort ();
 		}
 
-		/**
+        /**
          * 
          * On each monobehavier update check for new locations in the location que
          * 
@@ -66,7 +66,7 @@ namespace Framework
 			}
 		}
 		
-		/**
+        /**
          * 
          * Endless loop listening on socket for new locations
          * 
@@ -76,9 +76,9 @@ namespace Framework
 			while (true) {
 				Byte[] data = client.Receive (ref localEp);
 
-				Vector3 location = new Vector3 (320 - Mathf.Floor (BitConverter.ToSingle (data, 0)), 
+                Vector3 location = new Vector3(Mathf.Floor(BitConverter.ToSingle(data, 0)) - 200, 
 				                                Mathf.Floor (BitConverter.ToSingle (data, 8)), 
-				                                Mathf.Floor (BitConverter.ToSingle (data, 4)) - 240) / 200.0f;
+				                                Mathf.Floor (BitConverter.ToSingle (data, 4))-200) / 10.0f;
 
 				Color rgb = new Color (BitConverter.ToSingle (data, 20) / 255.0f, 
 				                       BitConverter.ToSingle (data, 16) / 255.0f, 
@@ -96,7 +96,7 @@ namespace Framework
 			}
 		}
 
-		/**
+        /**
          * 
          * \param hue
          * 
@@ -114,7 +114,7 @@ namespace Framework
 			}
 		}
 
-		/**
+        /**
          * 
          * \param rgbColor
          * \param H
@@ -135,7 +135,7 @@ namespace Framework
 			}
 		}
 		
-		/**
+        /**
          * 
          * \param offset
          * \param dominantcolor

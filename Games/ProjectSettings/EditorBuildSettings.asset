@@ -5,15 +5,9 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Minigames/OrientationTest/Level.unity
-  - enabled: 0
-    path: Assets/Minigames/PakDiePoen/Menu/MainMenu.unity
-  - enabled: 0
-    path: Assets/Minigames/PakDiePoen/Level1.unity
   - enabled: 1
-    path: Assets/MainScene/main.unity
+    path: Assets/MainMenu.unity
   - enabled: 1
-    path: Assets/Minigames/CoinCollector/miniGame1Menu.unity
+    path: Assets/Resources/Minigames/CoinCollector/miniGame1Menu.unity
   - enabled: 1
-    path: Assets/Minigames/CoinCollector/miniGame1.unity
+    path: Assets/Resources/Minigames/CoinCollector/miniGame1.unity
