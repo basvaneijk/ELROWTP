@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts;
+using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using System;
@@ -15,13 +16,6 @@ public class miniGame1Menu : MonoBehaviour
     */
     void Start()
     {
-
-        if (PlayerPrefs.GetInt("levelCleared") == null)
-        {
-            PlayerPrefs.SetInt("levelCleared", 0);
-        }
-
-
         int levelCleared = PlayerPrefs.GetInt("levelCleared");
         if (levelCleared >= 1)
         {
@@ -128,9 +122,10 @@ public class miniGame1Menu : MonoBehaviour
     /**
     *	Change the scene back to "main".
     */
-    public void returnToMain()
+    public void ReturnToMain()
     {
-        Application.LoadLevel("main");
+        GameObject gameManager = GameObject.FindGameObjectWithTag("MainMenu_GameManager");
+        gameManager.GetComponent<GameManager>().BackToMainMenu();
     }
 
     private string SecondsToHhMmSs(TimeSpan myTimeSpan)
