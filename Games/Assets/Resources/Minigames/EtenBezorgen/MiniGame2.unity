@@ -422,7 +422,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 368445412}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.769999981, y: -.300000012, z: -.670000017}
+  m_LocalPosition: {x: -.75, y: -.300000012, z: -.74000001}
   m_LocalScale: {x: .200000003, y: .200000003, z: .200000003}
   m_Children:
   - {fileID: 523925544}
@@ -566,7 +566,7 @@ GameObject:
   - 114: {fileID: 530387056}
   - 114: {fileID: 530387053}
   - 114: {fileID: 530387043}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: waiter
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -581,10 +581,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 530387042}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd1069009cf4e46a4bea714dda9b5e64, type: 3}
+  m_Script: {fileID: 11500000, guid: 5bee0c550cfa4644cbe8c5da775cb67f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   printDebug: 0
+  highpassFilter: 0
   rotationOffset: 0
 --- !u!114 &530387044
 MonoBehaviour:
@@ -712,7 +713,7 @@ SphereCollider:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 530387042}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: .5
@@ -1402,7 +1403,7 @@ GameObject:
   - 33: {fileID: 1697481061}
   - 135: {fileID: 1697481060}
   - 23: {fileID: 1697481059}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: foodModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1604,6 +1605,10 @@ Prefab:
     - target: {fileID: 410904, guid: 6767c64c6081f254ca0f63a6935eafc1, type: 2}
       propertyPath: m_LocalScale.z
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 177486, guid: 6767c64c6081f254ca0f63a6935eafc1, type: 2}
+      propertyPath: m_Layer
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6767c64c6081f254ca0f63a6935eafc1, type: 2}
