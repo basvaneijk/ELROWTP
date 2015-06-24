@@ -18,6 +18,7 @@ TagManager:
   - MainMenu_UI_SettingsPanel
   - MainMenu_UI_HelpPanel
   - MainMenu_UI_ControlButtons
+  - playerTray
   layers:
   - Default
   - TransparentFX
@@ -39,7 +40,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - Dienblad
   - 
   - 
   - 
