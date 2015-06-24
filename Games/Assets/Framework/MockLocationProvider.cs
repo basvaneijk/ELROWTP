@@ -18,7 +18,7 @@ namespace Framework
 			while (true) {
 				yield return new WaitForSeconds (1);
 				
-				var loc = new LocationUpdateArgs (1, Random.insideUnitSphere * 10, 1);
+				var loc = new LocationUpdateArgs (1, Random.insideUnitSphere * 10);
 				
 				if (OnLocationUpdate != null) {
 					OnLocationUpdate (this, loc);

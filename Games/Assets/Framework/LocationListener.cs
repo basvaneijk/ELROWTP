@@ -18,7 +18,6 @@ namespace Framework
 			locationProvider.OnLocationUpdate += (object source, LocationUpdateArgs e) => {
 				if ((PlayerColor)e.ObjectId == color) {
 					targetLocation = e.Location;
-					//GameObject.FindGameObjectWithTag ("Cords").GetComponent<Text> ().text = transform.position.ToString ();
 				}
 			};
 			targetLocation = transform.position;

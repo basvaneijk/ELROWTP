@@ -29,21 +29,6 @@ public class GyroOrientation : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-
-		//targetRotation = ConvertRotation (Input.gyro.attitude);//Quaternion.Euler (new Vector3 (0.0f, Input.compass.trueHeading + rotationOffset, 0.0f));
-
-		//speed = Mathf.Abs (Input.gyro.rotationRate.y) * 100.0f;
-
-		//direction = Quaternion.Dot (targetRotation, transform.localRotation);
-		//if (Mathf.Abs (direction) < 0.99f) {
-		//    //transform.localRotation = targetRotation;
-		//    transform.localRotation = Quaternion.RotateTowards (transform.rotation, targetRotation, 10.0f);
-		//} else if (speed > 10.0f) {
-		//    //transform.localRotation = Quaternion.RotateTowards (transform.rotation, targetRotation, speed);
-		//    transform.localRotation = transform.localRotation * Quaternion.AngleAxis (-Input.gyro.rotationRate.y, Vector3.up);
-		//}
-
-
 		if (highpassFilter) {
 			Vector3 gyroRot = Input.gyro.rotationRate;
 			if (Mathf.Abs (gyroRot.x) < 0.08) {
