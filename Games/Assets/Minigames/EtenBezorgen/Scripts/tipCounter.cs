@@ -98,4 +98,9 @@ public class tipCounter : MonoBehaviour
     {
         return isStarted;
     }
+
+    public float getTotalScore()
+    {
+        return totalScore;
+    }
 }
