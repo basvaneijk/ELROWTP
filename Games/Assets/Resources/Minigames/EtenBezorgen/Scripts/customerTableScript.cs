@@ -35,6 +35,7 @@ public class customerTableScript : MonoBehaviour {
 		Destroy (foodOnTableModel);
 		foodOnTableModel.SetActive (true);
 		foodOnTableModel = tmp;
+		foodOnTableModel.transform.localScale /= 5;
 		// call for kitchen chef
 		kitchenObject.GetComponent<kitchenScript>().requestFood (requestedFood);
 	} 
