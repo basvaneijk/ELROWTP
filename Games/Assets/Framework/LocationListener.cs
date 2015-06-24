@@ -4,13 +4,16 @@ using System.Collections;
 
 namespace Framework
 {
+	/**
+	 * Registers for location updates from a LocationProvider on the same entity. 
+	 * Translates the entity based on received updates with matching color
+	 */
 	public class LocationListener : MonoBehaviour
 	{
 		public PlayerColor color;
 		LocationProvider locationProvider;
 		Vector3 targetLocation;
 
-		// Use this for initialization
 		void Start ()
 		{
 			locationProvider = GetComponent<LocationProvider> ();

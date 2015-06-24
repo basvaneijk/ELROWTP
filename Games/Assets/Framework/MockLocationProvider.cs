@@ -3,7 +3,9 @@ using System.Collections;
 
 namespace Framework
 {
-	
+	/**
+	 * LocationProvider sending random location updates
+	 */
 	public class MockLocationProvider : MonoBehaviour, LocationProvider
 	{
 		public event LocationUpdateHandler OnLocationUpdate;

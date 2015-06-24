@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/**
+ * Rotates the entity based on the gyroscope's attitude
+ */
 public class GyroOrientation : MonoBehaviour
 {
 	public bool printDebug = false;
@@ -25,8 +28,7 @@ public class GyroOrientation : MonoBehaviour
 
 		northRotation = Quaternion.Euler (new Vector3 (0.0f, Input.compass.trueHeading + rotationOffset, 0.0f));
 	}
-	
-	// Update is called once per frame
+
 	void Update ()
 	{
 		if (highpassFilter) {
