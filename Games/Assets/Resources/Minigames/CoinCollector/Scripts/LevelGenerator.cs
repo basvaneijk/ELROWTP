@@ -15,7 +15,11 @@ public class LevelGenerator : MonoBehaviour
     private float coinOffset;
     public GameObject endScreen;
 
-    // Use this for initialization
+    
+	/**
+	*	initialize of the game. Loads all levels and checks which game needs to start.
+	*	Also scales and places startpoint
+	*/
     void Start()
     {
         if (PlayerPrefs.GetInt("GameScore" + PlayerPrefs.GetInt("level")) == null)
@@ -47,7 +51,7 @@ public class LevelGenerator : MonoBehaviour
 
 
 
-    // Update is called once per frame
+    // Update is called once per frame and check if the game can start so the coins can spawn
     void Update()
     {
         if (Input.GetKey(KeyCode.T))
@@ -71,12 +75,18 @@ public class LevelGenerator : MonoBehaviour
         }
 
     }
-
+	/**
+	*	scale convert especially for this game
+	*	\param float data 
+	*/
     float getScale(float data)
     {
         return data / 10;
     }
 
+	/**
+	*	starts the game
+	*/
     public void startGame()
     {
         GameObject.FindGameObjectWithTag("StartGameButton").GetComponent<RectTransform>().anchoredPosition = new Vector3(0, 1000, 0);
@@ -85,7 +95,10 @@ public class LevelGenerator : MonoBehaviour
 
 
     }
-
+	/**
+	*	scale convert especially for this game
+	*	\param int ticks datetime ticks 
+	*/
     public void stopGame(int ticks)
     {
         endScreen.SetActive(true);
@@ -123,7 +136,9 @@ public class LevelGenerator : MonoBehaviour
 
 
     }
-
+	/**
+	*	instantiate level1
+	*/
     private void level1()
     {
         ArrayList level1Positions = new ArrayList();
@@ -145,7 +160,9 @@ public class LevelGenerator : MonoBehaviour
         Level level1 = new Level(1, coin, level1Positions);
         levels.Add(level1);
     }
-
+	/**
+	*	instantiate level2
+	*/
     private void level2()
     {
         ArrayList level2Positions = new ArrayList();
@@ -167,7 +184,9 @@ public class LevelGenerator : MonoBehaviour
         Level level2 = new Level(2, coin, level2Positions);
         levels.Add(level2);
     }
-
+	/**
+	*	instantiate level3
+	*/
     private void level3()
     {
         ArrayList level3Positions = new ArrayList();
@@ -189,11 +208,16 @@ public class LevelGenerator : MonoBehaviour
         Level level3 = new Level(2, coin, level3Positions);
         levels.Add(level3);
     }
-
+	/**
+	*	returns number of coins.
+	*/
     public int getCoinCount()
     {
         return CurrentLevel.coinPositions.Count;
     }
+	/**
+	*	convert timespan to string with MM:SS format
+	*/
     private string SecondsToHhMmSs(TimeSpan myTimeSpan)
     {
         return string.Format("{0:00}:{1:00}", myTimeSpan.Minutes, myTimeSpan.Seconds);

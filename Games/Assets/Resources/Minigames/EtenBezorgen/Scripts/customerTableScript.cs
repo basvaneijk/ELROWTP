@@ -43,7 +43,7 @@ public class customerTableScript : MonoBehaviour {
 	void OnTriggerEnter (Collider col)
 	{
 		print ("Collision with: " + col.gameObject.name);
-		if(col.gameObject.name == "waiter"){
+		if(col.gameObject.name == "DishWood"){
 			int givenFood = presentTray.GetComponent<trayScript>().getCurrentFood(); //cookingRequests.Dequeue()
 			if(givenFood == requestedFood){
 				// delivery
@@ -51,6 +51,7 @@ public class customerTableScript : MonoBehaviour {
 				foodOnTableModel.SetActive (false);
 				presentTray.GetComponent<trayScript>().clearTray();
 				waitingForFood = false;
+				requestedFood = -1;
 				requestTimer = Random.Range(10,15);
 			}else{
 				// wrong
