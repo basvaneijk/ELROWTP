@@ -8,14 +8,18 @@ public class tipCounter : MonoBehaviour
     private float score;
     private float tip;
     private float maxtip;
+    private float tipDecrease;
 	private DateTime time;
 	private Boolean isStarted = false;
 	private DateTime tempTime;
-	private int pause = 30;
+    private int pause;
+    private float totalScore;
 
 	// Use this for initialization
 	void Start ()
     {
+        totalScore = 0f;
+        pause = 30;
         score = 15f;
         tip = 5f;
 	}
@@ -32,13 +36,13 @@ public class tipCounter : MonoBehaviour
             }
             else if(tip > 0.1f && tempTime.Subtract(time).TotalSeconds > 2)
             {
-                if (tip < 0.30f)
+                if (tip < (tipDecrease + 0.1f))
                 {
                     tip = 0.0f;
                 }
                 else
                 {
-                    tip -= 0.20f;
+                    tip -= tipDecrease;
                 }
                 time = tempTime;
             }
@@ -55,9 +59,11 @@ public class tipCounter : MonoBehaviour
     public void stopCounter()
     {
         isStarted = false;
+        totalScore += this.getScore();
         pause = 30;
         score = 15f;
         tip = 5f;
+        tipDecrease = 0.20f;
     }
 
 	public float getScore ()
@@ -65,14 +71,12 @@ public class tipCounter : MonoBehaviour
 		return score + tip;
 	}
 
-	public void setScore (float points)
-	{
-		this.score = points;
-	}
-
-    public void setTip(float tipmoney)
+    public void SetValues(float score, float tip, float tipDecrease,int pause)
     {
-        this.tip = tipmoney;
+        this.score = score;
+        this.tip = tip;
+        this.tipDecrease = tipDecrease;
+        this.pause = pause;
     }
 
     public float getTip()
@@ -83,6 +87,11 @@ public class tipCounter : MonoBehaviour
     public float getMaxtip()
     {
         return maxtip;
+    }
+
+    public float getTipDecrease()
+    {
+        return tipDecrease;
     }
 
     public Boolean started()
