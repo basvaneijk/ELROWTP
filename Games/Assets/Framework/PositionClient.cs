@@ -88,7 +88,7 @@ namespace Framework
 				RGBToHSV (rgb, out h, out s, out v);
 				PlayerColor objid = HueObject (h * 360.0f);
 
-				var loc = new LocationUpdateArgs ((int)objid, location, 1);
+				var loc = new LocationUpdateArgs ((int)objid, location);
 
 				lock (locqueue) {
 					locqueue.Add (loc);

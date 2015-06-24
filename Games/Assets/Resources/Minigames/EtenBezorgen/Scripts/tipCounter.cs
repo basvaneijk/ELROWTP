@@ -50,6 +50,10 @@ public class tipCounter : MonoBehaviour
         }
     }
 
+
+    /**
+     * Start the tipcounter
+     */
 	public void startCounter ()
 	{
 		time = DateTime.Now;
@@ -57,6 +61,9 @@ public class tipCounter : MonoBehaviour
         maxtip = tip;
 	}
 
+    /**
+     * stop and reset the tipcounter
+     */
     public void stopCounter()
     {
         isStarted = false;
@@ -67,12 +74,14 @@ public class tipCounter : MonoBehaviour
         tipDecrease = 0.20f;
     }
 
-	public float getScore ()
-	{
-		return score + tip;
-	}
-
-    public void SetValues(float score, float tip, float tipDecrease,int pause)
+    /**
+     * Set the score variables for the next delivery
+     * \param score this the desired score upon delivery 
+     * \param tip this is the etra score for completing the delivery quicker
+     * \param tipDecrease this is the value with wich the tip decreases every 2 seconds
+     * \param pause this is the time in seconds the counter waits before starting to decrease the tip
+     */
+    public void SetValues(float score, float tip, float tipDecrease, int pause)
     {
         this.score = score;
         this.tip = tip;
@@ -80,26 +89,55 @@ public class tipCounter : MonoBehaviour
         this.pause = pause;
     }
 
+    /**
+     * Get the current score of the tipcounter
+     * \return score
+     */
+	public float getScore ()
+	{
+		return score + tip;
+	}
+
+    /**
+     * Get current tip
+     * \return tip
+     */
     public float getTip()
     {
         return tip;
     }
 
+    /**
+     * Get the maximum tip
+     * \return maxTip
+     */
     public float getMaxtip()
     {
         return maxtip;
     }
 
+    /**
+     * Get the tipDecrease amount
+     * \return tipDecrease
+     */
     public float getTipDecrease()
     {
         return tipDecrease;
     }
 
+    /**
+     * Get a bool of wether teh counter is started or not
+     * \return isStarted
+     */
     public Boolean started()
     {
         return isStarted;
     }
 
+    /**
+     * Get the total score for the player
+     * \return totalScore
+     */
     public float getTotalScore()
     {
         return totalScore;
