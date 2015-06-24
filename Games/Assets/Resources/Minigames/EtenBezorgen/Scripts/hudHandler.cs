@@ -43,13 +43,20 @@ public class hudHandler : MonoBehaviour {
             }
             else if (kitchen.GetComponent<tipCounter>().getMaxtip() != kitchen.GetComponent<tipCounter>().getTip())
             {
-                TipTransform.position = new Vector3(maxXValue -
-                (
-                (TipTransform.rect.width / kitchen.GetComponent<tipCounter>().getMaxtip()) * kitchen.GetComponent<tipCounter>().getTipDecrease()) *
+                //determain the new position of the tipbar depending on the lost tip
+                TipTransform.position = new Vector3(maxXValue - (
+                
+                //get the bar with and devide it by the max tip
+                (TipTransform.rect.width / kitchen.GetComponent<tipCounter>().getMaxtip())
+                * kitchen.GetComponent<tipCounter>().getTipDecrease()) *
+
+                //devide the maxtip by the tipdecrease and divede that by the maxtip devided by the lost tip
                 (
                 (kitchen.GetComponent<tipCounter>().getMaxtip() / kitchen.GetComponent<tipCounter>().getTipDecrease()) /
                 (kitchen.GetComponent<tipCounter>().getMaxtip() / 
-                (kitchen.GetComponent<tipCounter>().getMaxtip() - kitchen.GetComponent<tipCounter>().getTip()))), TipTransform.position.y);
+                (kitchen.GetComponent<tipCounter>().getMaxtip() - kitchen.GetComponent<tipCounter>().getTip())))
+                
+                , TipTransform.position.y);
             }
             else
             {
