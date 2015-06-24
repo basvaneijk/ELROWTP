@@ -19,10 +19,6 @@ TagManager:
   - MainMenu_UI_HelpPanel
   - MainMenu_UI_ControlButtons
   - playerTray
-  - CoinsLevel2
-  - CoinsLevel3
-  - GameScoreLevel1
-  - MainMenu_GameManager
   layers:
   - Default
   - TransparentFX
@@ -44,7 +40,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - Dienblad
   - 
   - 
   - 
