@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CompassOrientation : MonoBehaviour
+public class GyroOrientation : MonoBehaviour
 {
 	public bool printDebug = false;
 	public bool highpassFilter = false;

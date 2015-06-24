@@ -15,6 +15,7 @@ TagManager:
   - CoinLocatorArrow
   - Canvas
   - Wheelchair
+  - playerTray
   layers:
   - Default
   - TransparentFX
@@ -31,7 +32,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - BackgroundCamera_MG2
   - 
   - 
   - 
