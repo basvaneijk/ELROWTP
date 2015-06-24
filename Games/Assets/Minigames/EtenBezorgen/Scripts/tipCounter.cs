@@ -22,6 +22,7 @@ public class tipCounter : MonoBehaviour
         pause = 30;
         score = 15f;
         tip = 5f;
+        tipDecrease = 0.20f;
 	}
 	
 	// Update is called once per frame

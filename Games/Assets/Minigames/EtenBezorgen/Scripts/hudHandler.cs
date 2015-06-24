@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System;
 
 public class hudHandler : MonoBehaviour {
 
@@ -8,6 +9,7 @@ public class hudHandler : MonoBehaviour {
     private float minXValue;
     private float maxXValue;
     public Text tipText;
+    public Text totalScoreText;
     public GameObject kitchen;
     public GameObject tipHUD;
 	// Use this for initialization
@@ -20,6 +22,7 @@ public class hudHandler : MonoBehaviour {
 	// Update is called once per frame
     void Update()
     {
+        totalScoreText.text = "€" + kitchen.GetComponent<tipCounter>().getTotalScore().ToString("0.00");
         if (!tipHUD.activeInHierarchy && kitchen.GetComponent<tipCounter>().started())
         {
             
@@ -31,7 +34,7 @@ public class hudHandler : MonoBehaviour {
         }
         if (kitchen.GetComponent<tipCounter>().started())
         {
-			tipText.text = "Fooi: €" + kitchen.GetComponent<tipCounter>().getTip();
+            tipText.text = "Fooi: €" + kitchen.GetComponent<tipCounter>().getTip().ToString("0.00");
             
             
             if (kitchen.GetComponent<tipCounter>().getTip() < 0.10F)
