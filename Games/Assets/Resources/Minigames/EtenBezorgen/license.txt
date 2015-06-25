@@ -1,0 +1,2 @@
+All models, textures and images used in this MiniGame are downloaded from the Unity Asset Store, and have the default Unity License. This license can be found here;
+http://unity3d.com/legal/as_terms
