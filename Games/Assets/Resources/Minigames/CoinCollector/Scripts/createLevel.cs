@@ -1,7 +1,23 @@
-﻿using UnityEngine;
+﻿/*
+    Framework for ELRO Wants To Play
+    Copyright (C) 2015 Wouter Janssen
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+using UnityEngine;
 using System.Collections;
 
-public class createLevel : MonoBehaviour {
+public class createLevel : MonoBehaviour
+{
 
 	//scale 0.1 is 1m
 	//dus een scale van 1.0 is 10m
@@ -11,16 +27,17 @@ public class createLevel : MonoBehaviour {
 	/**
 	*	Check the "PlayerPrefs" and set the scale of the plane according to the dimensions.
 	*/
-	void Start () {
+	void Start ()
+	{
 
-        if (PlayerPrefs.GetFloat("width") > 0 && PlayerPrefs.GetFloat("length") > 0)
-        {
-            GameObject.FindGameObjectWithTag("LevelPlane").gameObject.transform.localScale = new Vector3(getScale(PlayerPrefs.GetFloat("width")), 0.1F, getScale(PlayerPrefs.GetFloat("length")));
-        }
+		if (PlayerPrefs.GetFloat ("width") > 0 && PlayerPrefs.GetFloat ("length") > 0) {
+			GameObject.FindGameObjectWithTag ("LevelPlane").gameObject.transform.localScale = new Vector3 (getScale (PlayerPrefs.GetFloat ("width")), 0.1F, getScale (PlayerPrefs.GetFloat ("length")));
+		}
 	
 	}
 	
-	void Update () {
+	void Update ()
+	{
 
 		/*if (Input.GetKeyDown("1")) {
 
@@ -51,7 +68,8 @@ public class createLevel : MonoBehaviour {
 	*	\param data The length or width (dimensions)
 	*	\return The data divided by 10 (scaling)
 	*/
-	float getScale(float data) {
+	float getScale (float data)
+	{
 		return data / 10;
 	}
 
