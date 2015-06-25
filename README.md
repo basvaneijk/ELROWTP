@@ -10,8 +10,7 @@ For full launcher documentation check http://niekarends.github.io/ELROWTP/launch
   |  _| _   | |   _   |  __ /  | |   | |    \ \/  \/ /       | |      |  ___/   <br />
  _| |__/ | _| |__/ | _| |  \ \_\  `-'  /     \  /\  /       _| |_    _| |_      <br />
 |________||________||____| |___|`.___.'       \/  \/       |_____|  |_____|     <br />
-                                                                               
-                                                                               
+
 **The project exists out of 2 parts:**<br />
 1. A Position server<br />
 2. A Game client
