@@ -1,6 +1,6 @@
 ﻿/*
     Framework for ELRO Wants To Play
-    Copyright (C) 2015 Wouter Janssen
+    Copyright (C) 2015 Ben Meulenberg
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
@@ -19,8 +19,6 @@ using System.Collections;
 public class createLevel : MonoBehaviour
 {
 
-	//scale 0.1 is 1m
-	//dus een scale van 1.0 is 10m
 	float width;
 	float length;
 

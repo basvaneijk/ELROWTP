@@ -24,19 +24,21 @@ public class ScoreTimer : MonoBehaviour
 
 	Text timerText;
 	bool timerStarted;
-
+	// Use this for initialization
 	void Start ()
 	{
 		timerText = GameObject.Find ("Timer").GetComponent<Text> ();
 		start = DateTime.Now;
 		timerStarted = true;
 	}
-
+	// Use this for resetting the timer
 	public void ResetTimer ()
 	{
 		start = DateTime.Now;
 	}
-
+	/* 
+	* This updates the timer when the game is started.
+	*/
 	void Update ()
 	{
 		if (GameObject.FindGameObjectWithTag ("Wheelchair").GetComponent<CoinCollection> ().isStarted) {
@@ -49,20 +51,32 @@ public class ScoreTimer : MonoBehaviour
            
 		}
 	}
+	/* 
+	* Get int minutes of timer
+	*/
 	public int GetMinutes ()
 	{
 		return (DateTime.Now - start).Minutes;
 	}
-
+	
+	/* 
+	* Get long seconds of timer
+	*/
 	public long GetSeconds ()
 	{
 		return (DateTime.Now - start).Seconds;
 	}
-
+	/* 
+	* Get long ticks of timer
+	*/
 	public long GetTicks ()
 	{
 		return (DateTime.Now - start).Ticks;
 	}
+	/* convert timer(TimeSpan) to string with format mm:ss
+	* \param TimeSpan myTimeSpan timespan to string
+	* return string
+	*/
 	private string SecondsToHhMmSs (TimeSpan myTimeSpan)
 	{
 		return string.Format ("{0:00}:{1:00}", myTimeSpan.Minutes, myTimeSpan.Seconds);
