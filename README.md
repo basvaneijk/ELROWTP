@@ -11,6 +11,14 @@ For full launcher documentation check http://niekarends.github.io/ELROWTP/launch
       |________||________||____| |___|`.___.'       \/  \/       |_____|  |_____|    
                                                                                
 
+The hardware we have used for testing is the following:<br />
+- Microsoft livecam
+- Linksys wag325n router
+- Macbook Pro 15" retina 2012 (as server)
+- Several different windows laptops (as server)
+
+It should be noted that any of the hardware we have used can be replaced. Any modern router that supports multicast should work.
+
 **The project exists out of 2 parts:**<br />
 1. A Position server<br />
 2. A Game client
@@ -48,7 +56,3 @@ The debug keyword enables debug mode in which additional debug screens are opene
 - Circularity: Roundness of the blob<br />
 - Inertia: Deformation of the blob<br />
 - Area: How many pixels in size<br />
-
-
-
-
