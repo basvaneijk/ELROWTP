@@ -1,7 +1,7 @@
 # ELROWTP README
 
-For full server documentation check http://niekarends.github.io/ELROWTP/index.html <br />
-For full launcher documentation check http://niekarends.github.io/ELROWTP/launcher/index.html <br />
+For full server documentation check http://basvaneijk.github.io/ELROWTP/index.html <br />
+For full launcher documentation check http://basvaneijk.github.io/ELROWTP/launcher/index.html <br />
 
        ________  _____     _______      ___     ____      ____  _________  _______   
       |_   __  ||_   _|   |_   __ \   .'   `.  |_  _|    |_  _||  _   _  ||_   __ \  
