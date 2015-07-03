@@ -12,7 +12,7 @@ For full launcher documentation check http://basvaneijk.github.io/ELROWTP/launch
                                                                                
 
 The hardware we have used for testing is the following:<br />
-- Microsoft livecam
+- Microsoft lifecam cinema HD
 - Linksys wag325n router
 - Macbook Pro 15" retina 2012 (as server)
 - Several different windows laptops (as server)
